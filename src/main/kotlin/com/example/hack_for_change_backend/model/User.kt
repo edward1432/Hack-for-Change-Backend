@@ -13,7 +13,7 @@ import javax.persistence.Table
 data class User (
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     val uniqueId: Long,
-    val userName: String,
+    var userName: String,
     @ManyToOne @JoinColumn(name = "organisation_id")
-    val organisation: Organisation
+    var organisation: Organisation
 )

@@ -13,11 +13,11 @@ data class Venue (
 
     @OneToOne
     @JoinColumn(name = "event_id")
-    val event: Event,
-    val name: String,
-    val location: Location,
+    var event: Event,
+    var name: String,
+    var location: Location,
 
     @Column
     @Enumerated(EnumType.STRING)
-    val type: List<EventType>
+    var type: List<EventType>
         )

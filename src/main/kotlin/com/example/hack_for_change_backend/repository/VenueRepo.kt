@@ -8,3 +8,5 @@ import org.springframework.stereotype.Repository
 interface VenueRepo : JpaRepository<Venue, Long> {
     companion object
 }
+
+
