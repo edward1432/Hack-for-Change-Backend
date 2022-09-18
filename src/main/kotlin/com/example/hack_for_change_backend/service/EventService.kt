@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 @Service
 class EventService(val eventRepo: EventRepo) {
 
-    fun findEventById(id: Long) = eventRepo.findById(id).orElseThrow { NoSuchElementException("Service with ID: $id does not exist") }
+    fun findEventById(id: Long) = eventRepo.findById(id).orElseThrow { NoSuchElementException("Event with ID: $id does not exist") }
 
     fun findAll() = eventRepo.findAll()
 
@@ -36,4 +36,5 @@ class EventService(val eventRepo: EventRepo) {
             throw e
         }
     }
+
 }
