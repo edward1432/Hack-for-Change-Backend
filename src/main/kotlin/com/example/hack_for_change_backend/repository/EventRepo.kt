@@ -8,7 +8,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface EventRepo : JpaRepository<Event, Long> {
-    companion object
-
 
 }

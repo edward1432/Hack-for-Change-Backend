@@ -10,16 +10,16 @@ import javax.persistence.*
 data class Event (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val uniqueId: Long,
-    val location: String,
-    val date: Date,
+    var uniqueId: Long,
+    var location: String,
+    var date: Date,
 
     @ManyToOne
     @JoinColumn(name = "organisation_id")
-    val organisation: Organisation,
+    var organisation: Organisation,
 
     @OneToMany
     @JoinColumn(name = "venue_id")
-    val venues: MutableList<Venue>,
-    val eventType: EventType
+    var venues: MutableList<Venue>,
+    var eventType: EventType
         )
