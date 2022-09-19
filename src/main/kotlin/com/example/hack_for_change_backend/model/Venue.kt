@@ -15,9 +15,9 @@ data class Venue (
     @JoinColumn(name = "event_id")
     var event: Event,
     var name: String,
-    var location: Location,
+    var location: String,
 
     @Column
     @Enumerated(EnumType.STRING)
-    var type: List<EventType>
+    var type: Enum<EventType>
         )
