@@ -21,5 +21,6 @@ data class Event (
     @OneToMany
     @JoinColumn(name = "venue_id")
     var venues: MutableList<Venue>,
+    @Enumerated(EnumType.STRING)
     var eventType: EventType
         )
