@@ -3,7 +3,7 @@ package com.example.hack_for_change_backend.model
 import com.example.hack_for_change_backend.model.enums.EventType
 import javax.persistence.*
 import javax.xml.stream.Location
-
+//add mapped by components on 14
 @Entity
 @Table(name = "venues")
 data class Venue (

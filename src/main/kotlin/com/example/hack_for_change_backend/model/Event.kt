@@ -5,6 +5,7 @@ import jdk.javadoc.doclet.Taglet.Location
 import java.util.Date
 import javax.persistence.*
 
+//add mapped by components on line 18a nd 22
 @Entity
 @Table(name = "events")
 data class Event (
@@ -21,6 +22,8 @@ data class Event (
     @OneToMany
     @JoinColumn(name = "venue_id")
     var venues: MutableList<Venue>,
+
+    @Column
     @Enumerated(EnumType.STRING)
     var eventType: EventType
         )
