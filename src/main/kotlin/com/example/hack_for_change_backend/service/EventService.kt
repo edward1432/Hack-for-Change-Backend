@@ -5,13 +5,21 @@ import com.example.hack_for_change_backend.repository.EventRepo
 import org.springframework.stereotype.Service
 
 @Service
-class EventService(val eventRepo: EventRepo) {
+class EventService(val eventRepo: EventRepo, val organisationService: OrganisationService) {
 
     fun findEventById(id: Long) = eventRepo.findById(id).orElseThrow { NoSuchElementException("Event with ID: $id does not exist") }
 
     fun findAll() = eventRepo.findAll()
 
-//    fun addNewEvent(event: Event, organisationId: Long) = eventRepo.save()
+    fun addNewEvent(event: Event): Event {
+        return try {
+            organisationService.findOrganisationById(event.organisation.uniqueId)
+            eventRepo.save(event)
+            event
+        } catch (e: NoSuchElementException) {
+            throw e
+        }
+    }
 
     // ===
     fun updateEvent(eventId: Long, eventDetails: Event): Event {

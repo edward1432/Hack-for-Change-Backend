@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/eventenums")
+@RequestMapping("/eventEnums")
 class EventEnumController(private val eventEnumService: EventEnumService) {
 
-    @GetMapping
+    @GetMapping("/getAll")
     fun getAll() = ResponseEntity.ok().body(eventEnumService.getAllEventEnums())
 }

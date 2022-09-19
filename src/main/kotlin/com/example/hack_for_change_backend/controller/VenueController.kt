@@ -43,10 +43,3 @@ class VenueController(private val venueService: VenueService) {
     }
 
 }
-
-
-
-
-
-
-}
