@@ -17,7 +17,7 @@ data class Venue (
     var name: String,
     var location: String,
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    var type: Enum<EventType>
+//    @Column
+//    @Enumerated(EnumType.STRING)
+//    var type: Enum<EventType>
         )

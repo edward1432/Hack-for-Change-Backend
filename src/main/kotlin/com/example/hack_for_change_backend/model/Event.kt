@@ -23,7 +23,7 @@ data class Event (
     @JoinColumn(name = "venue_id")
     var venues: MutableList<Venue>,
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    var eventType: EventType
+//    @Column
+//    @Enumerated(EnumType.STRING)
+//    var eventType: EventType
         )
