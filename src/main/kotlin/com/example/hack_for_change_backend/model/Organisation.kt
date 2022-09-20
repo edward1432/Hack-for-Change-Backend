@@ -9,17 +9,17 @@ import javax.persistence.*
 data class Organisation (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val uniqueId: Long,
+    var uniqueId: Long,
     @Column(name = "name")
-    val name: String,
-    val email: String,
-    val phoneNo: String,
+    var name: String,
+    var email: String,
+    var phoneNo: String,
 
     @JsonIgnoreProperties("organisation")
     @OneToMany(mappedBy = "organisation", cascade = [CascadeType.ALL])
-    val users: List<User>,
+    var users: List<User>,
 
     @JsonIgnoreProperties("organisation")
     @OneToMany(mappedBy = "organisation", cascade = [CascadeType.ALL])
-    val events: List<Event>
+    var events: List<Event>
         )
