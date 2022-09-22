@@ -31,7 +31,7 @@ class VenueService(val venueRepo: VenueRepo) {
             venue.event = venueDetails.event
             venue.name = venueDetails.name
             venue.location = venueDetails.location
-            venue.type = venueDetails.type
+//            venue.type = venueDetails.type
             return ResponseEntity.ok(venue)
         } catch (e: NoSuchElementException) {
             throw e

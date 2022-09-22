@@ -20,4 +20,4 @@ data class Venue (
     @Column
     @Enumerated(EnumType.STRING)
     var type: Enum<EventType>
-        )
+)

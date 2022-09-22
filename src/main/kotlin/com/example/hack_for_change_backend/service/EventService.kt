@@ -25,7 +25,7 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
     fun updateEvent(eventId: Long, eventDetails: Event): Event {
         try {
             val event = findEventById(eventId)
-            event.eventType = eventDetails.eventType
+//            event.eventType = eventDetails.eventType
             event.organisation = eventDetails.organisation
             event.date = eventDetails.date
             event.venues = eventDetails.venues
