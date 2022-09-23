@@ -1,6 +1,5 @@
 package com.example.hack_for_change_backend.model
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
@@ -17,9 +16,9 @@ data class Organisation (
 
     @JsonIgnoreProperties("organisation")
     @OneToMany(mappedBy = "organisation", cascade = [CascadeType.ALL])
-    var users: List<User>,
+    var enjoyers: MutableList<User>,
 
     @JsonIgnoreProperties("organisation")
     @OneToMany(mappedBy = "organisation", cascade = [CascadeType.ALL])
-    var events: List<Event>
+    var events: MutableList<Event>
         )

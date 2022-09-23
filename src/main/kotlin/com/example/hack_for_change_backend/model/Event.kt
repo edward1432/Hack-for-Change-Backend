@@ -1,7 +1,6 @@
 package com.example.hack_for_change_backend.model
 
 import com.example.hack_for_change_backend.model.enums.EventType
-import jdk.javadoc.doclet.Taglet.Location
 import java.util.Date
 import javax.persistence.*
 
@@ -23,7 +22,6 @@ data class Event (
     @JoinColumn(name = "venue_id")
     var venues: MutableList<Venue>,
 
-    @Column
-    @Enumerated(EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     var eventType: EventType
         )

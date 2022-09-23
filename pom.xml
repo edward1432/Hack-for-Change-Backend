@@ -50,7 +50,6 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -106,7 +105,22 @@
 					<compilerPlugins>
 						<plugin>spring</plugin>
 						<plugin>jpa</plugin>
+						<plugin>all-open</plugin>
 					</compilerPlugins>
+					<pluginOptions>
+						<option>no-arg:annotation=com.my.Annotation</option>
+						<option>all-open:annotation=javax.persistence.Entity</option>
+						<option>all-open:annotation=javax.persistence.Embeddable</option>
+						<option>all-open:annotation=javax.persistence.MappedSuperclass</option>
+<!--						<option>all-open:annotation=javax.persistence.Enumerated</option>-->
+<!--						<option>all-open:annotation=javax.persistence.EnumType</option>-->
+<!--						<option>all-open:annotation=javax.persistence.Table</option>-->
+<!--						<option>all-open:annotation=javax.persistence.OneToMany</option>-->
+<!--						<option>all-open:annotation=javax.persistence.ManyToMany</option>-->
+<!--						<option>all-open:annotation=javax.persistence.ManyToOne</option>-->
+<!--						<option>all-open:annotation=javax.persistence.EntityManagerFactory</option>-->
+<!--						<option>all-open:annotation=javax.persistence.Id</option>-->
+					</pluginOptions>
 				</configuration>
 				<dependencies>
 					<dependency>
