@@ -16,6 +16,17 @@ class OrganisationService(val organisationRepo: OrganisationRepo){
         return organisation
     }
 
+//    lateinit var organisationServiceManager: List<Organisation>
+
+    //    fun createOrganisation(organisation: Organisation): ResponseEntity<Organisation> {
+//        val organisationManager = (organisationServiceManager.find { organisationList -> organisationList == organisation })
+//        if (organisationManager != null) {
+//            throw IllegalStateException("[ORGANISATION] $organisation ALREADY EXISTS")
+//        }
+//        organisationRepo.save(organisation)
+//        return ResponseEntity.ok(organisation)
+//    }
+
     fun updateOrganisation(organisationID: Long, organisationDetails: Organisation): Organisation {
         return try {
             val organisation = findOrganisationById(organisationID)
@@ -26,7 +37,7 @@ class OrganisationService(val organisationRepo: OrganisationRepo){
             organisation.enjoyers = organisationDetails.enjoyers
             organisationRepo.save(organisation)
         } catch (e: NoSuchElementException) {
-            throw e
+            throw NoSuchElementException(e.message)
         }
     }
 
@@ -34,7 +45,7 @@ class OrganisationService(val organisationRepo: OrganisationRepo){
         try {
             organisationRepo.delete(findOrganisationById(organisationID))
         } catch (e: NoSuchElementException) {
-            throw e
+            throw NoSuchElementException(e.message)
         }
     }
 }

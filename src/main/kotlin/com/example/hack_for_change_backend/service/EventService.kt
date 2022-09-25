@@ -17,9 +17,20 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
             eventRepo.save(event)
             event
         } catch (e: NoSuchElementException) {
-            throw e
+            throw NoSuchElementException(e.message)
         }
     }
+
+//    lateinit var eventServiceManager: List<Event>
+
+    //    fun createEvent(event: Event): ResponseEntity<Event> {
+//        val eventManager = (eventServiceManager.find { eventList -> eventList == event })
+//        if (eventManager != null) {
+//            throw IllegalStateException("[EVENT] $event ALREADY EXISTS")
+//        }
+//        eventRepo.save(event)
+//        return ResponseEntity.ok(event)
+//    }
 
     // ===
     fun updateEvent(eventId: Long, eventDetails: Event): Event {
@@ -33,7 +44,7 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
             eventRepo.save(event)
             return event
         } catch (e: NoSuchElementException){
-            throw e
+            throw NoSuchElementException(e.message)
         }
     }
 
@@ -41,7 +52,7 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
         try {
             eventRepo.delete(findEventById(eventId))
         } catch (e: NoSuchElementException) {
-            throw e
+            throw NoSuchElementException(e.message)
         }
     }
 

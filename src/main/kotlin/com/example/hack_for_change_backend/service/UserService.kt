@@ -32,7 +32,7 @@ class UserService(val userRepo: UserRepo) {
             user.organisation = userDetails.organisation
             return ResponseEntity.ok(user)
         } catch (e: NoSuchElementException) {
-            throw e
+            throw NoSuchElementException(e.message)
         }
     }
 
@@ -41,7 +41,7 @@ class UserService(val userRepo: UserRepo) {
             userRepo.delete(findUserById(userId))
             return ResponseEntity.ok(HttpStatus.OK)
         }catch(e: NoSuchElementException){
-            throw e
+            throw NoSuchElementException(e.message)
         }
     }
 }

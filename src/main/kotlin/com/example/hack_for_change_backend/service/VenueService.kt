@@ -16,6 +16,8 @@ class VenueService(val venueRepo: VenueRepo) {
         }
     }
 
+    lateinit var venueServiceManager: List<Venue>
+
     fun findAll(): List<Venue>{
         return venueRepo.findAll()
     }
@@ -24,6 +26,16 @@ class VenueService(val venueRepo: VenueRepo) {
         venueRepo.save(venue)
         return ResponseEntity.ok(venue)
     }
+
+//    fun createVenue(venue: Venue): ResponseEntity<Venue> {
+//        val venueManager = (venueServiceManager.find { venueList -> venueList == venue })
+//        if (venueManager != null) {
+//            throw IllegalStateException("[VENUE] $venue ALREADY EXISTS")
+//        }
+//        venueRepo.save(venue)
+//        return ResponseEntity.ok(venue)
+//    }
+
 
     fun updateVenue(venueId: Long, venueDetails: Venue): ResponseEntity<Venue> {
         try {
@@ -34,7 +46,7 @@ class VenueService(val venueRepo: VenueRepo) {
 //            venue.type = venueDetails.type
             return ResponseEntity.ok(venue)
         } catch (e: NoSuchElementException) {
-            throw e
+            throw NoSuchElementException(e.message)
         }
     }
 
@@ -43,7 +55,7 @@ class VenueService(val venueRepo: VenueRepo) {
             venueRepo.delete(findVenueById(venueId))
             return ResponseEntity.ok(HttpStatus.OK)
         } catch (e: NoSuchElementException) {
-            throw e
+            throw NoSuchElementException(e.message)
         }
     }
 }
