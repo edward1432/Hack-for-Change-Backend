@@ -7,7 +7,7 @@ import javax.persistence.*
 @Table(name = "organisation")
 data class Organisation (
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var uniqueId: Long,
     @Column(name = "name")
     var name: String,

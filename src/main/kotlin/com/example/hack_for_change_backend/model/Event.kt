@@ -9,7 +9,7 @@ import javax.persistence.*
 @Table(name = "events")
 data class Event (
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var uniqueId: Long,
     var location: String,
     var date: Date,
@@ -23,5 +23,8 @@ data class Event (
     var venues: MutableList<Venue>,
 
     @Enumerated(value = EnumType.STRING)
-    var eventType: EventType
+    var eventType: EventType,
+
+    @ManyToMany (mappedBy = "events")
+    var enjoyers: List<User>
         )

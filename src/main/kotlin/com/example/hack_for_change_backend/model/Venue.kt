@@ -8,7 +8,7 @@ import javax.xml.stream.Location
 @Table(name = "venues")
 data class Venue (
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val uniqueId: Long,
 
     @OneToOne
