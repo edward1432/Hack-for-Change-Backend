@@ -1,8 +1,6 @@
 package com.example.hack_for_change_backend.service
 
-import com.example.hack_for_change_backend.model.User
 import com.example.hack_for_change_backend.model.Venue
-import com.example.hack_for_change_backend.repository.UserRepo
 import com.example.hack_for_change_backend.repository.VenueRepo
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

@@ -1,7 +1,6 @@
 package com.example.hack_for_change_backend.repository
 
 import com.example.hack_for_change_backend.model.Organisation
-import com.example.hack_for_change_backend.model.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

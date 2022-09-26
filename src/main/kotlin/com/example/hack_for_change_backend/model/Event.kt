@@ -26,5 +26,5 @@ data class Event (
     var eventType: EventType,
 
     @ManyToMany (mappedBy = "events")
-    var enjoyers: List<User>
+    val enjoyers: List<Enjoyer> = listOf()
         )

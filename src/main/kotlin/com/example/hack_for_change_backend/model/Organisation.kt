@@ -16,7 +16,7 @@ data class Organisation (
 
     @JsonIgnoreProperties("organisation")
     @OneToMany(mappedBy = "organisation", cascade = [CascadeType.ALL])
-    var enjoyers: MutableList<User>,
+    var enjoyers: MutableList<Enjoyer>,
 
     @JsonIgnoreProperties("organisation")
     @OneToMany(mappedBy = "organisation", cascade = [CascadeType.ALL])
