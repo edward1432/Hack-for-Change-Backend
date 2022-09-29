@@ -38,7 +38,6 @@ class VenueService(val venueRepo: VenueRepo) {
     fun updateVenue(venueId: Long, venueDetails: Venue): ResponseEntity<Venue> {
         try {
             val venue = findVenueById(venueId)
-            venue.event = venueDetails.event
             venue.name = venueDetails.name
             venue.location = venueDetails.location
 //            venue.type = venueDetails.type

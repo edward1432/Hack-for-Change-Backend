@@ -38,7 +38,7 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
             val event = findEventById(eventId)
 //            event.eventType = eventDetails.eventType
             event.organisation = eventDetails.organisation
-            event.date = eventDetails.date
+            event.startDateTime = eventDetails.startDateTime
             event.venues = eventDetails.venues
             event.location = eventDetails.location
             eventRepo.save(event)

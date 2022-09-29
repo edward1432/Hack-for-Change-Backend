@@ -1,6 +1,6 @@
 package com.example.hack_for_change_backend.repository
 
-import com.example.hack_for_change_backend.model.Enjoyer
+import com.example.hack_for_change_backend.model.Employee
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
@@ -8,14 +8,14 @@ import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UserRepo : JpaRepository<Enjoyer, Long> {
+interface UserRepo : JpaRepository<Employee, Long> {
     companion object
 
     @Query(value = "SELECT * FROM enjoyers WHERE organisation LIKE %:organisation%", nativeQuery = true)
-    fun findByOrganisation(@Param("organisation") organisation: String): List<Enjoyer>
+    fun findByOrganisation(@Param("organisation") organisation: String): List<Employee>
 
     @Query(value = "SELECT * FROM enjoyers WHERE lower(userName) LIKE lower(?1)", nativeQuery = true)
-    fun findByUserName(@Param("userName") userName: String): List<Enjoyer>
+    fun findByUserName(@Param("userName") userName: String): List<Employee>
 
     @Modifying
     @Query(value = "UPDATE enjoyers SET event_id = ?1 WHERE id = ?2", nativeQuery = true)
