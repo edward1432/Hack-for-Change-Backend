@@ -14,7 +14,7 @@ class VenueService(val venueRepo: VenueRepo) {
         }
     }
 
-    lateinit var venueServiceManager: List<Venue>
+
 
     fun findAll(): List<Venue>{
         return venueRepo.findAll()
@@ -24,6 +24,8 @@ class VenueService(val venueRepo: VenueRepo) {
 //        venueRepo.save(venue)
 //        return ResponseEntity.ok(venue)
 //    }
+
+    lateinit var venueServiceManager: List<Venue>
 
     fun createVenue(venue: Venue): ResponseEntity<Venue> {
         val venueManager = (venueServiceManager.find { venueList -> venueList == venue })

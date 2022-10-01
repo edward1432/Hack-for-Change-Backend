@@ -2,6 +2,7 @@ package com.example.hack_for_change_backend.service
 
 import com.example.hack_for_change_backend.model.Event
 import com.example.hack_for_change_backend.repository.EventRepo
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
@@ -22,8 +23,8 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
     }
 
 //    lateinit var eventServiceManager: List<Event>
-
-    //    fun createEvent(event: Event): ResponseEntity<Event> {
+//
+//        fun createEvent(event: Event): ResponseEntity<Event> {
 //        val eventManager = (eventServiceManager.find { eventList -> eventList == event })
 //        if (eventManager != null) {
 //            throw IllegalStateException("[EVENT] $event ALREADY EXISTS")

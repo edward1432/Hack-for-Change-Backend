@@ -40,4 +40,14 @@ class UserController(private val userService: UserService) {
         }
     }
 
+    @DeleteMapping("/userOrganisation" + "/{id}")
+    fun deleteUser(@PathVariable("id") userId: Long): ResponseEntity<HttpStatus> {
+        return try {
+            userService.deleteUser(userId)
+            ResponseEntity.ok().body(HttpStatus.OK)
+        } catch (e: NoSuchElementException) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+        }
+    }
+
 }

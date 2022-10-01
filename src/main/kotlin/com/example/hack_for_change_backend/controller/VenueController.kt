@@ -40,4 +40,14 @@ class VenueController(private val venueService: VenueService) {
         }
     }
 
+    @DeleteMapping("/deleteVenue" + "/{id}")
+    fun deleteVenue(@PathVariable("id") venueId: Long): ResponseEntity<HttpStatus> {
+        return try {
+            venueService.deleteVenue(venueId)
+            ResponseEntity.ok().body(HttpStatus.OK)
+        } catch (e: NoSuchElementException) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+        }
+    }
+
 }
