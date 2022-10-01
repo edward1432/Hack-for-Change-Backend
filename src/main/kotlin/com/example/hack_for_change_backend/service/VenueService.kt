@@ -20,19 +20,19 @@ class VenueService(val venueRepo: VenueRepo) {
         return venueRepo.findAll()
     }
 
-    fun createVenue(venue: Venue): ResponseEntity<Venue> {
-        venueRepo.save(venue)
-        return ResponseEntity.ok(venue)
-    }
-
 //    fun createVenue(venue: Venue): ResponseEntity<Venue> {
-//        val venueManager = (venueServiceManager.find { venueList -> venueList == venue })
-//        if (venueManager != null) {
-//            throw IllegalStateException("[VENUE] $venue ALREADY EXISTS")
-//        }
 //        venueRepo.save(venue)
 //        return ResponseEntity.ok(venue)
 //    }
+
+    fun createVenue(venue: Venue): ResponseEntity<Venue> {
+        val venueManager = (venueServiceManager.find { venueList -> venueList == venue })
+        if (venueManager != null) {
+            throw IllegalStateException("[VENUE] $venue ALREADY EXISTS")
+        }
+        venueRepo.save(venue)
+        return ResponseEntity.ok(venue)
+    }
 
 
     fun updateVenue(venueId: Long, venueDetails: Venue): ResponseEntity<Venue> {
