@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
 @RestController
+@CrossOrigin(origins = ["http://localhost:3000"])
 @RequestMapping("/venues")
 class VenueController(private val venueService: VenueService) {
     @GetMapping("/findAll")

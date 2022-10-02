@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
 @RestController
+@CrossOrigin(origins = ["http://localhost:3000"])
 @RequestMapping("/users")
 class UserController(private val userService: UserService) {
 
@@ -40,7 +41,7 @@ class UserController(private val userService: UserService) {
         }
     }
 
-    @DeleteMapping("/userOrganisation" + "/{id}")
+    @DeleteMapping("/deleteUser" + "/{id}")
     fun deleteUser(@PathVariable("id") userId: Long): ResponseEntity<HttpStatus> {
         return try {
             userService.deleteUser(userId)
