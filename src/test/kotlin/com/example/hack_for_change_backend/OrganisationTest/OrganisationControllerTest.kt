@@ -89,6 +89,7 @@ class OrganisationControllerTest {
         verify(repository, times(1)).save(organisation)
     }
 
+
     @Test
     fun good_post_request_event(){
         val organisation = organisation1
@@ -102,7 +103,7 @@ class OrganisationControllerTest {
                 contentType(MediaType.APPLICATION_JSON)
             }
             content{
-                json("""{"id":1,"name":"Test"}""")
+                json("""{"uniqueId":1,"name":"name","email":"email", "phoneNo":"phoneNo,"enjoyers":"$enjoyerMutableList","events":"$eventMutableList"}""")
             }
         }
         verify(repository, times(1)).save(organisation)

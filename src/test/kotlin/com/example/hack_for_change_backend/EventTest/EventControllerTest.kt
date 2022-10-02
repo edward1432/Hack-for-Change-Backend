@@ -29,6 +29,8 @@ import com.example.hack_for_change_backend.model.Venue
 import com.example.hack_for_change_backend.model.enums.EventType
 
 import org.junit.jupiter.api.Nested
+import org.springframework.test.web.servlet.delete
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 
 @AutoConfigureMockMvc // auto-magically configures and enables an instance of MockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -100,7 +102,7 @@ class EventControllerTest() {
                 contentType(MediaType.APPLICATION_JSON)
             }
             content{
-                 json("""{"id":1,"name":"Test"}""")
+                 json("""{"uniqueId":3,"location":"Home","date":"date","organisation":"$organisation","venues":"$venueMutableList","eventType":"$enum","enjoyers":"$enjoyers""}""")
             }
         }
         verify(repository, times(1)).save(event)
