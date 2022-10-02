@@ -92,6 +92,12 @@
 			<version>3.0.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito.kotlin</groupId>
+			<artifactId>mockito-kotlin</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+
 
 
 	</dependencies>

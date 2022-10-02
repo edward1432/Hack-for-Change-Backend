@@ -12,7 +12,8 @@ data class Event (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var uniqueId: Long,
     var location: String,
-    var date: Date,
+//    var date: Date,
+    var date: String,
 
     @ManyToOne
     @JoinColumn(name = "organisation_id")
