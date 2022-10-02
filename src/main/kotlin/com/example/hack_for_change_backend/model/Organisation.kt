@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 @Entity
-@Table(name = "organisation")
+@Table(name = "organisations")
 data class Organisation (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ data class Organisation (
 
     @JsonIgnoreProperties("organisation")
     @OneToMany(mappedBy = "organisation", cascade = [CascadeType.ALL])
-    var enjoyers: MutableList<Enjoyer>,
+    var employees: MutableList<Employee>,
 
     @JsonIgnoreProperties("organisation")
     @OneToMany(mappedBy = "organisation", cascade = [CascadeType.ALL])

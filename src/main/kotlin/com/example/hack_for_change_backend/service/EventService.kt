@@ -1,6 +1,7 @@
 package com.example.hack_for_change_backend.service
 
 import com.example.hack_for_change_backend.model.Event
+import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.repository.EventRepo
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service
 class EventService(val eventRepo: EventRepo, val organisationService: OrganisationService) {
 
     fun findEventById(id: Long) = eventRepo.findById(id).orElseThrow { NoSuchElementException("Event with ID: $id does not exist") }
+
+    fun findEventByType(eventType: EventType): List<Event> = eventRepo.findByEventTypeIs(eventType)
 
     fun findAll() = eventRepo.findAll()
 
@@ -39,7 +42,7 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
             val event = findEventById(eventId)
 //            event.eventType = eventDetails.eventType
             event.organisation = eventDetails.organisation
-            event.date = eventDetails.date
+            event.startDateTime = eventDetails.startDateTime
             event.venues = eventDetails.venues
             event.location = eventDetails.location
             eventRepo.save(event)

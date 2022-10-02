@@ -12,19 +12,19 @@ data class Event (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var uniqueId: Long,
     var location: String,
-    var date: Date,
+    var startDateTime: Date,
+    var endDateTime: Date,
 
     @ManyToOne
     @JoinColumn(name = "organisation_id")
     var organisation: Organisation,
 
-    @OneToMany
-    @JoinColumn(name = "venue_id")
+    @ManyToMany (mappedBy = "events")
     var venues: MutableList<Venue>,
 
     @Enumerated(value = EnumType.STRING)
     var eventType: EventType,
 
     @ManyToMany (mappedBy = "events")
-    val enjoyers: List<Enjoyer> = listOf()
+    val employees: List<Employee> = listOf()
         )

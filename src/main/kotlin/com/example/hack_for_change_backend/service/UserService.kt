@@ -1,6 +1,6 @@
 package com.example.hack_for_change_backend.service
 
-import com.example.hack_for_change_backend.model.Enjoyer
+import com.example.hack_for_change_backend.model.Employee
 import com.example.hack_for_change_backend.repository.UserRepo
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -9,27 +9,27 @@ import org.springframework.stereotype.Service
 @Service
 class UserService(val userRepo: UserRepo) {
 
-    fun findUserById(id: Long): Enjoyer {
+    fun findUserById(id: Long): Employee {
         return userRepo.findById(id).orElseThrow {
             NoSuchElementException("[USER] $id NOT FOUND")
         }
     }
 
-    fun findAll(): List<Enjoyer> {
+    fun findAll(): List<Employee> {
         return userRepo.findAll()
     }
 
-    fun createUser(enjoyer: Enjoyer): ResponseEntity<Enjoyer>{
-        userRepo.save(enjoyer)
-        return ResponseEntity.ok(enjoyer)
+    fun createUser(employee: Employee): ResponseEntity<Employee>{
+        userRepo.save(employee)
+        return ResponseEntity.ok(employee)
     }
 
 
-    fun updateUser(userId: Long, enjoyerDetails: Enjoyer): ResponseEntity<Enjoyer> {
+    fun updateUser(userId: Long, employeeDetails: Employee): ResponseEntity<Employee> {
         try {
             val user = findUserById(userId)
-            user.userName = enjoyerDetails.userName
-            user.organisation = enjoyerDetails.organisation
+            user.userName = employeeDetails.userName
+            user.organisation = employeeDetails.organisation
             return ResponseEntity.ok(user)
         } catch (e: NoSuchElementException) {
             throw NoSuchElementException(e.message)

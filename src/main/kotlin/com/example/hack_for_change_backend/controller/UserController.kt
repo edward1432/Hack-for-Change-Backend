@@ -1,6 +1,6 @@
 package com.example.hack_for_change_backend.controller
 
-import com.example.hack_for_change_backend.model.Enjoyer
+import com.example.hack_for_change_backend.model.Employee
 import com.example.hack_for_change_backend.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,10 +13,10 @@ import org.springframework.web.server.ResponseStatusException
 class UserController(private val userService: UserService) {
 
     @GetMapping("/findAll")
-    fun getAllUsers(): ResponseEntity<List<Enjoyer>> = ResponseEntity.ok(userService.findAll())
+    fun getAllUsers(): ResponseEntity<List<Employee>> = ResponseEntity.ok(userService.findAll())
 
     @GetMapping("/findById/{id}")
-    fun findUserById(@PathVariable("id") userId: Long): ResponseEntity<Enjoyer> {
+    fun findUserById(@PathVariable("id") userId: Long): ResponseEntity<Employee> {
         return try {
             ResponseEntity.ok(userService.findUserById(userId))
         } catch (e: Exception) {
@@ -24,18 +24,18 @@ class UserController(private val userService: UserService) {
         }
     }
     @PostMapping("/addUser")
-    fun addUser(@RequestBody enjoyer: Enjoyer): ResponseEntity<Enjoyer> {
+    fun addUser(@RequestBody employee: Employee): ResponseEntity<Employee> {
         return try {
-            userService.createUser(enjoyer)
+            userService.createUser(employee)
         }catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }
 
     @PutMapping("/updateUser/{id}")
-    fun updateUser(@PathVariable("id") userId: Long, @RequestBody enjoyer: Enjoyer): ResponseEntity<Enjoyer> {
+    fun updateUser(@PathVariable("id") userId: Long, @RequestBody employee: Employee): ResponseEntity<Employee> {
         return try {
-            userService.updateUser(userId, enjoyer)
+            userService.updateUser(userId, employee)
         }catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }

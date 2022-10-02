@@ -1,12 +1,12 @@
 package com.example.hack_for_change_backend.controller
 
 import com.example.hack_for_change_backend.model.Event
+import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.service.EventService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
-import kotlin.Exception
 
 @RestController
 @CrossOrigin(origins = ["http://localhost:3000"])
@@ -23,6 +23,11 @@ class EventController(private val eventService: EventService) {
         } catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
+    }
+
+    @GetMapping("/findByEventTypeIs")
+    fun fundEventByType(): ResponseEntity<List<Event>> {
+        return ResponseEntity.ok(eventService.findEventByType(EventType.BOWLING))
     }
 
     @PostMapping("/addEvent")

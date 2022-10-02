@@ -3,8 +3,8 @@ package com.example.hack_for_change_backend.model
 import javax.persistence.*
 
 @Entity
-@Table(name = "enjoyer")
-data class Enjoyer (
+@Table(name = "employees")
+data class Employee (
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +16,8 @@ data class Enjoyer (
     var organisation: Organisation,
     @ManyToMany
     @JoinTable(
-        name = "enjoyer_event_mapper",
-        joinColumns = [JoinColumn(name = "enjoyer_id")],
+        name = "employee_event_mapper",
+        joinColumns = [JoinColumn(name = "employee_id")],
     inverseJoinColumns = [JoinColumn(name = "event_id")]
         )
     val events: List<Event> = listOf()
