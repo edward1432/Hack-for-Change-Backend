@@ -26,8 +26,8 @@ class EventController(private val eventService: EventService) {
     }
 
     @GetMapping("/findByEventTypeIs")
-    fun fundEventByType(): ResponseEntity<List<Event>> {
-        return ResponseEntity.ok(eventService.findEventByType(EventType.BOWLING))
+    fun findEventByType(@RequestParam eventType: EventType): ResponseEntity<List<Event>> {
+        return ResponseEntity.ok(eventService.findEventByType(eventType))
     }
 
     @PostMapping("/addEvent")
