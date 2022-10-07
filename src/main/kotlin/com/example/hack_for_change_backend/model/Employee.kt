@@ -1,5 +1,6 @@
 package com.example.hack_for_change_backend.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -14,6 +15,7 @@ data class Employee (
     @ManyToOne
     @JoinColumn(name = "organisation_id")
     var organisation: Organisation,
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
         name = "employee_event_mapper",
