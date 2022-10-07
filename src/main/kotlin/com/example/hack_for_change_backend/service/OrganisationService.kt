@@ -35,7 +35,7 @@ class OrganisationService(val organisationRepo: OrganisationRepo){
             organisation.name = organisationDetails.name
             organisation.events = organisationDetails.events
             organisation.phoneNo = organisationDetails.phoneNo
-            organisation.enjoyers = organisationDetails.enjoyers
+            organisation.employees = organisationDetails.employees
             organisationRepo.save(organisation)
         } catch (e: NoSuchElementException) {
             throw NoSuchElementException(e.message)

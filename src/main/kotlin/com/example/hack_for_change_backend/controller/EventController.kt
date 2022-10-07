@@ -1,12 +1,12 @@
 package com.example.hack_for_change_backend.controller
 
 import com.example.hack_for_change_backend.model.Event
+import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.service.EventService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
-import kotlin.Exception
 
 @RestController
 @CrossOrigin(origins = ["http://localhost:3000"])
@@ -23,6 +23,11 @@ class EventController(private val eventService: EventService) {
         } catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
+    }
+
+    @GetMapping("/findByEventTypeIs")
+    fun findEventByType(@RequestParam eventType: EventType): ResponseEntity<List<Event>> {
+        return ResponseEntity.ok(eventService.findEventByType(eventType))
     }
 
     @PostMapping("/addEvent")
@@ -47,6 +52,16 @@ class EventController(private val eventService: EventService) {
     fun deleteEvent(@PathVariable("id") eventId: Long): ResponseEntity<HttpStatus> {
         return try {
             eventService.deleteEvent(eventId)
+            ResponseEntity.ok().body(HttpStatus.OK)
+        } catch (e: NoSuchElementException) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+        }
+    }
+
+    @PutMapping("/addEmployee/{event_id}/{employee_id}")
+    fun addEmployeeToEvent(@PathVariable("event_id") eventId: Long, @PathVariable("employee_id") employeeId: Long): ResponseEntity<HttpStatus> {
+        return try {
+            eventService.addEmployeeToEvent(eventId, employeeId)
             ResponseEntity.ok().body(HttpStatus.OK)
         } catch (e: NoSuchElementException) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
