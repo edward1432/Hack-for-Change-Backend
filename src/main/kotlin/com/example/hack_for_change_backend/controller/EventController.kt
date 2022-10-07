@@ -57,4 +57,14 @@ class EventController(private val eventService: EventService) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }
+
+    @PutMapping("/addEmployee/{event_id}/{employee_id}")
+    fun addEmployeeToEvent(@PathVariable("event_id") eventId: Long, @PathVariable("employee_id") employeeId: Long): ResponseEntity<HttpStatus> {
+        return try {
+            eventService.addEmployeeToEvent(eventId, employeeId)
+            ResponseEntity.ok().body(HttpStatus.OK)
+        } catch (e: NoSuchElementException) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+        }
+    }
 }

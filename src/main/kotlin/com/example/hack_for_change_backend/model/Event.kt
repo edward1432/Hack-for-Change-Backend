@@ -26,5 +26,5 @@ data class Event (
     var eventType: EventType,
 
     @ManyToMany (mappedBy = "events")
-    val employees: List<Employee> = listOf()
+    val employees: MutableList<Employee> = mutableListOf()
         )
