@@ -16,7 +16,7 @@ data class Employee (
     @JoinColumn(name = "organisation_id")
     var organisation: Organisation,
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(
         name = "employee_event_mapper",
         joinColumns = [JoinColumn(name = "employee_id")],
