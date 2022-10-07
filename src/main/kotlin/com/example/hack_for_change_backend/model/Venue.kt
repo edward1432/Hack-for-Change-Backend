@@ -1,6 +1,7 @@
 package com.example.hack_for_change_backend.model
 
 import com.example.hack_for_change_backend.model.enums.EventType
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 import javax.xml.stream.Location
 //add mapped by components on 14
