@@ -1,6 +1,7 @@
 package com.example.hack_for_change_backend.model
 
 import com.example.hack_for_change_backend.model.enums.EventType
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 import javax.xml.stream.Location
 //add mapped by components on 14
@@ -11,9 +12,13 @@ data class Venue (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val uniqueId: Long,
 
-    @OneToOne
-    @JoinColumn(name = "event_id")
-    var event: Event,
+    @ManyToMany
+    @JoinTable(
+        name = "venue_event_mapper",
+        joinColumns = [JoinColumn(name = "venue_id")],
+        inverseJoinColumns = [JoinColumn(name = "event_id")]
+    )
+    val events: List<Event> = listOf(),
     var name: String,
     var location: String,
 

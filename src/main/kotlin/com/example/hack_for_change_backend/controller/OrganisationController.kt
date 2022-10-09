@@ -51,7 +51,7 @@ class OrganisationController(private val organisationService: OrganisationServic
         }
     }
 
-    @DeleteMapping("/deleteOrganisation" + "/{id}")
+    @DeleteMapping("/deleteOrganisation/{id}")
     fun deleteOrganisation(@PathVariable("id") organisationId: Long): ResponseEntity<HttpStatus> {
         return try {
             organisationService.deleteOrganisation(organisationId)
