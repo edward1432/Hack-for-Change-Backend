@@ -24,22 +24,8 @@ class User {
         joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
     )
-    @ManyToOne
-    @JoinColumn(name = "organisation_id")
-    var organisation: Organisation? = null
-
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-        name = "employee_event_mapper",
-        joinColumns = [JoinColumn(name = "employee_id")],
-        inverseJoinColumns = [JoinColumn(name = "event_id")]
-    )
-
-
     var roles: Collection<Role>? = null
-    val events: List<Event> = listOf()
-
+    
     constructor() {}
     constructor(
         firstName: String?, lastName: String?, email: String?,
@@ -51,4 +37,18 @@ class User {
         this.password = password
         this.roles = roles
     }
+    @ManyToOne
+    @JoinColumn(name = "organisation_id")
+    var organisation: Organisation? = null
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+        name = "employee_event_mapper",
+        joinColumns = [JoinColumn(name = "employee_id")],
+        inverseJoinColumns = [JoinColumn(name = "event_id")]
+    )
+    val events: List<Event> = listOf()
+
+
 }
