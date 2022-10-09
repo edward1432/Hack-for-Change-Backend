@@ -15,7 +15,7 @@ data class Organisation (
     var phoneNo: String,
 
     @JsonIgnoreProperties("organisation")
-    @OneToMany(mappedBy = "organisation", cascade = [CascadeType.])
+    @OneToMany(mappedBy = "organisation", cascade = [CascadeType.PERSIST])
     var employees: MutableList<Employee>,
 
     @JsonIgnoreProperties("organisation")
