@@ -3,8 +3,6 @@ package com.example.hack_for_change_backend.service
 import com.example.hack_for_change_backend.model.Event
 import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.repository.EventRepo
-import org.h2.engine.User
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
@@ -64,7 +62,7 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
     fun addEmployeeToEvent(eventID: Long, employeeID: Long) {
         try {
             val event = findEventById(eventID)
-            event.employees.add(userService.findUserById(employeeID))
+            event.users.add(userService.findUserById(employeeID))
             eventRepo.save(event)
         } catch (e: NoSuchElementException) {
             throw NoSuchElementException(e.message)

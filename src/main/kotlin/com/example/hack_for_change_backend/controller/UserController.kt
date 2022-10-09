@@ -1,13 +1,11 @@
 package com.example.hack_for_change_backend.controller
 
-import com.example.hack_for_change_backend.model.Employee
+import com.example.hack_for_change_backend.model.User
 import com.example.hack_for_change_backend.service.UserService
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
-import java.util.*
 import kotlin.NoSuchElementException
 
 
@@ -17,10 +15,10 @@ import kotlin.NoSuchElementException
 class UserController(private val userService: UserService) {
 
     @GetMapping("/findAll")
-    fun getAllUsers(): ResponseEntity<List<Employee>> = ResponseEntity.ok(userService.findAll())
+    fun getAllUsers(): ResponseEntity<List<User>> = ResponseEntity.ok(userService.findAll())
 
     @GetMapping("/findById/{id}")
-    fun findUserById(@PathVariable("id") userId: Long): ResponseEntity<Employee> {
+    fun findUserById(@PathVariable("id") userId: Long): ResponseEntity<User> {
         return try {
             ResponseEntity.ok(userService.findUserById(userId))
         } catch (e: Exception) {
@@ -28,18 +26,18 @@ class UserController(private val userService: UserService) {
         }
     }
     @PostMapping("/addUser")
-    fun addUser(@RequestBody employee: Employee): ResponseEntity<Employee> {
+    fun addUser(@RequestBody user: User): ResponseEntity<User> {
         return try {
-            userService.createUser(employee)
+            userService.createUser(user)
         }catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }
 
     @PutMapping("/updateUser/{id}")
-    fun updateUser(@PathVariable("id") userId: Long, @RequestBody employee: Employee): ResponseEntity<Employee> {
+    fun updateUser(@PathVariable("id") userId: Long, @RequestBody user: User): ResponseEntity<User> {
         return try {
-            userService.updateUser(userId, employee)
+            userService.updateUser(userId, user)
         }catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
