@@ -12,7 +12,8 @@ data class Venue (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val uniqueId: Long,
 
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(
         name = "venue_event_mapper",
         joinColumns = [JoinColumn(name = "venue_id")],
