@@ -10,8 +10,8 @@ import javax.persistence.*
 @Table(name = "role")
 class Role {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: String? = null
         set(id) {
             field = this.id
