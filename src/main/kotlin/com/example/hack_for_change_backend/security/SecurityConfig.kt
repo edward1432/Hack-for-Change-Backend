@@ -73,7 +73,6 @@ constructor(private val userService: UserDataService) : WebSecurityConfigurerAda
 
     @Bean
     @Primary
-    //Making this primary to avoid any accidental duplication with another token service instance of the same name
     open fun tokenServices(): DefaultTokenServices {
         val defaultTokenServices = DefaultTokenServices()
         defaultTokenServices.setTokenStore(tokenStore())
