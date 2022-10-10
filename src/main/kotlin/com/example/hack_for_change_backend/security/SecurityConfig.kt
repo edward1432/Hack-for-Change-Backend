@@ -1,4 +1,5 @@
-import com.nepooomuk.account.service.UserService
+import com.example.hack_for_change_backend.service.UserDataService
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -21,7 +22,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 open class SecurityConfig @Autowired
-constructor(private val userService: UserService) : WebSecurityConfigurerAdapter() {
+constructor(private val userService: UserDataService) : WebSecurityConfigurerAdapter() {
 
     @Value("\${security.signing-key}")
     private val signingKey: String? = null
