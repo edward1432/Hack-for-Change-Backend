@@ -32,10 +32,13 @@ open class User {
     @NotEmpty(message = "Please enter your password")
     @NotNull(message = "A Password is required")
     internal var password: String = ""
+
+
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = arrayOf(JoinColumn(name = "user_id", referencedColumnName = "id")),
-        inverseJoinColumns = arrayOf(JoinColumn(name = "role_id", referencedColumnName = "id")))
-    var roles: List<Role>? = null
+    @JoinTable(name = "user_role", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "uniqueId")],
+        inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
+    )
+    var roles: MutableSet<Role>? = null
         set(roles) {
             field = this.roles
         }
