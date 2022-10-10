@@ -51,13 +51,13 @@ class OrganisationController(private val organisationService: OrganisationServic
         }
     }
 
-    @DeleteMapping("/deleteOrganisation/{id}")
-    fun deleteOrganisation(@PathVariable("id") organisationId: Long): ResponseEntity<HttpStatus> {
-        return try {
-            organisationService.deleteOrganisation(organisationId)
-            ResponseEntity.ok().body(HttpStatus.OK)
-        } catch (e: NoSuchElementException) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
-        }
-    }
+//    @DeleteMapping("/deleteOrganisation/{id}")
+//    fun deleteOrganisation(@PathVariable("id") organisationId: Long): ResponseEntity<HttpStatus> {
+//        return try {
+//            organisationService.deleteOrganisation(organisationId)
+//            ResponseEntity.ok().body(HttpStatus.OK)
+//        } catch (e: NoSuchElementException) {
+//            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+//        }
+//    }
 }
