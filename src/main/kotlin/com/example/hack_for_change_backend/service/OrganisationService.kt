@@ -2,6 +2,9 @@ package com.example.hack_for_change_backend.service
 
 import com.example.hack_for_change_backend.model.Organisation
 import com.example.hack_for_change_backend.repository.OrganisationRepo
+import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.github.fge.jsonpatch.JsonPatch
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
@@ -41,6 +44,11 @@ class OrganisationService(val organisationRepo: OrganisationRepo){
             throw NoSuchElementException(e.message)
         }
     }
+
+//    fun applyPatchToOrganisation(patch: JsonPatch, targetOrganisation: Organisation): Organisation {
+//        val patched: JsonNode = patch.apply(jacksonObjectMapper().convertValue(targetOrganisation, JsonNode.class)))
+//            return jacksonObjectMapper().treeToValue(patched, Organisation.class)
+//    }
 
     fun deleteOrganisation(organisationID: Long) {
         try {
