@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull
 
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 open class User {
     @Id
     @Column

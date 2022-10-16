@@ -26,4 +26,6 @@ constructor(private val userRepository: UserRepo) : UserDetailsService {
 
         return org.springframework.security.core.userdetails.User(user.email, user.password, authorities)
     }
+
+
 }
