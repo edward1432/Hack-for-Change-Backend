@@ -30,5 +30,5 @@ data class Event (
 
     @JsonIgnore
     @ManyToMany (mappedBy = "events")
-    val employees: MutableList<Employee> = mutableListOf()
+    val users: MutableList<User> = mutableListOf()
         )
