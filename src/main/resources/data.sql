@@ -142,7 +142,7 @@ INSERT INTO organisations (name, email, phone_no) VALUES ('LBG', 'lbg@lbg.com', 
 --insert into venue_event_mapper (venue_id, event_id) values (8, 12);
 --insert into venue_event_mapper (venue_id, event_id) values (3, 8);
 
-insert into users (email_address, password, organisation_id) values ('test@test.com', 'asdfghjk', 1);
+insert into users (email_address, password, organisation_id) values ('test@test.com', 'admin', 1);
 
 insert into role (role_name, description) values ('role1', 'this is role 1');
 
