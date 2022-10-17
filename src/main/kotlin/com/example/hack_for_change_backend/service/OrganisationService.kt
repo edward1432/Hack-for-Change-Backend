@@ -2,10 +2,6 @@ package com.example.hack_for_change_backend.service
 
 import com.example.hack_for_change_backend.model.Organisation
 import com.example.hack_for_change_backend.repository.OrganisationRepo
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.github.fge.jsonpatch.JsonPatch
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
