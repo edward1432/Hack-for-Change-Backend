@@ -56,8 +56,13 @@ class User {
     )
     val events: List<Event> = listOf()
 
-    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL])
-    val ballots: List<Ballot> = listOf()
+    @OneToMany(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "ballot_id")
+    val ballots: MutableList<Ballot> = mutableListOf()
+
+
+//    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL])
+//    val ballots: List<Ballot> = listOf()
 
     constructor() {
     }

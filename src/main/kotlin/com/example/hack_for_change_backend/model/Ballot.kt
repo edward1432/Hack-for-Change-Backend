@@ -6,7 +6,9 @@ import javax.persistence.*
 @Entity
 @Table(name = "ballots")
 data class Ballot (
+//    val choice: EventType
     @Id
+    @Column(name = "ballot_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var uniqueId: Long,
     @ManyToOne

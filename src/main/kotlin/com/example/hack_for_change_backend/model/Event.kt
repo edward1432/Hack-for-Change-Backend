@@ -30,5 +30,9 @@ data class Event (
 
     @JsonIgnore
     @ManyToMany (mappedBy = "events")
-    val users: MutableList<User> = mutableListOf()
+    val users: MutableList<User> = mutableListOf(),
+
+    @OneToOne
+    @JoinColumn
+    val poll: Poll
         )

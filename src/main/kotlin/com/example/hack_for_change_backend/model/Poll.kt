@@ -9,9 +9,12 @@ data class Poll (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var uniqueID: Long,
 
-    @OneToOne
+    @OneToOne(mappedBy = "poll")
     @JoinColumn(name = "event_id")
     var event: Event,
+
+//    val votes: MutableMap<User, Ballot?> = mutableMapOf()
+
 
 //    @ManyToMany(cascade = [CascadeType.ALL])
 //    @JoinTable(
@@ -19,7 +22,7 @@ data class Poll (
 //        joinColumns = [JoinColumn(name = "poll_id")],
 //        inverseJoinColumns = [JoinColumn(name = "user_id")]
 //    )
-//    val voters: Map<User, Ballot> = mutableMapOf(),
+//    val voters: Map<User, Ballot?> = mutableMapOf()
 
     @OneToMany
     val votes: MutableSet<Ballot>
