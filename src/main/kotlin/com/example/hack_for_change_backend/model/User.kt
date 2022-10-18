@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull
 @Data
 @Entity
 @Table(name = "users")
-open class User {
+class User {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,6 +55,9 @@ open class User {
         inverseJoinColumns = [JoinColumn(name = "event_id")]
     )
     val events: List<Event> = listOf()
+
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL])
+    val ballots: List<Ballot> = listOf()
 
     constructor() {
     }
