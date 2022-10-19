@@ -4,6 +4,7 @@ import com.example.hack_for_change_backend.model.enums.EventType
 import com.fasterxml.jackson.annotation.JsonIgnore
 import java.util.Date
 import javax.persistence.*
+import kotlin.jvm.Transient
 
 //add mapped by components on line 18a nd 22
 @Entity
@@ -26,11 +27,14 @@ data class Event (
     var venues: MutableList<Venue>,
 
     @Enumerated(value = EnumType.STRING)
-    var eventType: EventType,
+    var eventType: EventType?,
 
     @JsonIgnore
     @ManyToMany (mappedBy = "events")
     val users: MutableList<User> = mutableListOf(),
+
+    @Transient
+    val votes: MutableMap<User, Ballot?> = mutableMapOf(),
 
     @OneToOne
     @JoinColumn

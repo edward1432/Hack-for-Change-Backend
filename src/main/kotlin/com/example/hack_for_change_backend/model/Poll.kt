@@ -24,6 +24,6 @@ data class Poll (
 //    )
 //    val voters: Map<User, Ballot?> = mutableMapOf()
 
-    @OneToMany
-    val votes: MutableSet<Ballot>
+//    @OneToMany
+//    val votes: MutableSet<Ballot>
         )

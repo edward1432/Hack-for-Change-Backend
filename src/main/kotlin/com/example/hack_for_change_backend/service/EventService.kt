@@ -1,6 +1,8 @@
 package com.example.hack_for_change_backend.service
 
+import com.example.hack_for_change_backend.model.Ballot
 import com.example.hack_for_change_backend.model.Event
+import com.example.hack_for_change_backend.model.User
 import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.repository.EventRepo
 import org.springframework.stereotype.Service
@@ -69,4 +71,19 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
         }
     }
 
+    private fun isUserInEvent(user: User, event: Event): Boolean = event.users.contains(user)
+    fun castBallot(eventId: Long, userId: Long, choice: EventType) {
+        try {
+            val event = findEventById(eventId)
+            val user = userService.findUserById(userId)
+            if (isUserInEvent(user, event)) {
+                event.votes[user] = Ballot(choice)
+            } else {
+                throw NoSuchElementException("User ${user.uniqueId} not registered for this event")
+            }
+            eventRepo.save(event)
+        } catch (e: NoSuchElementException) {
+            throw NoSuchElementException(e.message)
+        }
+    }
 }

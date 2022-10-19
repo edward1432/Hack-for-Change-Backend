@@ -18,7 +18,7 @@ class User {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var uniqueId: Long? = null
+    var uniqueId: Long = 0
         set(id) {
             field = this.uniqueId
         }
@@ -56,9 +56,9 @@ class User {
     )
     val events: List<Event> = listOf()
 
-    @OneToMany(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "ballot_id")
-    val ballots: MutableList<Ballot> = mutableListOf()
+//    @OneToMany(cascade = [CascadeType.ALL])
+//    @JoinColumn(name = "ballot_id")
+//    val ballots: MutableList<Ballot> = mutableListOf()
 
 
 //    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL])

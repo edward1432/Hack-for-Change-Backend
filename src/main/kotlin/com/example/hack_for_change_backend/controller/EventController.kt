@@ -59,9 +59,25 @@ class EventController(private val eventService: EventService) {
     }
 
     @PutMapping("/addEmployee/{event_id}/{employee_id}")
-    fun addEmployeeToEvent(@PathVariable("event_id") eventId: Long, @PathVariable("employee_id") employeeId: Long): ResponseEntity<HttpStatus> {
+    fun addEmployeeToEvent(@PathVariable("event_id") eventId: Long,
+                           @PathVariable("employee_id") employeeId: Long):
+            ResponseEntity<HttpStatus> {
         return try {
             eventService.addEmployeeToEvent(eventId, employeeId)
+            ResponseEntity.ok().body(HttpStatus.OK)
+        } catch (e: NoSuchElementException) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+        }
+    }
+
+    @PatchMapping("castBallot/{event_id}/{user_id}")
+    fun castBallot(@PathVariable("event_id") eventId: Long,
+                   @PathVariable("user_id") userId: Long,
+                   @RequestParam("Choice") choice: EventType
+                   ):
+            ResponseEntity<HttpStatus> {
+        return try {
+            eventService.castBallot(eventId, userId, choice)
             ResponseEntity.ok().body(HttpStatus.OK)
         } catch (e: NoSuchElementException) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)

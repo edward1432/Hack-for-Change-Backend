@@ -5,7 +5,7 @@ INSERT INTO organisations (name, email, phone_no) VALUES ('LBG', 'lbg@lbg.com', 
 --insert into organisations (name, email, phone_no) values ('Invesco', 'invesco@invesco.com', '564125,7748');
 --insert into organisations (name, email, phone_no) values ('Mercator', 'mercator@mercator.com', '224497,1649');
 --
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nar''yan-Mar', '2023-01-29 19:00:00', '2023-01-29 23:00:00', 1, 'GOLF');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nar''yan-Mar', '2023-01-29 19:00:00', '2023-01-29 23:00:00', 1, 'GOLF');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Huayuanli', '2023-04-13 19:00:00', '2023-04-13 23:00:00', 1, 'DINNER');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nanqi', '2023-05-04 19:00:00', '2023-05-04 23:00:00', 2, 'GOLF');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Pringgabaya', '2023-06-20 19:00:00', '2023-06-20 23:00:00', 3, 'DRINKING');
@@ -36,38 +36,10 @@ INSERT INTO organisations (name, email, phone_no) VALUES ('LBG', 'lbg@lbg.com', 
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Pecatu', '2023-02-19 19:00:00', '2023-02-19 23:00:00', 3, 'DINNER');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Badajoz', '2023-05-31 19:00:00', '2023-05-31 23:00:00', 2, 'BOWLING');
 --
---insert into employees (user_name, organisation_id) values ('ccarhart6', 1);
---insert into employees (user_name, organisation_id) values ('kbaudasso0', 2);
---insert into employees (user_name, organisation_id) values ('jvanni1', 4);
---insert into employees (user_name, organisation_id) values ('ddemitri2', 6);
---insert into employees (user_name, organisation_id) values ('akirby3', 5);
---insert into employees (user_name, organisation_id) values ('jshellshear4', 4);
---insert into employees (user_name, organisation_id) values ('dlineen5', 2);
---insert into employees (user_name, organisation_id) values ('gbattey7', 2);
---insert into employees (user_name, organisation_id) values ('pnower8', 6);
---insert into employees (user_name, organisation_id) values ('dmccowan9', 3);
---insert into employees (user_name, organisation_id) values ('agreschika', 5);
---insert into employees (user_name, organisation_id) values ('jdeganb', 2);
---insert into employees (user_name, organisation_id) values ('kbelloc', 5);
---insert into employees (user_name, organisation_id) values ('nbleythingd', 2);
---insert into employees (user_name, organisation_id) values ('rduddelle', 6);
---insert into employees (user_name, organisation_id) values ('bbredef', 5);
---insert into employees (user_name, organisation_id) values ('glechelleg', 6);
---insert into employees (user_name, organisation_id) values ('cjeannonh', 2);
---insert into employees (user_name, organisation_id) values ('gmountstepheni', 1);
---insert into employees (user_name, organisation_id) values ('gwinslowj', 3);
---insert into employees (user_name, organisation_id) values ('csmowtonk', 6);
---insert into employees (user_name, organisation_id) values ('jjenckesl', 2);
---insert into employees (user_name, organisation_id) values ('wblomfieldm', 4);
---insert into employees (user_name, organisation_id) values ('icreaseyn', 2);
---insert into employees (user_name, organisation_id) values ('nrubinskyo', 3);
---insert into employees (user_name, organisation_id) values ('apriddeyp', 1);
---insert into employees (user_name, organisation_id) values ('jshickleq', 6);
---insert into employees (user_name, organisation_id) values ('urodenborchr', 3);
---insert into employees (user_name, organisation_id) values ('mdalgetys', 4);
---insert into employees (user_name, organisation_id) values ('rtuffint', 6);
+insert into users (email_address, password, organisation_id) values ('test@test.com', 'asdfghjkl', 1);
+
 --
---INSERT INTO venues (location, name, type) VALUES ('London', 'Slug and Lettuce', 'DRINKING');
+INSERT INTO venues (location, name, type) VALUES ('London', 'Slug and Lettuce', 'DRINKING');
 --insert into venues (location, name, type) values ('Northfield', 'GlaxoSmithKline Consumer Healthcare LP', 'DINNER');
 --insert into venues (location, name, type) values ('Schmedeman', 'Unifirst First Aid Corporation', 'LUNCH');
 --insert into venues (location, name, type) values ('Sutherland', 'BCM Ltd', 'GOLF');
@@ -79,7 +51,7 @@ INSERT INTO organisations (name, email, phone_no) VALUES ('LBG', 'lbg@lbg.com', 
 --insert into venues (location, name, type) values ('Straubel', 'Wal-Mart Stores Inc', 'DRINKING');
 --insert into venues (location, name, type) values ('Corben', 'Sandoz Inc', 'BOWLING');
 --
---insert into employee_event_mapper (employee_id, event_id) values (1, 1);
+insert into employee_event_mapper (employee_id, event_id) values (1, 1);
 --insert into employee_event_mapper (employee_id, event_id) values (9, 16);
 --insert into employee_event_mapper (employee_id, event_id) values (8, 26);
 --insert into employee_event_mapper (employee_id, event_id) values (25, 13);
@@ -111,7 +83,7 @@ INSERT INTO organisations (name, email, phone_no) VALUES ('LBG', 'lbg@lbg.com', 
 --insert into employee_event_mapper (employee_id, event_id) values (18, 17);
 --insert into employee_event_mapper (employee_id, event_id) values (7, 26);
 
---insert into venue_event_mapper (venue_id, event_id) values (6, 16);
+insert into venue_event_mapper (venue_id, event_id) values (1, 1);
 --insert into venue_event_mapper (venue_id, event_id) values (8, 11);
 --insert into venue_event_mapper (venue_id, event_id) values (4, 28);
 --insert into venue_event_mapper (venue_id, event_id) values (9, 18);
@@ -142,7 +114,7 @@ INSERT INTO organisations (name, email, phone_no) VALUES ('LBG', 'lbg@lbg.com', 
 --insert into venue_event_mapper (venue_id, event_id) values (8, 12);
 --insert into venue_event_mapper (venue_id, event_id) values (3, 8);
 
-insert into users (email_address, password, organisation_id) values ('test@test.com', 'admin', 1);
+--insert into users (email_address, password, organisation_id) values ('test@test.com', 'admin', 1);
 
 insert into role (role_name, description) values ('role1', 'this is role 1');
 
