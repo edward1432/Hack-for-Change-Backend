@@ -19,9 +19,9 @@ class User {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var uniqueId: Long = 0
-        set(id) {
-            field = this.uniqueId
-        }
+//        set(id) {
+//            field = this.uniqueId
+//        }
 
     @Column(name = "email_address")
     @Email(message = "Please enter a valid Email")

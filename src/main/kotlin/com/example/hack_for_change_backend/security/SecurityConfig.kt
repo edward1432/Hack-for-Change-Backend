@@ -21,7 +21,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-open class SecurityConfig @Autowired
+class SecurityConfig @Autowired
 constructor(private val userService: UserDataService) : WebSecurityConfigurerAdapter() {
 
     @Value("\${security.signing-key}")
@@ -60,20 +60,20 @@ constructor(private val userService: UserDataService) : WebSecurityConfigurerAda
     }
 
     @Bean
-    open fun accessTokenConverter(): JwtAccessTokenConverter {
+    fun accessTokenConverter(): JwtAccessTokenConverter {
         val converter = JwtAccessTokenConverter()
         converter.setSigningKey(signingKey!!)
         return converter
     }
 
     @Bean
-    open fun tokenStore(): TokenStore {
+    fun tokenStore(): TokenStore {
         return JwtTokenStore(accessTokenConverter())
     }
 
     @Bean
     @Primary
-    open fun tokenServices(): DefaultTokenServices {
+    fun tokenServices(): DefaultTokenServices {
         val defaultTokenServices = DefaultTokenServices()
         defaultTokenServices.setTokenStore(tokenStore())
         defaultTokenServices.setSupportRefreshToken(true)

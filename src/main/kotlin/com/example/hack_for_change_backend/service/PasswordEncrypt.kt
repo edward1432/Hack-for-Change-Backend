@@ -15,8 +15,6 @@ class PasswordEncrypt : PasswordEncoder {
     }
 
     companion object {
-
-
         fun encodePassword(password: String): String {
             val passwordEncoder = BCryptPasswordEncoder()
             return passwordEncoder.encode(password)
