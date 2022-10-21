@@ -10,11 +10,14 @@ class PasswordEncrypt : PasswordEncoder {
         return BCrypt.hashpw(rawPassword.toString(), BCrypt.gensalt(12))
     }
 
+    // todo: login
     override fun matches(rawPassword: CharSequence, encodedPassword: String): Boolean {
         return BCrypt.checkpw(rawPassword.toString(), encodedPassword)
     }
 
     companion object {
+
+        // todo register
         fun encodePassword(password: String): String {
             val passwordEncoder = BCryptPasswordEncoder()
             return passwordEncoder.encode(password)

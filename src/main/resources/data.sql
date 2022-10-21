@@ -37,8 +37,9 @@ insert into events (location, start_date_time, end_date_time, organisation_id, e
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Badajoz', '2023-05-31 19:00:00', '2023-05-31 23:00:00', 2, 'BOWLING');
 --
 insert into users (email_address, password, organisation_id) values ('test@test.com', '{noop}asdfghjkl', 1);
+insert into users (email_address, password, organisation_id) values ('admin@admin.com', '{noop}adminpass', 1);
 
---
+
 INSERT INTO venues (location, name, type) VALUES ('London', 'Slug and Lettuce', 'DRINKING');
 --insert into venues (location, name, type) values ('Northfield', 'GlaxoSmithKline Consumer Healthcare LP', 'DINNER');
 --insert into venues (location, name, type) values ('Schmedeman', 'Unifirst First Aid Corporation', 'LUNCH');

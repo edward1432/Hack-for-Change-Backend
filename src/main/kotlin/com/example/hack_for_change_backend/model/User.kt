@@ -39,9 +39,6 @@ class User {
         inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
     )
     var roles: MutableSet<Role>? = null
-        set(roles) {
-            field = this.roles
-        }
 
     @ManyToOne
     @JoinColumn(name = "organisation_id")
