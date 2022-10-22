@@ -4,8 +4,10 @@ import com.example.hack_for_change_backend.model.User
 import com.example.hack_for_change_backend.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
+import java.util.*
 import kotlin.NoSuchElementException
 
 
@@ -16,6 +18,7 @@ class UserController(private val userService: UserService) {
 
     @GetMapping("/findAll")
     fun getAllUsers(): ResponseEntity<List<User>> = ResponseEntity.ok(userService.findAll())
+
 
     @GetMapping("/findById/{id}")
     fun findUserById(@PathVariable("id") userId: Long): ResponseEntity<User> {
@@ -33,6 +36,7 @@ class UserController(private val userService: UserService) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }
+
 
     @PutMapping("/updateUser/{id}")
     fun updateUser(@PathVariable("id") userId: Long, @RequestBody user: User): ResponseEntity<User> {

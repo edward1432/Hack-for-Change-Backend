@@ -33,7 +33,6 @@ class User {
     @NotNull(message = "A Password is required")
     internal var password: String = ""
 
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "uniqueId")],
         inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
