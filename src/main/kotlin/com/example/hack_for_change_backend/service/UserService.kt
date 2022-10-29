@@ -19,17 +19,22 @@ class UserService(val userRepo: UserRepo, val passwordEncoder: PasswordEncoder) 
         }
     }
 
+    fun checkUserEmail(email: String): Boolean = findAll().any { it.email == email }
+
     fun findAll(): List<User> {
         return userRepo.findAll()
     }
 
     fun createUser(user: User): ResponseEntity<User> {
-        user.run {
-            password = passwordEncoder.encode(user.password)
-            role = UserRoles.USER
-        }
-        userRepo.save(user)
-        return ResponseEntity.ok(user)
+        if (!checkUserEmail(user.email!!)) {
+            user.run {
+                password = passwordEncoder.encode(user.password)
+                role = UserRoles.USER
+            }
+            userRepo.save(user)
+            return ResponseEntity.ok(user)
+
+        } else throw IllegalArgumentException("Email ${user.email} already registered")
     }
 
 

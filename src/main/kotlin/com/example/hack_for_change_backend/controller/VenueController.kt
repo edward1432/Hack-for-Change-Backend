@@ -27,7 +27,7 @@ class VenueController(private val venueService: VenueService) {
     fun addVenue(@RequestBody venue: Venue): ResponseEntity<Venue> {
         return try {
             venueService.createVenue(venue)
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }

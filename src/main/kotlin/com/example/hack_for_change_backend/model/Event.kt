@@ -16,17 +16,16 @@ data class Event (
     var startDateTime: Date,
     var endDateTime: Date,
 
-
     @ManyToOne
     @JoinColumn(name = "organisation_id")
-    var organisation: Organisation,
+    var organisation: Organisation?,
 
     @JsonIgnore
     @ManyToMany (mappedBy = "events")
-    var venues: MutableList<Venue>,
+    var venues: MutableList<Venue>?,
 
     @Enumerated(value = EnumType.STRING)
-    var eventType: EventType,
+    var eventType: EventType?,
 
     @JsonIgnore
     @ManyToMany (mappedBy = "events")

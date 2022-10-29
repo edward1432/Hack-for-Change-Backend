@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
+import java.lang.IllegalArgumentException
 
 @RestController
 @CrossOrigin(origins = ["http://localhost:3000"])
@@ -31,11 +32,13 @@ class EventController(private val eventService: EventService) {
     }
 
     @PostMapping("/addEvent")
-    fun addEvent(@RequestBody event: Event): ResponseEntity<Event> {
+    fun addEvent(@RequestBody event: Event, @RequestParam organisationId: Long): ResponseEntity<Event> {
         return try {
-            ResponseEntity.ok().body(eventService.addNewEvent(event))
+            ResponseEntity.ok().body(eventService.addNewEvent(event, organisationId))
         } catch (e: NoSuchElementException) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+        } catch (e: IllegalArgumentException) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, e.message)
         }
     }
 

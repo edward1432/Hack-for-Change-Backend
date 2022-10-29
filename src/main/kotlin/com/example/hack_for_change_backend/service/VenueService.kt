@@ -5,6 +5,7 @@ import com.example.hack_for_change_backend.repository.VenueRepo
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import java.lang.IllegalArgumentException
 
 @Service
 class VenueService(val venueRepo: VenueRepo) {
@@ -14,26 +15,19 @@ class VenueService(val venueRepo: VenueRepo) {
         }
     }
 
-
-
     fun findAll(): List<Venue>{
         return venueRepo.findAll()
     }
 
-//    fun createVenue(venue: Venue): ResponseEntity<Venue> {
-//        venueRepo.save(venue)
-//        return ResponseEntity.ok(venue)
-//    }
-
-    lateinit var venueServiceManager: List<Venue>
+    fun checkVenueExists(venue: Venue): Boolean = findAll().contains(venue)
 
     fun createVenue(venue: Venue): ResponseEntity<Venue> {
-        val venueManager = (venueServiceManager.find { venueList -> venueList == venue })
-        if (venueManager != null) {
-            throw IllegalStateException("[VENUE] $venue ALREADY EXISTS")
+        if (!checkVenueExists(venue)) {
+            venueRepo.save(venue)
+            return ResponseEntity.ok(venue)
+        } else {
+            throw IllegalArgumentException("[VENUE] $venue ALREADY EXISTS")
         }
-        venueRepo.save(venue)
-        return ResponseEntity.ok(venue)
     }
 
 

@@ -14,9 +14,20 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
 
     fun findAll() = eventRepo.findAll()
 
-    fun addNewEvent(event: Event): Event {
+    fun checkEventExists(event: Event) = findAll().any {
+        it.run {
+            location == event.location
+                    && eventType == event.eventType
+//                    && venues == event.venues
+//                    && startDateTime == event.startDateTime
+//                    && endDateTime == event.endDateTime
+        }
+    }
+
+    fun addNewEvent(event: Event, organisationId: Long): Event {
+        if (checkEventExists(event)) throw IllegalArgumentException("Event $event already exists")
         return try {
-            organisationService.findOrganisationById(event.organisation.uniqueId)
+            event.organisation = organisationService.findOrganisationById(organisationId)
             eventRepo.save(event)
             event
         } catch (e: NoSuchElementException) {

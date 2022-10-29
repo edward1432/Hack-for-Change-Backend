@@ -31,8 +31,7 @@ data class User (
     @Length(min = 8, message = "Your password must have at least 8 characters")
     @NotEmpty(message = "Please enter your password")
     @NotNull(message = "A Password is required")
-    internal var password: String?
-    ,
+    internal var password: String?,
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "user_role", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "uniqueId")],
 //        inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]

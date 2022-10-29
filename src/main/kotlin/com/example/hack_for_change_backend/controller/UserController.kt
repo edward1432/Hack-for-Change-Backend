@@ -1,7 +1,6 @@
 package com.example.hack_for_change_backend.controller
 
 import com.example.hack_for_change_backend.model.User
-import com.example.hack_for_change_backend.security.UserCredentialsDto
 import com.example.hack_for_change_backend.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
