@@ -12,20 +12,11 @@ class Role {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: String? = null
-        set(id) {
-            field = this.id
-        }
+    var id: Long? = null
 
     @Column(name = "role_name")
     var roleName: String? = null
-        set(roleName) {
-            field = this.roleName
-        }
 
     @Column(name = "description")
     var description: String? = null
-        set(description) {
-            field = this.description
-        }
 }

@@ -19,9 +19,6 @@ open class User {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var uniqueId: Long? = null
-        set(id) {
-            field = this.uniqueId
-        }
 
     @Column(name = "email_address")
     @Email(message = "Please enter a valid Email")
@@ -39,9 +36,6 @@ open class User {
         inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
     )
     var roles: MutableSet<Role>? = null
-        set(roles) {
-            field = this.roles
-        }
 
     @ManyToOne
     @JoinColumn(name = "organisation_id")
