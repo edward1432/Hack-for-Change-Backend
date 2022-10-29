@@ -28,19 +28,21 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
             .roles("USER")
     }
 
-//    @Throws(Exception::class)
-//    override fun configure(http: HttpSecurity) {
-//        http.httpBasic()
-//            .and()
-//            .authorizeRequests()
+    @Throws(Exception::class)
+    @Override
+    override fun configure(http: HttpSecurity) {
+        http.httpBasic()
+            .and()
+            .authorizeRequests()
 //            .antMatchers(HttpMethod.GET, "/").hasRole("ADMIN")
-//            .antMatchers(HttpMethod.POST, "//**").hasRole("ADMIN")
+            .antMatchers("/users/**").permitAll()
+            .antMatchers(HttpMethod.POST, "/users/addUser/**").hasAnyAuthority("ADMIN", "USER")
 //            .antMatchers(HttpMethod.PUT, "//**").hasRole("ADMIN")
 //            .antMatchers(HttpMethod.DELETE, "//**").hasRole("ADMIN")
 //            .antMatchers(HttpMethod.GET, "//**").hasAnyRole("ADMIN", "USER")
-//            .and()
-//            .csrf().disable()
-//            .formLogin().disable()
-//    }
+            .and()
+            .csrf().disable()
+            .formLogin().disable()
+    }
 
 }

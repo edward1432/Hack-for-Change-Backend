@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
 
 }
 
-@Bean
-fun passwordEncoder(): PasswordEncoder {
-	return BCryptPasswordEncoder()
-}
+//@Bean
+//fun passwordEncoder(): PasswordEncoder {
+//	return BCryptPasswordEncoder()
+//}

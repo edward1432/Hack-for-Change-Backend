@@ -22,7 +22,7 @@ constructor(private val userRepository: UserRepo) : UserDetailsService {
             ?: throw UsernameNotFoundException(String.format("The username %s doesn't exist", s))
 
         val authorities = ArrayList<GrantedAuthority>()
-        user.roles!!.forEach { role -> authorities.add(SimpleGrantedAuthority(role.roleName)) }
+//        user.roles!!.forEach { role -> authorities.add(SimpleGrantedAuthority(role.roleName)) }
 
         return org.springframework.security.core.userdetails.User(user.email, user.password, authorities)
     }

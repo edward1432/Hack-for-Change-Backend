@@ -146,4 +146,4 @@ INSERT INTO organisations (name, email, phone_no) VALUES ('LBG', 'lbg@lbg.com', 
 
 insert into role (role_name, description) values ('role1', 'this is role 1');
 
-insert into user_role (user_id, role_id) values (1, 1);
+--insert into user_role (user_id, role_id) values (1, 1);
