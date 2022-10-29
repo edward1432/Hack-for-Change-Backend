@@ -3,10 +3,13 @@ package com.example.hack_for_change_backend.controller
 import com.example.hack_for_change_backend.model.Organisation
 
 import com.example.hack_for_change_backend.service.OrganisationService
+import com.fasterxml.jackson.databind.JsonNode
+import com.github.fge.jsonpatch.JsonPatch
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 @RestController
 @CrossOrigin(origins = ["http://localhost:3000"])
@@ -50,6 +53,19 @@ class OrganisationController(private val organisationService: OrganisationServic
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }
+
+//    @PatchMapping("/update/{id}", consumes = ["application/json-patch+json"])
+//    fun updateOrganisationEmail(@PathVariable("id") organisationId: Long, @RequestBody patch: JsonPatch): ResponseEntity<Organisation> {
+//        return try {
+//            val organisation = organisationService.findOrganisationById(organisationId)
+//            val organisationPatched = applyPatchTo
+//        }
+//    }
+//
+//    @PatchMapping("/update/{id}")
+//    fun updateOrg(@PathVariable("id") organisationId: Long, @RequestBody objectMap: Map<Any, Any>) {
+//
+//    }
 
 //    @DeleteMapping("/deleteOrganisation/{id}")
 //    fun deleteOrganisation(@PathVariable("id") organisationId: Long): ResponseEntity<HttpStatus> {
