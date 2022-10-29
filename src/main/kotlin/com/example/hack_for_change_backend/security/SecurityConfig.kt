@@ -1,82 +1,53 @@
-import com.example.hack_for_change_backend.service.UserDataService
+package com.example.hack_for_change_backend.security
 
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
+import com.example.hack_for_change_backend.HackForChangeBackendApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Primary
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
+import org.springframework.context.support.beans
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
-import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices
-import org.springframework.security.oauth2.provider.token.TokenStore
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
+import org.springframework.security.config.web.servlet.invoke
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.web.servlet.function.ServerResponse
+import org.springframework.web.servlet.function.router
 
-@Configuration
+@SpringBootApplication
+class KotlinSecurityApplication
+
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-open class SecurityConfig @Autowired
-constructor(private val userService: UserDataService) : WebSecurityConfigurerAdapter() {
+class SecurityConfig : WebSecurityConfigurerAdapter() {
 
-    @Value("\${security.signing-key}")
-    private val signingKey: String? = null
-
-    @Value("\${security.encoding-strength}")
-    private val encodingStrength: Int? = null
-
-    @Value("\${security.security-realm}")
-    private val securityRealm: String? = null
-
-    @Bean
-    @Throws(Exception::class)
-    override fun authenticationManager(): AuthenticationManager {
-        return super.authenticationManager()
+    override fun configure(http: HttpSecurity?) {
+        http {
+            httpBasic {}
+            authorizeRequests {
+                authorize("/greetings/**", hasAuthority("ROLE_ADMIN"))
+                authorize("/**", permitAll)
+            }
+        }
     }
+}
 
-    @Throws(Exception::class)
-    override fun configure(auth: AuthenticationManagerBuilder?) {
-        auth!!.userDetailsService(userService)
-            .passwordEncoder(BCryptPasswordEncoder())
-    }
+fun main(args: Array<String>) {
+    runApplication<HackForChangeBackendApplication>(*args) {
+        addInitializers(beans {
+            bean {
 
-    @Throws(Exception::class)
-    override fun configure(http: HttpSecurity) {
-        http
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .httpBasic()
-            .realmName(securityRealm)
-            .and()
-            .csrf()
-            .disable()
+                fun user(user: String, pw: String, vararg roles: String) =
+                    User.withDefaultPasswordEncoder().username(user).password(pw).roles(*roles).build()
 
-    }
-
-    @Bean
-    open fun accessTokenConverter(): JwtAccessTokenConverter {
-        val converter = JwtAccessTokenConverter()
-        converter.setSigningKey(signingKey!!)
-        return converter
-    }
-
-    @Bean
-    open fun tokenStore(): TokenStore {
-        return JwtTokenStore(accessTokenConverter())
-    }
-
-    @Bean
-    @Primary
-    open fun tokenServices(): DefaultTokenServices {
-        val defaultTokenServices = DefaultTokenServices()
-        defaultTokenServices.setTokenStore(tokenStore())
-        defaultTokenServices.setSupportRefreshToken(true)
-        return defaultTokenServices
+                InMemoryUserDetailsManager(user("alex", "admin", "USER"), user("admin", "admin", "USER", "ADMIN"))
+            }
+            bean {
+                router {
+                    GET("/greetings") { request ->
+                        request.principal().map { it.name }.map { ServerResponse.ok().body(mapOf("greeting" to "Hello, $it")) }.orElseGet { ServerResponse.badRequest().build() }
+                    }
+                }
+            }
+        })
     }
 }
