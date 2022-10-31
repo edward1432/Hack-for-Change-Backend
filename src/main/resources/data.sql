@@ -1,20 +1,20 @@
 INSERT INTO organisations (name, email, phone_no) VALUES ('LBG', 'lbg@lbg.com', '12345,6789');
---insert into organisations (name, email, phone_no) values ('Atos', 'atos@atos.com', '805768,3558');
---insert into organisations (name, email, phone_no) values ('M&S', 'm&s@m&s.com', '305735,4302');
---insert into organisations (name, email, phone_no) values ('CFC', 'cfc@cfc.com', '815564,3538');
---insert into organisations (name, email, phone_no) values ('Invesco', 'invesco@invesco.com', '564125,7748');
---insert into organisations (name, email, phone_no) values ('Mercator', 'mercator@mercator.com', '224497,1649');
---
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nar''yan-Mar', '2023-01-29 19:00:00', '2023-01-29 23:00:00', 1, 'GOLF');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Huayuanli', '2023-04-13 19:00:00', '2023-04-13 23:00:00', 1, 'DINNER');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nanqi', '2023-05-04 19:00:00', '2023-05-04 23:00:00', 2, 'GOLF');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Pringgabaya', '2023-06-20 19:00:00', '2023-06-20 23:00:00', 3, 'DRINKING');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nueva Arica', '2023-05-16 19:00:00', '2023-05-16 23:00:00', 4, 'CINEMA');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Tomiya', '2023-07-22 19:00:00', '2023-07-22 23:00:00', 1, 'DINNER');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Ban Phaeo', '2023-07-14 19:00:00', '2023-07-14 23:00:00', 1, 'CINEMA');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Shuangxiqiao', '2023-03-11 19:00:00', '2023-03-11 23:00:00', 1, 'BOWLING');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Qiubin', '2023-03-06 19:00:00', '2023-03-06 23:00:00', 5, 'DINNER');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Kadugannawa', '2023-04-02 19:00:00', '2023-04-02 23:00:00', 5, 'CINEMA');
+insert into organisations (name, email, phone_no) values ('Atos', 'atos@atos.com', '805768,3558');
+insert into organisations (name, email, phone_no) values ('M&S', 'm&s@m&s.com', '305735,4302');
+insert into organisations (name, email, phone_no) values ('CFC', 'cfc@cfc.com', '815564,3538');
+insert into organisations (name, email, phone_no) values ('Invesco', 'invesco@invesco.com', '564125,7748');
+insert into organisations (name, email, phone_no) values ('Mercator', 'mercator@mercator.com', '224497,1649');
+
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nar''yan-Mar', '2023-01-29 19:00:00', '2023-01-29 23:00:00', 1, 'GOLF');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Huayuanli', '2023-04-13 19:00:00', '2023-04-13 23:00:00', 1, 'DINNER');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nanqi', '2023-05-04 19:00:00', '2023-05-04 23:00:00', 2, 'GOLF');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Pringgabaya', '2023-06-20 19:00:00', '2023-06-20 23:00:00', 3, 'DRINKING');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nueva Arica', '2023-05-16 19:00:00', '2023-05-16 23:00:00', 4, 'CINEMA');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Tomiya', '2023-07-22 19:00:00', '2023-07-22 23:00:00', 1, 'DINNER');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Ban Phaeo', '2023-07-14 19:00:00', '2023-07-14 23:00:00', 1, 'CINEMA');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Shuangxiqiao', '2023-03-11 19:00:00', '2023-03-11 23:00:00', 1, 'BOWLING');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Qiubin', '2023-03-06 19:00:00', '2023-03-06 23:00:00', 5, 'DINNER');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Kadugannawa', '2023-04-02 19:00:00', '2023-04-02 23:00:00', 5, 'CINEMA');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Urung', '2023-02-14 19:00:00', '2023-02-14 23:00:00', 6, 'GOLF');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Neyagawa', '2022-12-22 19:00:00', '2022-12-22 23:00:00', 4, 'GOKARTING');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Psygansu', '2023-03-12 19:00:00', '2023-03-12 23:00:00', 6, 'GOKARTING');
