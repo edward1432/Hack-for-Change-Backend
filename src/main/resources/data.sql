@@ -8,7 +8,7 @@ insert into organisations (name, email, phone_no) values ('Mercator', 'mercator@
 insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nar''yan-Mar', '2023-01-29 19:00:00', '2023-01-29 23:00:00', 1, 'GOLF');
 insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Huayuanli', '2023-04-13 19:00:00', '2023-04-13 23:00:00', 1, 'DINNER');
 insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nanqi', '2023-05-04 19:00:00', '2023-05-04 23:00:00', 2, 'GOLF');
-insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Pringgabaya', '2023-06-20 19:00:00', '2023-06-20 23:00:00', 3, 'DRINKING');
+insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Pringgabaya', '2023-06-20 19:00:00', '2023-06-20 23:00:00', 3, 'DRINKS');
 insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nueva Arica', '2023-05-16 19:00:00', '2023-05-16 23:00:00', 4, 'CINEMA');
 insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Tomiya', '2023-07-22 19:00:00', '2023-07-22 23:00:00', 1, 'DINNER');
 insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Ban Phaeo', '2023-07-14 19:00:00', '2023-07-14 23:00:00', 1, 'CINEMA');
@@ -26,10 +26,10 @@ insert into events (location, start_date_time, end_date_time, organisation_id, e
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Castelo', '2023-05-04 19:00:00', '2023-05-04 23:00:00', 5, 'DINNER');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Ōtsuki', '2022-12-21 19:00:00', '2022-12-21 23:00:00', 6, 'CINEMA');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Cantuk Kidul', '2023-04-12 19:00:00', '2023-04-12 23:00:00', 5, 'DINNER');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Los Cerrillos', '2023-02-19 19:00:00', '2023-02-19 23:00:00', 4, 'DRINKING');
+--insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Los Cerrillos', '2023-02-19 19:00:00', '2023-02-19 23:00:00', 4, 'DRINKS');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Loma Bonita', '2023-02-27 19:00:00', '2023-02-27 23:00:00', 4, 'GOLF');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Bajo', '2022-12-19 19:00:00', '2022-12-19 23:00:00', 5, 'GOKARTING');
---insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Cabanas de Viriato', '2023-06-17 19:00:00', '2023-06-17 23:00:00', 1, 'DRINKING');
+--insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Cabanas de Viriato', '2023-06-17 19:00:00', '2023-06-17 23:00:00', 1, 'DRINKS');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Novopokrovka', '2023-06-07 19:00:00', '2023-06-07 23:00:00', 6, 'BOWLING');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Xiabaishi', '2023-05-23 19:00:00', '2023-05-23 23:00:00', 5, 'DINNER');
 --insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Dobrovo', '2023-07-09 19:00:00', '2023-07-09 23:00:00', 1, 'GOKARTING');
@@ -67,16 +67,16 @@ insert into events (location, start_date_time, end_date_time, organisation_id, e
 --insert into employees (user_name, organisation_id) values ('mdalgetys', 4);
 --insert into employees (user_name, organisation_id) values ('rtuffint', 6);
 --
---INSERT INTO venues (location, name, type) VALUES ('London', 'Slug and Lettuce', 'DRINKING');
+--INSERT INTO venues (location, name, type) VALUES ('London', 'Slug and Lettuce', 'DRINKS');
 --insert into venues (location, name, type) values ('Northfield', 'GlaxoSmithKline Consumer Healthcare LP', 'DINNER');
 --insert into venues (location, name, type) values ('Schmedeman', 'Unifirst First Aid Corporation', 'LUNCH');
 --insert into venues (location, name, type) values ('Sutherland', 'BCM Ltd', 'GOLF');
---insert into venues (location, name, type) values ('Magdeline', 'Roxane Laboratories, Inc', 'DRINKING');
+--insert into venues (location, name, type) values ('Magdeline', 'Roxane Laboratories, Inc', 'DRINKS');
 --insert into venues (location, name, type) values ('Stephen', 'ABC Compounding Co., Inc.', 'GOLF');
 --insert into venues (location, name, type) values ('Lakewood Gardens', 'Watson Pharma, Inc.', 'CINEMA');
 --insert into venues (location, name, type) values ('Dayton', 'Aurobindo Pharma Limited', 'CINEMA');
 --insert into venues (location, name, type) values ('Center', 'SHISEIDO AMERICAS CORPORATION', 'LUNCH');
---insert into venues (location, name, type) values ('Straubel', 'Wal-Mart Stores Inc', 'DRINKING');
+--insert into venues (location, name, type) values ('Straubel', 'Wal-Mart Stores Inc', 'DRINKS');
 --insert into venues (location, name, type) values ('Corben', 'Sandoz Inc', 'BOWLING');
 --
 --insert into employee_event_mapper (employee_id, event_id) values (1, 1);
