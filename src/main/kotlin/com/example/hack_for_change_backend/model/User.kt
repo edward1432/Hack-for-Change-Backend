@@ -47,8 +47,8 @@ data class User (
     @JsonIgnore
     @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(
-        name = "employee_event_mapper",
-        joinColumns = [JoinColumn(name = "employee_id")],
+        name = "user_event_mapper",
+        joinColumns = [JoinColumn(name = "unique_id")],
         inverseJoinColumns = [JoinColumn(name = "event_id")]
     )
     val events: List<Event> = listOf()
