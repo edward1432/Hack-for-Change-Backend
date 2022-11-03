@@ -1,6 +1,7 @@
 package com.example.hack_for_change_backend.service
 
 import com.example.hack_for_change_backend.model.Event
+import com.example.hack_for_change_backend.model.enums.EventStatus
 import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.repository.EventRepo
 import org.springframework.stereotype.Service
@@ -12,7 +13,7 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
 
     fun findEventByType(eventType: EventType): List<Event> = eventRepo.findByEventTypeIs(eventType)
 
-    fun findAll() = eventRepo.findAll()
+    fun findAll(): List<Event> = eventRepo.findAll()
 
     fun checkEventExists(event: Event) = findAll().any {
         it.run {
@@ -28,6 +29,7 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
         if (checkEventExists(event)) throw IllegalArgumentException("Event $event already exists")
         return try {
             event.organisation = organisationService.findOrganisationById(organisationId)
+//            event.status = EventStatus.PROPOSED
             eventRepo.save(event)
             event
         } catch (e: NoSuchElementException) {
@@ -55,6 +57,7 @@ class EventService(val eventRepo: EventRepo, val organisationService: Organisati
             event.startDateTime = eventDetails.startDateTime
             event.venues = eventDetails.venues
             event.location = eventDetails.location
+            event.status = eventDetails.status
             eventRepo.save(event)
             return event
         } catch (e: NoSuchElementException){

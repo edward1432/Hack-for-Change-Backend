@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController
 @CrossOrigin(origins = ["http://localhost:3000"])
 @RequestMapping("/eventEnums")
 class EventEnumController(private val eventEnumService: EventEnumService) {
+    @GetMapping("/getAllTypes")
+    fun getAllTypes() = ResponseEntity.ok().body(eventEnumService.getAllEventEnums())
 
-    @GetMapping("/getAll")
-    fun getAll() = ResponseEntity.ok().body(eventEnumService.getAllEventEnums())
+    @GetMapping("/getAllStatusOptions")
+    fun getAllStatusOptions() = ResponseEntity.ok().body(eventEnumService.getAllEventStatusEnums())
 }

@@ -1,5 +1,6 @@
 package com.example.hack_for_change_backend.model
 
+import com.example.hack_for_change_backend.model.enums.EventStatus
 import com.example.hack_for_change_backend.model.enums.EventType
 import com.fasterxml.jackson.annotation.JsonIgnore
 import java.util.Date
@@ -13,6 +14,7 @@ data class Event (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var uniqueId: Long,
     var location: String,
+    var name: String,
     var startDateTime: Date,
     var endDateTime: Date,
 
@@ -29,5 +31,8 @@ data class Event (
 
     @JsonIgnore
     @ManyToMany (mappedBy = "events")
-    val users: MutableList<User> = mutableListOf()
+    val users: MutableList<User> = mutableListOf(),
+
+    @Enumerated(value = EnumType.STRING)
+    var status: EventStatus = EventStatus.PROPOSED
         )
