@@ -40,9 +40,9 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 //            .antMatchers(HttpMethod.PUT, "//**").hasRole("ADMIN")
 //            .antMatchers(HttpMethod.DELETE, "//**").hasRole("ADMIN")
 //            .antMatchers(HttpMethod.GET, "//**").hasAnyRole("ADMIN", "USER")
-            .and()
-            .csrf().disable()
-            .formLogin().disable()
+//            .and()
+//            .csrf().disable()
+//            .formLogin().disable()
     }
 
 }
