@@ -1,7 +1,5 @@
 package com.example.hack_for_change_backend.registration
 
-import com.example.demo.registration.token.ConfirmationToken
-import com.example.demo.registration.token.ConfirmationTokenService
 import com.example.hack_for_change_backend.email.EmailSender
 import com.example.hack_for_change_backend.model.User
 import com.example.hack_for_change_backend.model.enums.UserRoles
@@ -18,42 +16,42 @@ import java.time.LocalDateTime
 
 @Service
 @AllArgsConstructor
-class RegistrationService (
-    val userService: UserService,
-    val emailValidator: EmailValidator,
-    val confirmationTokenService: ConfirmationTokenService,
-    val emailSender: EmailSender
-    ){
+class RegistrationService (val userService: UserService){
+//    val userService = UserService()
+    val emailValidator = EmailValidator()
+    val confirmationTokenService = ConfirmationTokenService()
+//    val emailSender = EmailSender()
+
 
 
     fun register(request: RegistrationRequest): String {
         val isValidEmail: Boolean = emailValidator.test(request.email)
         check(isValidEmail) { "Email ${request.email} not valid" }
 
-        val token: String? = userService.signUpUser(
+        val token: String = userService.signUpUser(
             User(request.firstName, request.lastName, request.email, request.password, UserRoles.USER)
         )
 
-        )
-        val link = "http://localhost:8080/api/v1/registration/confirm?token=$token"
-        emailSender!!.send(
-            request.email,
-            request.email?.let { buildEmail(it, link) }
-        )
+//        val link = "http://localhost:8080/api/v1/registration/confirm?token=$token"
+//        emailSender!!.send(
+//            request.email,
+//            request.email?.let { buildEmail(it, link) }
+//        )
         return token
     }
 
     @Transactional
-    fun confirmToken(token: String?): String {
+    fun confirmToken(token: String): String {
         val confirmationToken: ConfirmationToken? = confirmationTokenService
-            ?.getToken(token)
+            .getToken(token)
             ?.orElseThrow { IllegalStateException("token not found") }
-        check(confirmationToken.getConfirmedAt() == null) { "email already confirmed" }
-        val expiredAt: LocalDateTime = confirmationToken.getExpiresAt()
+
+        check(confirmationToken?.confirmedAt == null) { "email already confirmed" }
+        val expiredAt: LocalDateTime = confirmationToken!!.expiresAt
         check(!expiredAt.isBefore(LocalDateTime.now())) { "token expired" }
         confirmationTokenService.setConfirmedAt(token)
         userService.enableAppUser(
-            confirmationToken.getAppUser().getEmail()
+            confirmationToken.user.email
         )
         return "confirmed"
     }

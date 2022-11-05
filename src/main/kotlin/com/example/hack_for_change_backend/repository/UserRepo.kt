@@ -6,11 +6,15 @@ import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
+import java.util.*
 import javax.transaction.Transactional
 
 @Repository
+@Transactional
 interface UserRepo : JpaRepository<User, Long> {
+
     companion object
+
     fun findByEmail(email: String): User?
 
     @Query(value = "SELECT * FROM enjoyers WHERE organisation LIKE %:organisation%", nativeQuery = true)

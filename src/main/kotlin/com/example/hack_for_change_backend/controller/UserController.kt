@@ -25,23 +25,23 @@ class UserController(private val userService: UserService) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }
-    @PostMapping("/addUser")
-    fun addUser(@RequestBody user: User): ResponseEntity<User> {
-        return try {
-            userService.createUser(user)
-        }catch (e: Exception) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
-        }
-    }
+//    @PostMapping("/addUser")
+//    fun addUser(@RequestBody user: User): ResponseEntity<User> {
+//        return try {
+//            userService.createUser(user)
+//        }catch (e: Exception) {
+//            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+//        }
+//    }
 
-    @PostMapping("/login/login")
-    fun loginUser(@RequestParam email: String, @RequestParam password: String): User{
-        return try{
-            userService.userLogin(email, password)
-        }catch (e: Exception){
-            throw throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
-        }
-    }
+//    @PostMapping("/login/login")
+//    fun loginUser(@RequestParam email: String, @RequestParam password: String): User{
+//        return try{
+//            userService.userLogin(email, password)
+//        }catch (e: Exception){
+//            throw throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+//        }
+//    }
 
     @PutMapping("/updateUser/{id}")
     fun userUpdate(@PathVariable("id") userId: Long, @RequestBody user: User): ResponseEntity<User> {

@@ -8,14 +8,17 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 
-@Getter
-@Setter
-@NoArgsConstructor
+//@Getter
+//@Setter
+//@NoArgsConstructor
 @Entity
 class ConfirmationToken(
-    @field:Column(nullable = false) private val token: String,
-    @field:Column(nullable = false) private val createdAt: LocalDateTime,
-    @field:Column(nullable = false) private val expiresAt: LocalDateTime,
+    @Column(nullable = false)
+    val token: String,
+    @Column(nullable = false)
+    val createdAt: LocalDateTime,
+    @Column(nullable = false)
+    val expiresAt: LocalDateTime,
     user: User
 ) {
     @SequenceGenerator(
@@ -25,12 +28,12 @@ class ConfirmationToken(
     )
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "confirmation_token_sequence")
-    private val id: Long? = null
-    private val confirmedAt: LocalDateTime? = null
+    val id: Long? = null
+    val confirmedAt: LocalDateTime? = null
 
     @ManyToOne
-    @JoinColumn(nullable = false, name = "app_user_id")
-    private val user: User
+    @JoinColumn(nullable = false, name = "user_id")
+    val user: User
 
     init {
         this.user = user

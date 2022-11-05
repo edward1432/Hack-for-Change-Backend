@@ -7,7 +7,10 @@ import com.example.hack_for_change_backend.repository.EventRepo
 import org.springframework.stereotype.Service
 
 @Service
-class EventService(val eventRepo: EventRepo, val organisationService: OrganisationService, val userService: UserService) {
+class EventService(
+    val eventRepo: EventRepo,
+    val organisationService: OrganisationService,
+    val userService: UserService) {
 
     fun findEventById(id: Long) = eventRepo.findById(id).orElseThrow { NoSuchElementException("Event with ID: $id does not exist") }
 

@@ -5,6 +5,8 @@ import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.example.hack_for_change_backend.registration.token.ConfirmationToken
 import com.example.hack_for_change_backend.registration.token.ConfirmationTokenService
 import com.example.hack_for_change_backend.repository.UserRepo
+import lombok.AllArgsConstructor
+import lombok.NoArgsConstructor
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.userdetails.UserDetails
@@ -17,13 +19,17 @@ import java.time.LocalDateTime
 import java.util.*
 
 @Service
-class UserService(val userRepo: UserRepo,
-                  val passwordEncoder: PasswordEncoder,
-                  val bCryptPasswordEncoder: BCryptPasswordEncoder,
-                  val confirmationTokenService: ConfirmationTokenService
-                  ) : UserDetailsService {
+class UserService(
+    val userRepo: UserRepo
+//                  val passwordEncoder: PasswordEncoder,
+//                  val confirmationTokenService: ConfirmationTokenService
+) : UserDetailsService {
 
+//    private lateinit var userRepo: UserRepo
+//    private final val userRepo = UserRepo.Companion
     private val notFoundMsg = "User with email %s not found"
+    private final val bCryptPasswordEncoder = BCryptPasswordEncoder()
+    private final val confirmationTokenService = ConfirmationTokenService()
 
     fun findUserById(id: Long): User {
         return userRepo.findById(id).orElseThrow {
@@ -70,19 +76,19 @@ class UserService(val userRepo: UserRepo,
 //        } else {
 //            return userRepo.findByEmail(email)
 //        if (passwordEncoder.matches(password, userRepo.findByEmail(email).password)) {
-    fun createUser(user: User): ResponseEntity<User> {
-        if (!checkUserEmail(user.email)) {
-            user.run {
-                password = passwordEncoder.encode(user.password)
-                role = UserRoles.USER
-            }
-            userRepo.save(user)
-            return ResponseEntity.ok(user)
+//    fun createUser(user: User): ResponseEntity<User> {
+//        if (!checkUserEmail(user.email)) {
+//            user.run {
+//                password = passwordEncoder.encode(user.password)
+//                role = UserRoles.USER
+//            }
+//            userRepo.save(user)
+//            return ResponseEntity.ok(user)
+//
+//        } else throw IllegalArgumentException("Email ${user.email} already registered")
+//    }
 
-        } else throw IllegalArgumentException("Email ${user.email} already registered")
-    }
-
-    fun signUpUser(user: User): String? {
+    fun signUpUser(user: User): String {
 
         if (checkUserEmail(user.email)) {
             throw java.lang.IllegalArgumentException("Email ${user.email} already registered")
