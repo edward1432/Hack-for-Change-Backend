@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 
@@ -16,8 +17,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 @AllArgsConstructor
 @EnableWebSecurity
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
-    private val userService: UserService? = null
-    private val bCryptPasswordEncoder: BCryptPasswordEncoder? = null
+
+    private lateinit var userService: UserDetailsService
+    private lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
+
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
@@ -40,7 +43,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     fun daoAuthenticationProvider(): DaoAuthenticationProvider {
         val provider = DaoAuthenticationProvider()
         provider.setPasswordEncoder(bCryptPasswordEncoder)
-        provider.setUserDetailsService(userDetailsService())
+        provider.setUserDetailsService(userService)
         return provider
     }
 }

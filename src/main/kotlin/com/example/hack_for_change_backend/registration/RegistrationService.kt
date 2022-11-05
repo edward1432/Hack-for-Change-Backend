@@ -18,22 +18,22 @@ import java.time.LocalDateTime
 
 @Service
 @AllArgsConstructor
-class RegistrationService {
-    private val userService: UserService? = null
-    private val emailValidator: EmailValidator? = null
-    private val confirmationTokenService: ConfirmationTokenService? = null
-    private val emailSender: EmailSender? = null
+class RegistrationService (
+    val userService: UserService,
+    val emailValidator: EmailValidator,
+    val confirmationTokenService: ConfirmationTokenService,
+    val emailSender: EmailSender
+    ){
+
+
     fun register(request: RegistrationRequest): String {
-        val isValidEmail: Boolean = emailValidator!!.test(request.email)
-        check(isValidEmail) { "email not valid" }
-        val token: ResponseEntity<User> = userService!!.createUser(
-            User(
-                request.email,
-                request.password(),
-                request.getEmail(),
-                request.getPassword(),
-                UserRoles.USER
-            )
+        val isValidEmail: Boolean = emailValidator.test(request.email)
+        check(isValidEmail) { "Email ${request.email} not valid" }
+
+        val token: String? = userService.signUpUser(
+            User(request.firstName, request.lastName, request.email, request.password, UserRoles.USER)
+        )
+
         )
         val link = "http://localhost:8080/api/v1/registration/confirm?token=$token"
         emailSender!!.send(

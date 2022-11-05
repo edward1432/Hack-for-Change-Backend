@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
+import javax.transaction.Transactional
 
 @Repository
 interface UserRepo : JpaRepository<User, Long> {
     companion object
-    fun findByEmail(email: String): User
+    fun findByEmail(email: String): User?
 
     @Query(value = "SELECT * FROM enjoyers WHERE organisation LIKE %:organisation%", nativeQuery = true)
     fun findByOrganisation(@Param("organisation") organisation: String): List<User>
@@ -30,8 +31,9 @@ interface UserRepo : JpaRepository<User, Long> {
     @Query(value = "UPDATE enjoyers SET venue_id = ?1 WHERE id = ?2", nativeQuery = true)
     fun addUserToVenue(user_id: Long, venue_id: Long)
 
-
-
-
-
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE User a " +
+            "SET a.enabled = TRUE WHERE a.email = ?1", nativeQuery = true)
+    fun enableUser(email: String): Int
 }
