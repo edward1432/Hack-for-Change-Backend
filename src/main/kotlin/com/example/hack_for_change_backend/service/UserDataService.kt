@@ -30,11 +30,5 @@ constructor(private val userRepository: UserRepo, val passwordEncoder: PasswordE
 
         return org.springframework.security.core.userdetails.User(user.email, user.password, authorities)
     }
-    fun userLogin(email: String, password: String): User {
-        if (passwordEncoder.matches(password, userRepository.findByEmail(email).password)) {
-            return userRepository.findByEmail(email)
-        }else{
-            throw NoSuchElementException("[EMAIL] $email NOT FOUND")
-        }
+
     }
-}

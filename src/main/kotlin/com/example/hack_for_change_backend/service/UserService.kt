@@ -37,6 +37,14 @@ class UserService(val userRepo: UserRepo, val passwordEncoder: PasswordEncoder) 
         } else throw IllegalArgumentException("Email ${user.email} already registered")
     }
 
+    fun userLogin(email: String, password: String): User {
+        if (passwordEncoder.matches(password, userRepo.findByEmail(email).password)) {
+            return userRepo.findByEmail(email)
+        } else {
+            throw NoSuchElementException("[EMAIL] $email NOT FOUND")
+        }
+    }
+
 
     fun updateUser(userId: Long, userDetails: User): ResponseEntity<User> {
         try {
@@ -57,4 +65,4 @@ class UserService(val userRepo: UserRepo, val passwordEncoder: PasswordEncoder) 
             throw NoSuchElementException(e.message)
         }
     }
-}
+        }
