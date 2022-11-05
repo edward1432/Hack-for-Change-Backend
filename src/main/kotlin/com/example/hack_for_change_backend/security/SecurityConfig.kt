@@ -35,6 +35,14 @@ class WebSecurityConfig (val userService: UserService): WebSecurityConfigurerAda
     @Throws(Exception::class)
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.authenticationProvider(daoAuthenticationProvider())
+        auth.inMemoryAuthentication()
+            .withUser("admin")
+            .password(bCryptPasswordEncoder.encode("admin"))
+            .roles("USER", "ADMIN")
+            .and()
+            .withUser("user")
+            .password(bCryptPasswordEncoder.encode("user"))
+            .roles("USER")
     }
 
     @Bean

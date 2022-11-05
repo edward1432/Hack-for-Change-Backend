@@ -4,7 +4,6 @@ import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.fasterxml.jackson.annotation.JsonIgnore
 import lombok.Builder
 import lombok.Data
-import org.hibernate.validator.constraints.Length
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -12,7 +11,6 @@ import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.NotNull
 
 
 @Data
@@ -57,32 +55,23 @@ class User(
         inverseJoinColumns = [JoinColumn(name = "event_id")]
     )
     val events: List<Event> = mutableListOf()
+    private var locked: Boolean = false
+    private var enabled: Boolean = false
+
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        TODO("Not yet implemented")
+        val authority = SimpleGrantedAuthority(role.name)
+        return Collections.singletonList(authority)
     }
 
-    override fun getPassword(): String {
-        TODO("Not yet implemented")
-    }
+    override fun getPassword(): String = password
 
-    override fun getUsername(): String {
-        TODO("Not yet implemented")
-    }
+    override fun getUsername(): String = email
 
-    override fun isAccountNonExpired(): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun isAccountNonExpired(): Boolean = true
 
-    override fun isAccountNonLocked(): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun isAccountNonLocked(): Boolean = !locked
 
-    override fun isCredentialsNonExpired(): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun isCredentialsNonExpired(): Boolean = true
 
-    override fun isEnabled(): Boolean {
-        TODO("Not yet implemented")
-    }
-
+    override fun isEnabled(): Boolean = enabled
 }
