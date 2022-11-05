@@ -2,6 +2,7 @@ package com.example.hack_for_change_backend.model
 
 import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import lombok.Builder
 import lombok.Data
 import org.springframework.security.core.GrantedAuthority
@@ -32,20 +33,18 @@ class User(
     @Enumerated(EnumType.STRING)
     var role: UserRoles
 ) : UserDetails {
+    //    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_role", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "uniqueId")],
+//        inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
+//    )
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var uniqueId: Long = 0
 
-    //    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "user_role", joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "uniqueId")],
-//        inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
-//    )
-//    var roles: MutableSet<Role>? = null,
-
-    @ManyToOne
-    @JoinColumn(name = "organisation_id")
-    var organisation: Organisation? = null
+    @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.PERSIST])
+    val myPosts: MutableList<Post> = mutableListOf()
 
     @JsonIgnore
     @ManyToMany(cascade = [CascadeType.ALL])
@@ -55,6 +54,13 @@ class User(
         inverseJoinColumns = [JoinColumn(name = "event_id")]
     )
     val events: List<Event> = mutableListOf()
+
+//    var roles: MutableSet<Role>? = null,
+
+    @ManyToOne
+    @JoinColumn(name = "organisation_id")
+    var organisation: Organisation? = null
+
     private var locked: Boolean = false
     private var enabled: Boolean = true
 
