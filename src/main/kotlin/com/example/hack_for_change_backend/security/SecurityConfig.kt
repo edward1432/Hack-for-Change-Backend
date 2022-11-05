@@ -1,5 +1,6 @@
 package com.example.hack_for_change_backend.security
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -8,9 +9,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.web.AuthenticationEntryPoint
 
 @Configuration
 class SecurityConfig : WebSecurityConfigurerAdapter() {
+
+//    @Autowired
+//    lateinit var authenticationEntryPoint: AuthenticationEntryPoint
 
     @Bean
     fun encoder(): PasswordEncoder {
@@ -31,12 +36,24 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     @Override
     override fun configure(http: HttpSecurity) {
-        http.httpBasic()
-            .and()
+        http
             .authorizeRequests()
-//            .antMatchers(HttpMethod.GET, "/").hasRole("ADMIN")
-            .antMatchers("/users/**").permitAll()
-            .antMatchers(HttpMethod.POST, "/users/addUser/**").hasAnyAuthority("ADMIN", "USER")
+            .antMatchers("/")
+            .authenticated()
+            .and()
+            .httpBasic()
+
+
+//            .authenticationEntryPoint(authenticationEntryPoint)
+//            .formLogin()
+//            .loginPage("/login")
+
+//        httpBasic()
+//            .and()
+//            .authorizeRequests()
+////            .antMatchers(HttpMethod.GET, "/").hasRole("ADMIN")
+//            .antMatchers("/users/**").permitAll()
+//            .antMatchers(HttpMethod.POST, "/users/addUser/**").hasAnyAuthority("ADMIN", "USER")
 //            .antMatchers(HttpMethod.PUT, "//**").hasRole("ADMIN")
 //            .antMatchers(HttpMethod.DELETE, "//**").hasRole("ADMIN")
 //            .antMatchers(HttpMethod.GET, "//**").hasAnyRole("ADMIN", "USER")
