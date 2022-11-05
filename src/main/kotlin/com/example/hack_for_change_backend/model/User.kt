@@ -56,7 +56,7 @@ class User(
     )
     val events: List<Event> = mutableListOf()
     private var locked: Boolean = false
-    private var enabled: Boolean = false
+    private var enabled: Boolean = true
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         val authority = SimpleGrantedAuthority(role.name)

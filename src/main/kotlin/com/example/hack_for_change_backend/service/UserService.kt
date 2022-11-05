@@ -5,22 +5,20 @@ import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.example.hack_for_change_backend.registration.token.ConfirmationToken
 import com.example.hack_for_change_backend.registration.token.ConfirmationTokenService
 import com.example.hack_for_change_backend.repository.UserRepo
-import lombok.AllArgsConstructor
-import lombok.NoArgsConstructor
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.util.*
 
 @Service
 class UserService(
-    val userRepo: UserRepo
+    val userRepo: UserRepo,
+    val confirmationTokenService: ConfirmationTokenService
 //                  val passwordEncoder: PasswordEncoder,
 //                  val confirmationTokenService: ConfirmationTokenService
 ) : UserDetailsService {
@@ -29,7 +27,6 @@ class UserService(
 //    private final val userRepo = UserRepo.Companion
     private val notFoundMsg = "User with email %s not found"
     private final val bCryptPasswordEncoder = BCryptPasswordEncoder()
-    private final val confirmationTokenService = ConfirmationTokenService()
 
     fun findUserById(id: Long): User {
         return userRepo.findById(id).orElseThrow {

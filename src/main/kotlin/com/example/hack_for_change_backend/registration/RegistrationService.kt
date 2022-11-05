@@ -1,13 +1,11 @@
 package com.example.hack_for_change_backend.registration
 
-import com.example.hack_for_change_backend.email.EmailSender
 import com.example.hack_for_change_backend.model.User
 import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.example.hack_for_change_backend.registration.token.ConfirmationToken
 import com.example.hack_for_change_backend.registration.token.ConfirmationTokenService
 import com.example.hack_for_change_backend.service.UserService
 import lombok.AllArgsConstructor
-import org.springframework.http.ResponseEntity
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,10 +14,12 @@ import java.time.LocalDateTime
 
 @Service
 @AllArgsConstructor
-class RegistrationService (val userService: UserService){
+class RegistrationService (
+    val userService: UserService,
+    val confirmationTokenService: ConfirmationTokenService
+    ){
 //    val userService = UserService()
     val emailValidator = EmailValidator()
-    val confirmationTokenService = ConfirmationTokenService()
 //    val emailSender = EmailSender()
 
 

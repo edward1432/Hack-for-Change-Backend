@@ -8,18 +8,17 @@ import java.util.*
 
 @Service
 @AllArgsConstructor
-class ConfirmationTokenService {
-    private val confirmationTokenRepository: ConfirmationTokenRepository? = null
+class ConfirmationTokenService(private val confirmationTokenRepository: ConfirmationTokenRepository) {
     fun saveConfirmationToken(token: ConfirmationToken) {
-        confirmationTokenRepository!!.save(token)
+        confirmationTokenRepository.save(token)
     }
 
     fun getToken(token: String?): Optional<ConfirmationToken?>? {
-        return confirmationTokenRepository!!.findByToken(token)
+        return confirmationTokenRepository.findByToken(token)
     }
 
     fun setConfirmedAt(token: String?): Int {
-        return confirmationTokenRepository!!.updateConfirmedAt(
+        return confirmationTokenRepository.updateConfirmedAt(
             token, LocalDateTime.now()
         )
     }
