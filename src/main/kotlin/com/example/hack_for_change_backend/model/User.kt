@@ -3,15 +3,16 @@ package com.example.hack_for_change_backend.model
 import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.fasterxml.jackson.annotation.JsonIgnore
 import lombok.Builder
-import javax.persistence.*
 import lombok.Data
-import org.hibernate.annotations.GenericGenerator
 import org.hibernate.validator.constraints.Length
-import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.Email
-
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import java.util.*
 import javax.persistence.*
+import javax.validation.constraints.Email
+import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
+
 
 @Data
 @Entity
@@ -53,3 +54,17 @@ data class User (
     )
     val events: List<Event> = listOf()
     )
+
+fun user(
+    email: String,
+    password: String,
+    userRoles: UserRoles
+) {
+    this.email = email
+    this.password = password
+    this.userRoles = userRoles
+}
+fun getAuthorities(): Collection<GrantedAuthority?>? {
+    val authority = SimpleGrantedAuthority(userRoles.name())
+    return Collections.singletonList(authority)
+}
