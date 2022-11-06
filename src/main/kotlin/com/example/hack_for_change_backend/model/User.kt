@@ -56,6 +56,7 @@ class User(
 //    )
 //    val events: List<Event> = mutableListOf()
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     val polls: MutableList<Poll> = mutableListOf()
 //    var roles: MutableSet<Role>? = null,

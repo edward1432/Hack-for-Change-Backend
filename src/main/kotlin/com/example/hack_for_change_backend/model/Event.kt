@@ -23,6 +23,7 @@ data class Event (
     @JoinColumn(name = "organisation_id")
     var organisation: Organisation?,
 
+    @JsonIgnore
     @OneToMany(mappedBy = "event")
     val userPolls: MutableList<Poll> = mutableListOf(),
 
