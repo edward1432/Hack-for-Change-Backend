@@ -11,10 +11,10 @@ import org.springframework.web.server.ResponseStatusException
 @CrossOrigin(origins = ["http://localhost:3000"])
 @RequestMapping("/venues")
 class VenueController(private val venueService: VenueService) {
-    @GetMapping("/findAll")
+    @GetMapping("/findAllVenues")
     fun getAllVenues(): ResponseEntity<List<Venue>> = ResponseEntity.ok(venueService.findAll())
 
-    @GetMapping("/findById/{id}")
+    @GetMapping("/findVenueById/{id}")
     fun findVenueById(@PathVariable("id") venueId: Long): ResponseEntity<Venue> {
         return try {
             ResponseEntity.ok(venueService.findVenueById(venueId))

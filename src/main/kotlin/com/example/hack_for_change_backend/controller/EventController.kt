@@ -14,10 +14,10 @@ import java.lang.IllegalArgumentException
 @RequestMapping("/events")
 class EventController(private val eventService: EventService) {
 
-    @GetMapping("/findAll")
+    @GetMapping("/findAllEvents")
     fun getAllEvents(): ResponseEntity<List<Event>> = ResponseEntity.ok(eventService.findAll())
 
-    @GetMapping("/findById/{id}")
+    @GetMapping("/findEventById/{id}")
     fun findEventById(@PathVariable("id") eventId: Long): ResponseEntity<Event> {
         return try {
             ResponseEntity.ok(eventService.findEventById(eventId))

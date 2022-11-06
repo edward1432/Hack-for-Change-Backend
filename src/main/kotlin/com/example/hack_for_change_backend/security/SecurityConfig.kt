@@ -4,6 +4,7 @@ import com.example.hack_for_change_backend.service.UserService
 import lombok.AllArgsConstructor
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -25,8 +26,40 @@ class WebSecurityConfig (val userService: UserService): WebSecurityConfigurerAda
         http
             .csrf().disable()
             .authorizeRequests()
-            .antMatchers("/api/v*/registration/**")
-            .permitAll()
+            .antMatchers("/api/v*/registration/**").permitAll()
+            //=================USER ENDPOINTS=================
+            .antMatchers(HttpMethod.GET, "/findAll").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.GET, "/findById/**").hasRole("ADMIN")
+            .antMatchers(HttpMethod.POST, "/addUser").permitAll()
+            .antMatchers(HttpMethod.POST, "/login/login").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.PUT, "/updateUser/**").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.DELETE, "/deleteUser/**").hasRole("ADMIN")
+            //=================POST ENDPOINTS=================
+            .antMatchers(HttpMethod.GET, "/findPosts").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.GET, "/findPostById/**").hasRole("ADMIN")
+            .antMatchers(HttpMethod.POST, "/addPost").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.PUT, "/editPost/**").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.DELETE, "/deletePost/**").hasAnyRole("ADMIN", "USER")
+            //=================VENUE ENDPOINTS=================
+            .antMatchers(HttpMethod.GET, "/findAllVenues").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.GET, "/findVenueById/**").hasRole("ADMIN")
+            .antMatchers(HttpMethod.POST, "/addVenue").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.PUT, "/updateVenue/**").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.DELETE, "/deleteVenue/**").hasAnyRole("ADMIN", "USER")
+            //=================EVENT ENDPOINTS=================
+            .antMatchers(HttpMethod.GET, "/findAllEvents").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.GET, "/findByEventTypeIs").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.GET, "/findEventById/**").hasRole("ADMIN")
+            .antMatchers(HttpMethod.POST, "/addEvent").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.PUT, "/updateEvent/**").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.PUT, "/addEmployee/**").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.DELETE, "/deleteEvent/**").hasAnyRole("ADMIN", "USER")
+            //=================ORGANISATION ENDPOINTS=================
+            .antMatchers(HttpMethod.GET, "/findAllOrganisations").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.GET, "/findOrganisationById/**").hasRole("ADMIN")
+            .antMatchers(HttpMethod.POST, "/addOrganisation").hasAnyRole("ADMIN")
+            .antMatchers(HttpMethod.PUT, "/updateOrganisation/**").hasAnyRole("ADMIN")
+            .antMatchers(HttpMethod.DELETE, "/deleteOrganisation/**").hasAnyRole("ADMIN")
             .anyRequest()
             .authenticated().and()
             .formLogin()

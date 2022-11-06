@@ -16,11 +16,11 @@ import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 @RequestMapping("/organisations")
 class OrganisationController(private val organisationService: OrganisationService) {
 
-    @GetMapping("/findAll")
+    @GetMapping("/findAllOrganisations")
     fun getAllOrganisations(): ResponseEntity<List<Organisation
     >> = ResponseEntity.ok(organisationService.findAll())
 
-    @GetMapping("/findById/{id}")
+    @GetMapping("/findOrganisationById/{id}")
     fun findOrganisationById(@PathVariable("id") organisationId: Long): ResponseEntity<Organisation> {
         return try {
             ResponseEntity.ok(organisationService.findOrganisationById(organisationId))
@@ -40,7 +40,7 @@ class OrganisationController(private val organisationService: OrganisationServic
         }
     }
 
-    @PutMapping("/updateOrganisation" + "/{id}")
+    @PutMapping("/updateOrganisation{id}")
     fun updateOrganisation(@PathVariable("id") organisationId: Long, @RequestBody updatedOrganisation
     : Organisation
     ): ResponseEntity<Organisation
