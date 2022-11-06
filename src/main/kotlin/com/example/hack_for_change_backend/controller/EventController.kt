@@ -70,4 +70,17 @@ class EventController(private val eventService: EventService) {
 //            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
 //        }
 //    }
+
+    @PutMapping("/addUser/{event_id}/{user_id}")
+    fun addUserToEvent(
+        @PathVariable("event_id") eventId: Long,
+        @PathVariable("user_id") userId: Long):
+            ResponseEntity<HttpStatus> {
+        return try {
+            eventService.addUserToEvent(eventId, userId)
+            ResponseEntity.ok().body(HttpStatus.OK)
+        } catch (e: Exception) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, e.message)
+        }
+    }
 }

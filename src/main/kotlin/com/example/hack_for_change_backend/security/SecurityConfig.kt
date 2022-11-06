@@ -29,6 +29,7 @@ class WebSecurityConfig (val userService: UserService): WebSecurityConfigurerAda
             .permitAll()
             .anyRequest()
             .authenticated().and()
+            .httpBasic().and()
             .formLogin()
     }
 

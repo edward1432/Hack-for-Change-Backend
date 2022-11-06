@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service
 class EventService(
     val eventRepo: EventRepo,
     val organisationService: OrganisationService,
-    val userService: UserService) {
+    val userService: UserService,
+    val pollService: PollService
+    ) {
 
     fun findEventById(id: Long) = eventRepo.findById(id).orElseThrow { NoSuchElementException("Event with ID: $id does not exist") }
 
@@ -85,5 +87,16 @@ class EventService(
 //            throw NoSuchElementException(e.message)
 //        }
 //    }
+
+    fun addUserToEvent(eventId: Long, userId: Long): Boolean {
+        return try {
+            val event = findEventById(eventId)
+            val user = userService.findUserById(userId)
+            pollService.addNewPoll(event, user)
+            true
+        } catch (e: Exception) {
+            throw Exception(e.message)
+        }
+    }
 
 }

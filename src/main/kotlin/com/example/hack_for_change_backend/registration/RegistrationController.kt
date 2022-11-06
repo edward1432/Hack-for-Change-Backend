@@ -16,6 +16,6 @@ class RegistrationController (val registrationService: RegistrationService){
 
     @GetMapping("/confirm")
     fun confirm(@RequestParam("token") token: String): String {
-        return registrationService!!.confirmToken(token)
+        return registrationService.confirmToken(token)
     }
 }
