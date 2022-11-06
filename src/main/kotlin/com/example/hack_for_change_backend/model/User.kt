@@ -1,6 +1,7 @@
 package com.example.hack_for_change_backend.model
 
 import com.example.hack_for_change_backend.model.enums.UserRoles
+import com.example.hack_for_change_backend.model.voting.Poll
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import lombok.Builder
@@ -46,15 +47,17 @@ class User(
     @OneToMany(mappedBy = "user", cascade = [CascadeType.PERSIST])
     val myPosts: MutableList<Post> = mutableListOf()
 
-    @JsonIgnore
-    @ManyToMany(cascade = [CascadeType.ALL])
-    @JoinTable(
-        name = "user_event_mapper",
-        joinColumns = [JoinColumn(name = "unique_id")],
-        inverseJoinColumns = [JoinColumn(name = "event_id")]
-    )
-    val events: List<Event> = mutableListOf()
+//    @JsonIgnore
+//    @ManyToMany(cascade = [CascadeType.ALL])
+//    @JoinTable(
+//        name = "user_event_mapper",
+//        joinColumns = [JoinColumn(name = "unique_id")],
+//        inverseJoinColumns = [JoinColumn(name = "event_id")]
+//    )
+//    val events: List<Event> = mutableListOf()
 
+    @OneToMany(mappedBy = "user")
+    val polls: MutableList<Poll> = mutableListOf()
 //    var roles: MutableSet<Role>? = null,
 
     @ManyToOne

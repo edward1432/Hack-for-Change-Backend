@@ -76,14 +76,14 @@ class EventService(
         }
     }
 
-    fun addEmployeeToEvent(eventID: Long, employeeID: Long) {
-        try {
-            val event = findEventById(eventID)
-            event.users.add(userService.findUserById(employeeID))
-            eventRepo.save(event)
-        } catch (e: NoSuchElementException) {
-            throw NoSuchElementException(e.message)
-        }
-    }
+//    fun addEmployeeToEvent(eventID: Long, employeeID: Long) {
+//        try {
+//            val event = findEventById(eventID)
+//            event.users.add(userService.findUserById(employeeID))
+//            eventRepo.save(event)
+//        } catch (e: NoSuchElementException) {
+//            throw NoSuchElementException(e.message)
+//        }
+//    }
 
 }

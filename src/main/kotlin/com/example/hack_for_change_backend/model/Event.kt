@@ -2,6 +2,7 @@ package com.example.hack_for_change_backend.model
 
 import com.example.hack_for_change_backend.model.enums.EventStatus
 import com.example.hack_for_change_backend.model.enums.EventType
+import com.example.hack_for_change_backend.model.voting.Poll
 import com.fasterxml.jackson.annotation.JsonIgnore
 import java.util.Date
 import javax.persistence.*
@@ -22,6 +23,9 @@ data class Event (
     @JoinColumn(name = "organisation_id")
     var organisation: Organisation?,
 
+    @OneToMany(mappedBy = "event")
+    val userPolls: MutableList<Poll> = mutableListOf(),
+
     @JsonIgnore
     @ManyToMany (mappedBy = "events")
     var venues: MutableList<Venue>?,
@@ -29,9 +33,10 @@ data class Event (
     @Enumerated(value = EnumType.STRING)
     var eventType: EventType?,
 
-    @JsonIgnore
-    @ManyToMany (mappedBy = "events")
-    val users: MutableList<User> = mutableListOf(),
+//    @JsonIgnore
+//    @ManyToMany (mappedBy = "events")
+//    val users: MutableList<User> = mutableListOf(),
+
 
     @Enumerated(value = EnumType.STRING)
     var status: EventStatus = EventStatus.PROPOSED
