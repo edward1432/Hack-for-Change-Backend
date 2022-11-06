@@ -34,6 +34,8 @@ class UserService(
         }
     }
 
+
+
     fun checkUserEmail(email: String): Boolean = findAll().any { it.email == email }
 
     fun findAll(): List<User> {
@@ -58,6 +60,14 @@ class UserService(
         try{
             userRepo.delete(findUserById(userId))
             return ResponseEntity.ok(HttpStatus.OK)
+        }catch(e: NoSuchElementException){
+            throw NoSuchElementException(e.message)
+        }
+    }
+
+    fun findUserByEmail(email: String): User?{
+        try{
+            return userRepo.findByEmail(email)
         }catch(e: NoSuchElementException){
             throw NoSuchElementException(e.message)
         }

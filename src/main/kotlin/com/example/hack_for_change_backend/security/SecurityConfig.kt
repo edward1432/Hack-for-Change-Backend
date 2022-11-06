@@ -34,6 +34,7 @@ class WebSecurityConfig (val userService: UserService): WebSecurityConfigurerAda
             .antMatchers(HttpMethod.POST, "/login/login").hasAnyRole("ADMIN", "USER")
             .antMatchers(HttpMethod.PUT, "/updateUser/**").hasAnyRole("ADMIN", "USER")
             .antMatchers(HttpMethod.DELETE, "/deleteUser/**").hasRole("ADMIN")
+            .antMatchers(HttpMethod.PATCH, "/users/patch/**").hasAnyRole("ADMIN", "USER")
             //=================POST ENDPOINTS=================
             .antMatchers(HttpMethod.GET, "/findPosts").hasAnyRole("ADMIN", "USER")
             .antMatchers(HttpMethod.GET, "/findPostById/**").hasRole("ADMIN")
