@@ -20,6 +20,7 @@ data class Poll(
     @ElementCollection
 //    @Access(AccessType.PROPERTY)
     var ballot: MutableList<EventType>,
+    @Column(name = "rsvp")
     @Enumerated(value = EnumType.STRING)
     var rsvp: RSVP? = null
 )

@@ -14,7 +14,7 @@ class EventService(
     val pollService: PollService
     ) {
 
-    fun findEventById(id: Long) = eventRepo.findById(id).orElseThrow { NoSuchElementException("Event with ID: $id does not exist") }
+    fun findEventById(id: Long): Event = eventRepo.findById(id).orElseThrow { NoSuchElementException("Event with ID: $id does not exist") }
 
     fun findEventByType(eventType: EventType): List<Event> = eventRepo.findByEventTypeIs(eventType)
 
