@@ -3,6 +3,7 @@ package com.example.hack_for_change_backend.service
 import com.example.hack_for_change_backend.model.Event
 import com.example.hack_for_change_backend.model.User
 import com.example.hack_for_change_backend.model.enums.EventType
+import com.example.hack_for_change_backend.model.enums.PollStatus
 import com.example.hack_for_change_backend.model.enums.RSVP
 import com.example.hack_for_change_backend.model.voting.Poll
 import com.example.hack_for_change_backend.repository.PollRepo
@@ -28,12 +29,17 @@ class PollService (
     }
 
     fun addVotes(pollId: Long, ballot: List<EventType>): Poll {
+
+        if (findPollById(pollId).event.pollStatus == PollStatus.CLOSED) throw Exception("Poll with ID: $pollId is closed")
+
         return try {
             val poll = findPollById(pollId)
             poll.ballot = ballot.toMutableList()
             pollRepo.save(poll)
         } catch (e: NoSuchElementException) {
             throw NoSuchElementException(e.message)
+        } catch (e: AssertionError) {
+            throw AssertionError(e.message)
         }
     }
 

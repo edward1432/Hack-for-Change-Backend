@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
+import java.lang.AssertionError
 
 @RestController
 @CrossOrigin(origins = ["http://localhost:3000"])
@@ -46,6 +47,8 @@ class PollController (private val pollService: PollService) {
             ResponseEntity.ok(pollService.addVotes(pollId, ballot))
         } catch (e: NoSuchElementException) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+        } catch (e: Exception) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, e.message)
         }
     }
 

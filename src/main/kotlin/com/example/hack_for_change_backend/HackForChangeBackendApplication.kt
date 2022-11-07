@@ -24,6 +24,8 @@ class HackForChangeBackendApplication {
 		eventService.addUserToEvent(1, 2)
 		eventService.addUserToEvent(1, 3)
 		eventService.addUserToEvent(1, 4)
+
+        eventService.countVotes(1)
     }
 }
 

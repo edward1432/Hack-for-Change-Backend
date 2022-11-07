@@ -99,4 +99,24 @@ class EventService(
         }
     }
 
+    fun countVotes(eventId: Long) {
+        try {
+            val event = findEventById(eventId)
+            val votes: MutableMap<EventType, Int> = mutableMapOf()
+
+            votes[EventType.BOWLING] = 1
+
+            var a = votes.getOrDefault(EventType.BOWLING, 0)
+            a += 1
+            votes[EventType.BOWLING] = a
+
+//            votes.put(EventType.BOWLING, (votes[EventType.BOWLING] += 1))
+
+            println(votes[EventType.BOWLING])
+
+//            event.userPolls.forEach { votes.put(it.ballot[0], (votes.get(it.ballot[0] += 3))) }
+        } catch (e: Exception) {
+            throw Exception(e.message)
+        }
+    }
 }
