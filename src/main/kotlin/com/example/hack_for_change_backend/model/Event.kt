@@ -38,6 +38,9 @@ data class Event (
     @Enumerated(value = EnumType.STRING)
     var eventType: EventType?,
 
+    @ElementCollection
+    var votes: MutableMap<EventType, Int>,
+
 //    @JsonIgnore
 //    @ManyToMany (mappedBy = "events")
 //    val users: MutableList<User> = mutableListOf(),

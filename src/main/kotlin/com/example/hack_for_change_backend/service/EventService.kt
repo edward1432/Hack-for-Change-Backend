@@ -104,19 +104,13 @@ class EventService(
             val event = findEventById(eventId)
             val votes: MutableMap<EventType, Int> = mutableMapOf()
 
-            votes[EventType.BOWLING] = 1
-
-            var a = votes.getOrDefault(EventType.BOWLING, 0)
-            a += 1
-            votes[EventType.BOWLING] = a
-
-//            votes.put(EventType.BOWLING, (votes[EventType.BOWLING] += 1))
-
-            println(votes[EventType.BOWLING])
-
-//            event.userPolls.forEach { votes.put(it.ballot[0], (votes.get(it.ballot[0] += 3))) }
-        } catch (e: Exception) {
-            throw Exception(e.message)
+            event.userPolls.forEach {
+                var a = votes.getOrDefault(it.ballot[0], 0)
+                a += 3
+                votes[it.ballot[0]] = a
+            }
+        } catch (e: NoSuchElementException) {
+            throw NoSuchElementException(e.message)
         }
     }
 }
