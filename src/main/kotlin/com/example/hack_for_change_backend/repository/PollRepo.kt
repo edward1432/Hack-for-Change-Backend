@@ -15,5 +15,5 @@ interface PollRepo : JpaRepository<Poll, Long> {
     fun findByEventId(eventId: Long): List<Poll>
 
     @Query(value = "select * from polls where event_unique_id = ?1 and user_unique_id = ?2", nativeQuery = true)
-    fun findByEventIdAndUserId(eventId: Long, userId: Long): List<Poll>
+    fun findByEventIdAndUserId(eventId: Long, userId: Long): Poll?
 }

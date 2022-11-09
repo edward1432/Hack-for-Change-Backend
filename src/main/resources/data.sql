@@ -5,7 +5,7 @@ insert into organisations (name, email, phone_no) values ('CFC', 'cfc@cfc.com', 
 insert into organisations (name, email, phone_no) values ('Invesco', 'invesco@invesco.com', '564125,7748');
 insert into organisations (name, email, phone_no) values ('Mercator', 'mercator@mercator.com', '224497,1649');
 
-insert into events (name, location, start_date_time, end_date_time, organisation_id, event_type, status, poll_status) values ('End of quarter celebration','Nar''yan-Mar', '2023-01-29 19:00:00', '2023-01-29 23:00:00', 1, 'GOLF', 'PROPOSED', 'CLOSED');
+insert into events (name, location, start_date_time, end_date_time, organisation_id, event_type, status, poll_status) values ('End of quarter celebration','Nar''yan-Mar', '2023-01-29 19:00:00', '2023-01-29 23:00:00', 1, 'GOLF', 'PROPOSED', 'OPEN');
 insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Huayuanli', '2023-04-13 19:00:00', '2023-04-13 23:00:00', 1, 'DINNER');
 insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Nanqi', '2023-05-04 19:00:00', '2023-05-04 23:00:00', 2, 'GOLF');
 insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Pringgabaya', '2023-06-20 19:00:00', '2023-06-20 23:00:00', 3, 'DRINKS');
