@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping(path = ["api/v1/registration"])
 @AllArgsConstructor
+@CrossOrigin(origins = ["http://localhost:3000"])
 class RegistrationController (val registrationService: RegistrationService){
 //    private val registrationService = RegistrationService()
     @PostMapping
