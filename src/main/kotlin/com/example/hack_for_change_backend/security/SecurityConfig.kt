@@ -48,6 +48,7 @@ class WebSecurityConfig (val userService: UserService): WebSecurityConfigurerAda
             .antMatchers(HttpMethod.POST, "/addVenue").hasAnyRole("ADMIN", "USER")
             .antMatchers(HttpMethod.PUT, "/updateVenue/**").hasAnyRole("ADMIN", "USER")
             .antMatchers(HttpMethod.DELETE, "/deleteVenue/**").hasAnyRole("ADMIN", "USER")
+            .antMatchers("/**").permitAll()
             //=================EVENT ENDPOINTS=================
             .antMatchers(HttpMethod.GET, "/findAllEvents").hasAnyRole("ADMIN", "USER")
             .antMatchers(HttpMethod.GET, "/findByEventTypeIs").hasAnyRole("ADMIN", "USER")
