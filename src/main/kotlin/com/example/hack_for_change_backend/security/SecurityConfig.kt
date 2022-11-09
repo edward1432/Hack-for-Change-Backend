@@ -28,7 +28,10 @@ class WebSecurityConfig (val userService: UserService): WebSecurityConfigurerAda
             .authorizeRequests()
             .antMatchers("/api/v*/registration/**").permitAll()
             //=================USER ENDPOINTS=================
-            .antMatchers("/**").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+//            .antMatchers(HttpMethod.GET, "/organisations/findAll").permitAll()
+//            .antMatchers(HttpMethod.OPTIONS, "/organisations/findAll").permitAll()
+//            .antMatchers("/**").hasAnyRole("ADMIN", "USER")
             .antMatchers(HttpMethod.GET, "/findAll").hasAnyRole("ADMIN", "USER")
             .antMatchers(HttpMethod.GET, "/findById/**").hasRole("ADMIN")
             .antMatchers(HttpMethod.POST, "/addUser").permitAll()
