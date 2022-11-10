@@ -30,6 +30,7 @@ class WebSecurityConfig (val userService: UserService): WebSecurityConfigurerAda
             //=================USER ENDPOINTS=================
 //            .antMatchers("/**").permitAll()
             .antMatchers(HttpMethod.GET, "/**").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/**").authenticated()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //            .antMatchers(HttpMethod.GET, "/organisations/findAll").permitAll()
 //            .antMatchers(HttpMethod.OPTIONS, "/organisations/findAll").permitAll()
