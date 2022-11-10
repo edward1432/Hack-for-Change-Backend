@@ -2,6 +2,7 @@ package com.example.hack_for_change_backend.model
 
 import com.example.hack_for_change_backend.model.enums.EventStatus
 import com.example.hack_for_change_backend.model.enums.EventType
+import com.example.hack_for_change_backend.model.enums.PollStatus
 import com.example.hack_for_change_backend.model.voting.Poll
 import com.fasterxml.jackson.annotation.JsonIgnore
 import java.util.Date
@@ -27,12 +28,18 @@ data class Event (
     @OneToMany(mappedBy = "event")
     val userPolls: MutableList<Poll> = mutableListOf(),
 
+    @Enumerated(value = EnumType.STRING)
+    var pollStatus: PollStatus = PollStatus.OPEN,
+
     @JsonIgnore
     @ManyToMany (mappedBy = "events")
     var venues: MutableList<Venue>?,
 
     @Enumerated(value = EnumType.STRING)
     var eventType: EventType?,
+
+    @ElementCollection
+    var votes: MutableMap<EventType, Int>,
 
 //    @JsonIgnore
 //    @ManyToMany (mappedBy = "events")

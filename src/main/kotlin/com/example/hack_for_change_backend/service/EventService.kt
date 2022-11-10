@@ -3,8 +3,13 @@ package com.example.hack_for_change_backend.service
 import com.example.hack_for_change_backend.model.Event
 import com.example.hack_for_change_backend.model.enums.EventStatus
 import com.example.hack_for_change_backend.model.enums.EventType
+import com.example.hack_for_change_backend.model.enums.PollStatus
+import com.example.hack_for_change_backend.model.voting.Poll
 import com.example.hack_for_change_backend.repository.EventRepo
+import org.springframework.context.annotation.Bean
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
+import kotlin.math.min
 
 @Service
 class EventService(
@@ -99,4 +104,41 @@ class EventService(
         }
     }
 
+    fun addVotes(eventId: Long, userId: Long, ballot: List<EventType>): Poll {
+        return try {
+            val event = findEventById(eventId)
+            if (event.pollStatus == PollStatus.CLOSED) throw Exception("Poll closed for event ID: $eventId")
+            val user = userService.findUserById(userId)
+            val poll = pollService.addVotesFromEvent(user, eventId, ballot)
+            countVotes(eventId)
+            println(poll.ballot)
+            poll
+        } catch (e: NotFoundException) {
+            throw NoSuchElementException(e.message)
+        }
+    }
+
+    fun countVotes(eventId: Long) {
+        try {
+            val event = findEventById(eventId)
+            val votes: MutableMap<EventType, Int> = mutableMapOf()
+
+            event.userPolls.forEach {
+
+                for (i in 0 until min(it.ballot.size, 3)) {
+                    
+                }
+
+                if (it.ballot.isNotEmpty()) {
+                    var a = votes.getOrDefault(it.ballot[0], 0)
+                    a += 3
+                    votes[it.ballot[0]!!] = a
+                }
+            }
+            event.votes = votes
+            eventRepo.save(event)
+        } catch (e: NoSuchElementException) {
+            throw NoSuchElementException(e.message)
+        }
+    }
 }

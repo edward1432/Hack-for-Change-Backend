@@ -2,7 +2,10 @@ package com.example.hack_for_change_backend.controller
 
 import com.example.hack_for_change_backend.model.Event
 import com.example.hack_for_change_backend.model.enums.EventType
+import com.example.hack_for_change_backend.model.voting.Poll
 import com.example.hack_for_change_backend.service.EventService
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
+import org.springframework.data.repository.query.Param
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -81,6 +84,17 @@ class EventController(private val eventService: EventService) {
             ResponseEntity.ok().body(HttpStatus.OK)
         } catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, e.message)
+        }
+    }
+
+    @PatchMapping("/addVotes/{event_id}/{user_id}")
+    fun addVotes(@PathVariable("event_id") eventId: Long,
+                 @PathVariable("user_id") userId: Long,
+                 @RequestParam("ballot", required = true) ballot: List<EventType>): ResponseEntity<Poll> {
+        return try {
+            ResponseEntity.ok(eventService.addVotes(eventId, userId, ballot))
+        } catch (e: NotFoundException) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }
 }
