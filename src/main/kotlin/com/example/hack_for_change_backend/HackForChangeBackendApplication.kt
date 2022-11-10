@@ -1,13 +1,10 @@
 package com.example.hack_for_change_backend
 
-import com.example.hack_for_change_backend.model.Organisation
 import com.example.hack_for_change_backend.model.Post
-import com.example.hack_for_change_backend.model.Organisation
 import com.example.hack_for_change_backend.model.User
 import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.example.hack_for_change_backend.service.EventService
 import com.example.hack_for_change_backend.service.PostService
-import com.example.hack_for_change_backend.service.OrganisationService
 import com.example.hack_for_change_backend.service.UserService
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
