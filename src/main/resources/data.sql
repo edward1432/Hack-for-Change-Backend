@@ -1,9 +1,9 @@
-INSERT INTO organisations (name, email, phone_no) VALUES ('LBG', 'lbg@lbg.com', '12345,6789');
-insert into organisations (name, email, phone_no) values ('Atos', 'atos@atos.com', '805768,3558');
-insert into organisations (name, email, phone_no) values ('M&S', 'm&s@m&s.com', '305735,4302');
-insert into organisations (name, email, phone_no) values ('CFC', 'cfc@cfc.com', '815564,3538');
-insert into organisations (name, email, phone_no) values ('Invesco', 'invesco@invesco.com', '564125,7748');
-insert into organisations (name, email, phone_no) values ('Mercator', 'mercator@mercator.com', '224497,1649');
+INSERT INTO organisations (name, email, phone_no, join_code) VALUES ('LBG', 'lbg@lbg.com', '12345,6789', gen_random_uuid ());
+insert into organisations (name, email, phone_no, join_code) values ('Atos', 'atos@atos.com', '805768,3558', gen_random_uuid ());
+insert into organisations (name, email, phone_no, join_code) values ('M&S', 'm&s@m&s.com', '305735,4302', gen_random_uuid ());
+insert into organisations (name, email, phone_no, join_code) values ('CFC', 'cfc@cfc.com', '815564,3538', gen_random_uuid ());
+insert into organisations (name, email, phone_no, join_code) values ('Invesco', 'invesco@invesco.com', '564125,7748', gen_random_uuid ());
+insert into organisations (name, email, phone_no, join_code) values ('Mercator', 'mercator@mercator.com', '224497,1649', gen_random_uuid ());
 
 insert into events (name, location, start_date_time, end_date_time, organisation_id, event_type, status) values ('End of quarter celebration','Nar''yan-Mar', '2023-01-29 19:00:00', '2023-01-29 23:00:00', 1, 'GOLF', 'PROPOSED');
 insert into events (location, start_date_time, end_date_time, organisation_id, event_type) values ('Huayuanli', '2023-04-13 19:00:00', '2023-04-13 23:00:00', 1, 'DINNER');
@@ -145,6 +145,7 @@ insert into venue_event_mapper (venue_id, event_id) values (3, 8);
 
 --insert into users (email_address, password, organisation_id) values ('test@test.com', 'admin', 1);
 
+insert into users (email_address, password, enabled, locked, first_name, last_name) values ('test@test.com', 'asfsayg', 'true', 'false', 'John', 'Smith');
 
 --insert into polls (event_unique_id, user_unique_id) values (1, 1);
 

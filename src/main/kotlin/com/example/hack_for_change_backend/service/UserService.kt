@@ -5,6 +5,7 @@ import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.example.hack_for_change_backend.registration.token.ConfirmationToken
 import com.example.hack_for_change_backend.registration.token.ConfirmationTokenService
 import com.example.hack_for_change_backend.repository.UserRepo
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.userdetails.UserDetails
@@ -40,7 +41,14 @@ class UserService(
         return userRepo.findAll()
     }
 
-//    fun userLogin(email: String, password: String): User {
+    fun login(email: String, password: String): User {
+        val user = userRepo.findByEmail(email)
+        return if (bCryptPasswordEncoder.matches(password, user!!.password)) {
+            user
+        } else {
+            throw Exception("Incorrect password")
+        }
+    }
 
     fun updateUser(userId: Long, userDetails: User): ResponseEntity<User> {
         try {
