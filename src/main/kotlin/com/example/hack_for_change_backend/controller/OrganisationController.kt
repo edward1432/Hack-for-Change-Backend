@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException
 import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 @RestController
-@CrossOrigin(origins = ["http://localhost:3000"])
+@CrossOrigin(origins = ["*"])
 @RequestMapping("/organisations")
 class OrganisationController(private val organisationService: OrganisationService) {
 
