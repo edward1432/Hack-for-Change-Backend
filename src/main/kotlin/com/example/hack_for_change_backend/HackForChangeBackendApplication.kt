@@ -34,10 +34,10 @@ class HackForChangeBackendApplication {
 		eventService.addUserToEvent(1, 3)
 		eventService.addUserToEvent(1, 4)
 
-        postService.createPost(Post(1L, "1Who's going to the next quarterly?", 0, user1));
-        postService.createPost(Post(2L, "2Who's going to the next quarterly?", 0, user2));
-        postService.createPost(Post(3L, "3Who's going to the next quarterly?", 0, user3));
-        postService.createPost(Post(4L, "4Who's going to the next quarterly?", 0, user4));
+        postService.createPost(Post(1L, "1Who's going to the next quarterly?", 0, user1), 1);
+        postService.createPost(Post(2L, "2Who's going to the next quarterly?", 0, user2), 2);
+        postService.createPost(Post(3L, "3Who's going to the next quarterly?", 0, user3), 3);
+        postService.createPost(Post(4L, "4Who's going to the next quarterly?", 0, user4), 4);
     }
 }
 

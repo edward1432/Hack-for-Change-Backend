@@ -1,7 +1,6 @@
 package com.example.hack_for_change_backend.controller
 
 import com.example.hack_for_change_backend.model.Post
-import com.example.hack_for_change_backend.model.Venue
 import com.example.hack_for_change_backend.service.PostService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -26,11 +25,11 @@ class PostController(private val postService: PostService)
         }
     }
 
-    @PostMapping("/addPost")
-    fun addPost(@RequestBody post: Post): ResponseEntity<Post> {
+    @PostMapping("/addPost/{user_id}")
+    fun addPost(@RequestBody post: Post, @PathVariable("user_id") userId: Long): ResponseEntity<Post> {
         return try {
-            postService.createPost(post)
-        } catch (e: Exception) {
+            ResponseEntity.ok(postService.createPost(post, userId))
+        } catch (e: NoSuchElementException) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }
@@ -54,7 +53,15 @@ class PostController(private val postService: PostService)
         }
     }
 
-
-
-
+    // likeDislike == true for like, false for remove like
+    @PatchMapping("/likeDislikePost/{post_id}/{user_id}")
+    fun likeDislikePost(@PathVariable("post_id") postId: Long,
+                        @PathVariable("user_id") userId: Long,
+                        @RequestParam(name = "like_dislike", required = true) likeDislike: Boolean): ResponseEntity<Post> {
+        return try {
+            ResponseEntity.ok(postService.addRemoveLike(postId, userId, likeDislike))
+        } catch (e: NoSuchElementException) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+        }
+    }
 }

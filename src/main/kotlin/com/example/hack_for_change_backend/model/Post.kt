@@ -1,7 +1,9 @@
 package com.example.hack_for_change_backend.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.Column
+import javax.persistence.ElementCollection
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -21,5 +23,8 @@ data class Post(
     var likeCount: Int,
     @JsonIgnoreProperties("posts")
     @ManyToOne
-    var user: User
-        )
+    var user: User?
+        ) {
+    @ElementCollection
+    val likes: MutableMap<User, Boolean> = mutableMapOf()
+}

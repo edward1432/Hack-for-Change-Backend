@@ -145,7 +145,7 @@ insert into venue_event_mapper (venue_id, event_id) values (3, 8);
 
 --insert into users (email_address, password, organisation_id) values ('test@test.com', 'admin', 1);
 
-insert into users (email_address, password, enabled, locked, first_name, last_name) values ('test@test.com', 'asfsayg', 'true', 'false', 'John', 'Smith');
+--insert into users (email_address, password, enabled, locked, first_name, last_name) values ('test@test.com', 'asfsayg', 'true', 'false', 'John', 'Smith');
 
 --insert into polls (event_unique_id, user_unique_id) values (1, 1);
 

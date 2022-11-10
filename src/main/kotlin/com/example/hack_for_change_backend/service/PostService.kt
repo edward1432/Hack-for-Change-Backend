@@ -2,16 +2,14 @@ package com.example.hack_for_change_backend.service
 
 
 import com.example.hack_for_change_backend.model.Post
-import com.example.hack_for_change_backend.model.Venue
 import com.example.hack_for_change_backend.repository.PostRepo
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
-import java.lang.IllegalArgumentException
 
 
 @Service
-class PostService(val postRepo: PostRepo) {
+class PostService(val postRepo: PostRepo, val userService: UserService) {
 
     fun findPostById(id: Long): Post {
         return postRepo.findById(id).orElseThrow {
@@ -25,12 +23,22 @@ class PostService(val postRepo: PostRepo) {
 
     fun checkPostExists(post: Post): Boolean = findAll().contains(post)
 
-    fun createPost(post: Post): ResponseEntity<Post> {
-        if (!checkPostExists(post)) {
+//    fun createPost(post: Post): ResponseEntity<Post> {
+//        if (!checkPostExists(post)) {
+//            postRepo.save(post)
+//            return ResponseEntity.ok(post)
+//        } else {
+//            throw IllegalArgumentException("[POST] $post ALREADY EXISTS")
+//        }
+//    }
+
+    fun createPost(post: Post, userId: Long): Post {
+        return try {
+            val user = userService.findUserById(userId)
+            post.user = user
             postRepo.save(post)
-            return ResponseEntity.ok(post)
-        } else {
-            throw IllegalArgumentException("[POST] $post ALREADY EXISTS")
+        } catch (e: NoSuchElementException) {
+            throw NoSuchElementException(e.message)
         }
     }
 
@@ -50,6 +58,18 @@ class PostService(val postRepo: PostRepo) {
         try {
             postRepo.delete(findPostById(postId))
             return ResponseEntity.ok(HttpStatus.OK)
+        } catch (e: NoSuchElementException) {
+            throw NoSuchElementException(e.message)
+        }
+    }
+
+    fun addRemoveLike(postId: Long, userId: Long, likeDislike: Boolean): Post {
+        return try {
+            val post = findPostById(postId)
+            val user = userService.findUserById(userId)
+            post.likes[user] = likeDislike
+            post.likeCount = post.likes.filterValues { it }.count()
+            postRepo.save(post)
         } catch (e: NoSuchElementException) {
             throw NoSuchElementException(e.message)
         }
