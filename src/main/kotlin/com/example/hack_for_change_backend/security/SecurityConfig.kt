@@ -32,6 +32,7 @@ class WebSecurityConfig (val userService: UserService): WebSecurityConfigurerAda
             .antMatchers(HttpMethod.GET, "/**").authenticated()
             .antMatchers(HttpMethod.PATCH, "/**").authenticated()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/users/loginUser/**").permitAll()
 //            .antMatchers(HttpMethod.GET, "/organisations/findAll").permitAll()
 //            .antMatchers(HttpMethod.OPTIONS, "/organisations/findAll").permitAll()
 //            .antMatchers(HttpMethod.GET, "/users/loginUser").hasAnyRole("ADMIN", "USER")
