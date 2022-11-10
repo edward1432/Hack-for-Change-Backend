@@ -43,6 +43,15 @@ class UserController(private val userService: UserService) {
 //        }
 //    }
 
+    @GetMapping("/loginUser")
+    fun loginUser(@RequestParam email: String, @RequestParam password: String): ResponseEntity<User> {
+        return try {
+            ResponseEntity.ok(userService.login(email, password))
+        } catch (e: Exception) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, e.message)
+        }
+    }
+
     @PutMapping("/updateUser/{id}")
     fun userUpdate(@PathVariable("id") userId: Long, @RequestBody user: User): ResponseEntity<User> {
         return try {
