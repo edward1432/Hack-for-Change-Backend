@@ -34,7 +34,7 @@ class UserController(private val userService: UserService) {
 //        }
 //    }
 
-//    @PostMapping("/login/login")
+//    @PostMapping("/login")
 //    fun loginUser(@RequestParam email: String, @RequestParam password: String): User{
 //        return try{
 //            userService.userLogin(email, password)
