@@ -28,7 +28,7 @@ class WebSecurityConfig (val userService: UserService): WebSecurityConfigurerAda
             .authorizeRequests()
             .antMatchers("/api/v*/registration/**").permitAll()
             //=================USER ENDPOINTS=================
-//            .antMatchers("/**").permitAll()
+            .antMatchers("/**").permitAll()
             .antMatchers(HttpMethod.GET, "/**").authenticated()
             .antMatchers(HttpMethod.PATCH, "/**").authenticated()
             .antMatchers(HttpMethod.POST, "/**").authenticated()
