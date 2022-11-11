@@ -3,6 +3,7 @@ package com.example.hack_for_change_backend.controller
 import com.example.hack_for_change_backend.model.Post
 import com.example.hack_for_change_backend.service.PostService
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
