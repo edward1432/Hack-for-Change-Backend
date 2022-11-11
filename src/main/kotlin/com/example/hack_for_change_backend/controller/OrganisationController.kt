@@ -53,27 +53,4 @@ class OrganisationController(private val organisationService: OrganisationServic
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }
-
-//    @PatchMapping("/update/{id}", consumes = ["application/json-patch+json"])
-//    fun updateOrganisationEmail(@PathVariable("id") organisationId: Long, @RequestBody patch: JsonPatch): ResponseEntity<Organisation> {
-//        return try {
-//            val organisation = organisationService.findOrganisationById(organisationId)
-//            val organisationPatched = applyPatchTo
-//        }
-//    }
-//
-//    @PatchMapping("/update/{id}")
-//    fun updateOrg(@PathVariable("id") organisationId: Long, @RequestBody objectMap: Map<Any, Any>) {
-//
-//    }
-
-//    @DeleteMapping("/deleteOrganisation/{id}")
-//    fun deleteOrganisation(@PathVariable("id") organisationId: Long): ResponseEntity<HttpStatus> {
-//        return try {
-//            organisationService.deleteOrganisation(organisationId)
-//            ResponseEntity.ok().body(HttpStatus.OK)
-//        } catch (e: NoSuchElementException) {
-//            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
-//        }
-//    }
 }

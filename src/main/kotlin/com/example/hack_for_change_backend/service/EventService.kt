@@ -30,9 +30,6 @@ class EventService(
         it.run {
             location == event.location
                     && eventType == event.eventType
-//                    && venues == event.venues
-//                    && startDateTime == event.startDateTime
-//                    && endDateTime == event.endDateTime
         }
     }
 
@@ -47,34 +44,6 @@ class EventService(
             throw NoSuchElementException(e.message)
         }
     }
-
-//    lateinit var eventServiceManager: List<Event>
-//
-//        fun createEvent(event: Event): ResponseEntity<Event> {
-//        val eventManager = (eventServiceManager.find { eventList -> eventList == event })
-//        if (eventManager != null) {
-//            throw IllegalStateException("[EVENT] $event ALREADY EXISTS")
-//        }
-//        eventRepo.save(event)
-//        return ResponseEntity.ok(event)
-//    }
-
-    // ===
-//    fun updateEvent(eventId: Long, eventDetails: Event): Event {
-//        try {
-//            val event = findEventById(eventId)
-////            event.eventType = eventDetails.eventType
-//            event.organisation = eventDetails.organisation
-//            event.startDateTime = eventDetails.startDateTime
-//            event.venues = eventDetails.venues
-//            event.location = eventDetails.location
-//            event.status = eventDetails.status
-//            eventRepo.save(event)
-//            return event
-//        } catch (e: NoSuchElementException){
-//            throw NoSuchElementException(e.message)
-//        }
-//    }
 
     fun updateEvent(eventId: Long, eventDetails: Event): Event {
         return try {

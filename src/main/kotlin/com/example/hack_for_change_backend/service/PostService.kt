@@ -23,15 +23,6 @@ class PostService(val postRepo: PostRepo, val userService: UserService) {
 
     fun checkPostExists(post: Post): Boolean = findAll().contains(post)
 
-//    fun createPost(post: Post): ResponseEntity<Post> {
-//        if (!checkPostExists(post)) {
-//            postRepo.save(post)
-//            return ResponseEntity.ok(post)
-//        } else {
-//            throw IllegalArgumentException("[POST] $post ALREADY EXISTS")
-//        }
-//    }
-
     fun createPost(post: Post, userId: Long): Post {
         return try {
             val user = userService.findUserById(userId)

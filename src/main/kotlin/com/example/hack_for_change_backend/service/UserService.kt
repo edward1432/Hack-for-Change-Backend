@@ -22,12 +22,8 @@ class UserService(
     val userRepo: UserRepo,
     val confirmationTokenService: ConfirmationTokenService,
     val organisationService: OrganisationService
-//                  val passwordEncoder: PasswordEncoder,
-//                  val confirmationTokenService: ConfirmationTokenService
 ) : UserDetailsService {
 
-//    private lateinit var userRepo: UserRepo
-//    private final val userRepo = UserRepo.Companion
     private val notFoundMsg = "User with email %s not found"
     private final val bCryptPasswordEncoder = BCryptPasswordEncoder()
 
@@ -76,24 +72,6 @@ class UserService(
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(email: String): UserDetails? =
         userRepo.findByEmail(email) ?: throw UsernameNotFoundException(String.format(notFoundMsg, email))
-
-    //    }
-//        }
-//            throw NoSuchElementException("[EMAIL] $email NOT FOUND")
-//        } else {
-//            return userRepo.findByEmail(email)
-//        if (passwordEncoder.matches(password, userRepo.findByEmail(email).password)) {
-//    fun createUser(user: User): ResponseEntity<User> {
-//        if (!checkUserEmail(user.email)) {
-//            user.run {
-//                password = passwordEncoder.encode(user.password)
-//                role = UserRoles.USER
-//            }
-//            userRepo.save(user)
-//            return ResponseEntity.ok(user)
-//
-//        } else throw IllegalArgumentException("Email ${user.email} already registered")
-//    }
 
     fun signUpUser(user: User, organisationId: Long): String {
         try {

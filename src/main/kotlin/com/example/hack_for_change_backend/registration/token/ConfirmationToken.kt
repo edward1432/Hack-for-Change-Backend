@@ -7,10 +7,6 @@ import lombok.Setter
 import java.time.LocalDateTime
 import javax.persistence.*
 
-
-//@Getter
-//@Setter
-//@NoArgsConstructor
 @Entity
 class ConfirmationToken(
     @Column(nullable = false)

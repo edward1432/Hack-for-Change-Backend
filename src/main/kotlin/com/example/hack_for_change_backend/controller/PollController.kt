@@ -45,16 +45,6 @@ class PollController (private val pollService: PollService) {
         }
     }
 
-//    @PatchMapping("/rsvp/{id}")
-//    fun rsvpToEvent(@PathVariable("id") pollId: Long,
-//                    @RequestParam("rsvp", required = false) rsvp: RSVP?): ResponseEntity<Poll> {
-//        return try {
-//            ResponseEntity.ok(pollService.rsvp(pollId, rsvp))
-//        } catch (e: NoSuchElementException) {
-//            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
-//        }
-//    }
-
     @PatchMapping("/rsvp/{event_id}/{user_id}")
     fun rsvpToEvent(@PathVariable("event_id") eventId: Long,
                     @PathVariable("user_id") userId: Long,

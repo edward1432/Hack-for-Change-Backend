@@ -77,7 +77,3 @@ class HackForChangeBackendApplication {
 fun main(args: Array<String>) {
     runApplication<HackForChangeBackendApplication>(*args)
 }
-//@Bean
-//fun passwordEncoder(): PasswordEncoder {
-//	return BCryptPasswordEncoder()
-//}

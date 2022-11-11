@@ -19,17 +19,6 @@ class OrganisationService(val organisationRepo: OrganisationRepo){
         return organisation
     }
 
-//    lateinit var organisationServiceManager: List<Organisation>
-//
-//        fun createOrganisation(organisation: Organisation): ResponseEntity<Organisation> {
-//        val organisationManager = (organisationServiceManager.find { organisationList -> organisationList == organisation })
-//        if (organisationManager != null) {
-//            throw IllegalStateException("[ORGANISATION] $organisation ALREADY EXISTS")
-//        }
-//        organisationRepo.save(organisation)
-//        return ResponseEntity.ok(organisation)
-//    }
-
     fun updateOrganisation(organisationID: Long, organisationDetails: Organisation): Organisation {
         return try {
             val organisation = findOrganisationById(organisationID)
@@ -43,11 +32,6 @@ class OrganisationService(val organisationRepo: OrganisationRepo){
             throw NoSuchElementException(e.message)
         }
     }
-
-//    fun applyPatchToOrganisation(patch: JsonPatch, targetOrganisation: Organisation): Organisation {
-//        val patched: JsonNode = patch.apply(jacksonObjectMapper().convertValue(targetOrganisation, JsonNode.class)))
-//            return jacksonObjectMapper().treeToValue(patched, Organisation.class)
-//    }
 
     fun deleteOrganisation(organisationID: Long) {
         try {
