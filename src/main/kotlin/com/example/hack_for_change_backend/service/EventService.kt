@@ -124,21 +124,35 @@ class EventService(
             val votes: MutableMap<EventType, Int> = mutableMapOf()
 
             event.userPolls.forEach {
-
+                var j = 3
                 for (i in 0 until min(it.ballot.size, 3)) {
-                    
-                }
-
-                if (it.ballot.isNotEmpty()) {
-                    var a = votes.getOrDefault(it.ballot[0], 0)
-                    a += 3
-                    votes[it.ballot[0]!!] = a
+                    var a = votes.getOrDefault(it.ballot[i], 0)
+                    a += j--
+                    votes[it.ballot[i]!!] = a
                 }
             }
             event.votes = votes
             eventRepo.save(event)
         } catch (e: NoSuchElementException) {
             throw NoSuchElementException(e.message)
+        }
+    }
+
+    fun closePoll(eventId: Long): Pair<Event, String> {
+        return try {
+            val event = findEventById(eventId)
+            event.pollStatus = PollStatus.CLOSED
+
+            val maxValue = event.votes.values.maxOf { it }
+            val winners: MutableSet<EventType> = mutableSetOf()
+            for ((key, value) in event.votes) {
+                if (value == maxValue) winners.add(key)
+            }
+            println(winners)
+
+            Pair(event, "a")
+        } catch (e: Exception) {
+            throw Exception(e.message)
         }
     }
 }
