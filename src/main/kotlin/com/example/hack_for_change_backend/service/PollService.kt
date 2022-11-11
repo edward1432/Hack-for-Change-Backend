@@ -14,6 +14,8 @@ class PollService (
     val pollRepo: PollRepo
         ) {
 
+    fun getAllPolls(): List<Poll> = pollRepo.findAll()
+
     fun findPollByEventId(eventId: Long): List<Poll> {
         return pollRepo.findByEventUniqueIdIs(eventId)
     }

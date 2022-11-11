@@ -22,6 +22,11 @@ import java.lang.AssertionError
 @RequestMapping("/polls")
 class PollController (private val pollService: PollService) {
 
+    @GetMapping("/findAll")
+    fun findAll(): ResponseEntity<List<Poll>> {
+        return ResponseEntity.ok(pollService.getAllPolls())
+    }
+
     @GetMapping("/findById/{id}")
     fun findById(@PathVariable("id") pollId: Long): ResponseEntity<Poll> {
         return try {
