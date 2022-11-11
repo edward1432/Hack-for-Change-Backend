@@ -63,11 +63,12 @@ class PostService(val postRepo: PostRepo, val userService: UserService) {
         }
     }
 
-    fun addRemoveLike(postId: Long, userId: Long, likeDislike: Boolean): Post {
+    fun addRemoveLike(postId: Long, userId: Long): Post {
         return try {
             val post = findPostById(postId)
             val user = userService.findUserById(userId)
-            post.likes[user] = likeDislike
+            val a = post.likes.getOrDefault(user, false)
+            post.likes[user] = !a
             post.likeCount = post.likes.filterValues { it }.count()
             postRepo.save(post)
         } catch (e: NoSuchElementException) {

@@ -54,13 +54,12 @@ class PostController(private val postService: PostService)
         }
     }
 
-    // likeDislike == true for like, false for remove like
+    // Adds or removes like if one has already been given by user
     @PatchMapping("/likeDislikePost/{post_id}/{user_id}")
     fun likeDislikePost(@PathVariable("post_id") postId: Long,
-                        @PathVariable("user_id") userId: Long,
-                        @RequestParam(name = "like_dislike", required = true) likeDislike: Boolean): ResponseEntity<Post> {
+                        @PathVariable("user_id") userId: Long): ResponseEntity<Post> {
         return try {
-            ResponseEntity.ok(postService.addRemoveLike(postId, userId, likeDislike))
+            ResponseEntity.ok(postService.addRemoveLike(postId, userId))
         } catch (e: NoSuchElementException) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
