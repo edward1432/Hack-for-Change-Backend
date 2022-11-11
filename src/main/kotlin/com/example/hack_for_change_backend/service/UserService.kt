@@ -15,11 +15,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.util.*
+import kotlin.NoSuchElementException
 
 @Service
 class UserService(
     val userRepo: UserRepo,
-    val confirmationTokenService: ConfirmationTokenService
+    val confirmationTokenService: ConfirmationTokenService,
+    val organisationService: OrganisationService
 //                  val passwordEncoder: PasswordEncoder,
 //                  val confirmationTokenService: ConfirmationTokenService
 ) : UserDetailsService {
@@ -93,32 +95,36 @@ class UserService(
 //        } else throw IllegalArgumentException("Email ${user.email} already registered")
 //    }
 
-    fun signUpUser(user: User): String {
+    fun signUpUser(user: User, organisationId: Long): String {
+        try {
+            val org = organisationService.findOrganisationById(organisationId)
 
-        if (checkUserEmail(user.email)) {
-            throw java.lang.IllegalArgumentException("Email ${user.email} already registered")
+            if (checkUserEmail(user.email)) {
+                throw java.lang.IllegalArgumentException("Email ${user.email} already registered")
+            }
+
+            user.run {
+                password = bCryptPasswordEncoder.encode(user.password)
+                role = UserRoles.USER
+                organisation = org
+            }
+            userRepo.save(user)
+
+            val token = UUID.randomUUID().toString()
+            val confirmationToken = ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                user
+            )
+            confirmationTokenService.saveConfirmationToken(
+                confirmationToken
+            )
+
+            return token
+        } catch (e: NoSuchElementException) {
+            throw NoSuchElementException(e.message)
         }
-
-        user.run {
-            password = bCryptPasswordEncoder.encode(user.password)
-            role = UserRoles.USER
-        }
-        userRepo.save(user)
-
-        val token = UUID.randomUUID().toString()
-        val confirmationToken = ConfirmationToken(
-            token,
-            LocalDateTime.now(),
-            LocalDateTime.now().plusMinutes(15),
-            user
-        )
-        confirmationTokenService.saveConfirmationToken(
-            confirmationToken
-        )
-
-
-//        TODO: SEND EMAIL
-        return token
     }
 
     fun enableAppUser(email: String): Int = userRepo.enableUser(email)
