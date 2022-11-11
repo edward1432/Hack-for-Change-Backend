@@ -19,6 +19,7 @@ data class Event (
     var name: String,
     var startDateTime: Date,
     var endDateTime: Date,
+    var description: String?,
 
     @ManyToOne
     @JoinColumn(name = "organisation_id")

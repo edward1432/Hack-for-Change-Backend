@@ -66,10 +66,11 @@ class HackForChangeBackendApplication {
         postService.createPost(Post(3L, "3Who's going to the next quarterly?", 0, user3), 3)
         postService.createPost(Post(4L, "4Who's going to the next quarterly?", 0, user4), 4)
 
-//        eventService.addVotes(1, 1, listOf(EventType.DINNER, EventType.CINEMA, EventType.BOWLING))
-//        eventService.addVotes(1, 2, listOf(EventType.CINEMA, EventType.DINNER, EventType.BOWLING))
-//        eventService.addVotes(1, 3, listOf(EventType.DINNER, EventType.CINEMA, EventType.BOWLING))
-//        eventService.addVotes(1, 4, listOf(EventType.BOWLING, EventType.DRINKS, EventType.CINEMA))
+        eventService.addVotes(1, 1, listOf(EventType.DINNER, EventType.CINEMA, EventType.BOWLING))
+        eventService.addVotes(1, 2, listOf(EventType.CINEMA, EventType.DINNER, EventType.BOWLING))
+        eventService.addVotes(1, 3, listOf(EventType.DINNER, EventType.CINEMA, EventType.BOWLING))
+        eventService.addVotes(1, 4, listOf(EventType.BOWLING, EventType.DRINKS, EventType.CINEMA))
+        eventService.addVotes(1, 5, listOf(EventType.DINNER))
     }
 }
 

@@ -59,18 +59,36 @@ class EventService(
 //    }
 
     // ===
+//    fun updateEvent(eventId: Long, eventDetails: Event): Event {
+//        try {
+//            val event = findEventById(eventId)
+////            event.eventType = eventDetails.eventType
+//            event.organisation = eventDetails.organisation
+//            event.startDateTime = eventDetails.startDateTime
+//            event.venues = eventDetails.venues
+//            event.location = eventDetails.location
+//            event.status = eventDetails.status
+//            eventRepo.save(event)
+//            return event
+//        } catch (e: NoSuchElementException){
+//            throw NoSuchElementException(e.message)
+//        }
+//    }
+
     fun updateEvent(eventId: Long, eventDetails: Event): Event {
-        try {
+        return try {
             val event = findEventById(eventId)
-//            event.eventType = eventDetails.eventType
-            event.organisation = eventDetails.organisation
-            event.startDateTime = eventDetails.startDateTime
-            event.venues = eventDetails.venues
-            event.location = eventDetails.location
-            event.status = eventDetails.status
+            event.run {
+                location = eventDetails.location
+                name = eventDetails.name
+                startDateTime = eventDetails.startDateTime
+                endDateTime = eventDetails.endDateTime
+                description = eventDetails.description
+                eventType = eventDetails.eventType
+                status = eventDetails.status
+            }
             eventRepo.save(event)
-            return event
-        } catch (e: NoSuchElementException){
+        } catch (e: NoSuchElementException) {
             throw NoSuchElementException(e.message)
         }
     }
@@ -111,7 +129,6 @@ class EventService(
             val user = userService.findUserById(userId)
             val poll = pollService.addVotesFromEvent(user, eventId, ballot)
             countVotes(eventId)
-            println(poll.ballot)
             poll
         } catch (e: NotFoundException) {
             throw NoSuchElementException(e.message)
@@ -140,19 +157,32 @@ class EventService(
 
     fun closePoll(eventId: Long): Pair<Event, String> {
         return try {
+            countVotes(eventId)
             val event = findEventById(eventId)
             event.pollStatus = PollStatus.CLOSED
 
-            val maxValue = event.votes.values.maxOf { it }
+            val maxValue = event.votes.values.maxOfOrNull { it }
             val winners: MutableSet<EventType> = mutableSetOf()
             for ((key, value) in event.votes) {
                 if (value == maxValue) winners.add(key)
             }
-            println(winners)
 
-            Pair(event, "a")
+            val message = when (winners.size) {
+                0 -> "No votes cast"
+                1 -> {
+                    event.eventType = winners.first()
+                    eventRepo.save(event)
+                    "${winners.first().niceName} is the winner with $maxValue votes"
+                }
+                else -> {
+                    "tie between ${winners.joinToString(", ")}"
+                }
+            }
+            Pair(event, message)
         } catch (e: Exception) {
             throw Exception(e.message)
         }
     }
+
+//    fun editEvent()
 }

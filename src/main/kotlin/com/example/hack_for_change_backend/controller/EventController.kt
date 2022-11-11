@@ -94,7 +94,11 @@ class EventController(private val eventService: EventService) {
 
     @PatchMapping("/closePoll/{event_id}")
     fun closePoll(@PathVariable("event_id") eventId: Long): ResponseEntity<Pair<Event, String>> {
-        return ResponseEntity.ok(eventService.closePoll(eventId))
+        return try {
+            ResponseEntity.ok(eventService.closePoll(eventId))
+        } catch (e: Exception) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, e.message)
+        }
     }
 
 //    @PatchMapping("/editDetails/{id}")
