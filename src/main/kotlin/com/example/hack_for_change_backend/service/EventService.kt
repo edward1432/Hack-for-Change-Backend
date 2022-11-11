@@ -156,7 +156,7 @@ class EventService(
         }
     }
 
-    fun closePoll(eventId: Long): Pair<Event, String> {
+    fun closePoll(eventId: Long): Pair<Event, Set<EventType>> {
         return try {
             countVotes(eventId)
             val event = findEventById(eventId)
@@ -167,19 +167,9 @@ class EventService(
             for ((key, value) in event.votes) {
                 if (value == maxValue) winners.add(key)
             }
-
-            val message = when (winners.size) {
-                0 -> "No votes cast"
-                1 -> {
-                    event.eventType = winners.first()
-                    eventRepo.save(event)
-                    "${winners.first().niceName} is the winner with $maxValue votes"
-                }
-                else -> {
-                    "tie between ${winners.joinToString(", ")}"
-                }
-            }
-            Pair(event, message)
+            if (winners.size == 1) event.eventType = winners.first()
+            eventRepo.save(event)
+            Pair(event, winners)
         } catch (e: Exception) {
             throw Exception(e.message)
         }

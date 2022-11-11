@@ -96,8 +96,9 @@ class EventController(private val eventService: EventService) {
         }
     }
 
+    // Returns pair consisting of the event and a set of the winning EventType(s)
     @PatchMapping("/closePoll/{event_id}")
-    fun closePoll(@PathVariable("event_id") eventId: Long): ResponseEntity<Pair<Event, String>> {
+    fun closePoll(@PathVariable("event_id") eventId: Long): ResponseEntity<Pair<Event, Set<EventType>>> {
         return try {
             ResponseEntity.ok(eventService.closePoll(eventId))
         } catch (e: Exception) {
