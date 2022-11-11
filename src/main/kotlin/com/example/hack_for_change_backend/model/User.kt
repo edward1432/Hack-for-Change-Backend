@@ -4,6 +4,7 @@ import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.example.hack_for_change_backend.model.voting.Poll
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import lombok.Builder
 import lombok.Data
 import org.springframework.security.core.GrantedAuthority
@@ -57,7 +58,7 @@ class User(
 //    val events: List<Event> = mutableListOf()
 
     @JsonIgnoreProperties("user")
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "user")
     val polls: MutableList<Poll> = mutableListOf()
 //    var roles: MutableSet<Role>? = null,

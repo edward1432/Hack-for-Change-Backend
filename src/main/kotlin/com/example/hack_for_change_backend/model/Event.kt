@@ -5,6 +5,7 @@ import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.model.enums.PollStatus
 import com.example.hack_for_change_backend.model.voting.Poll
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.util.Date
 import javax.persistence.*
 
@@ -25,7 +26,7 @@ data class Event (
     @JoinColumn(name = "organisation_id")
     var organisation: Organisation?,
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "event")
     val userPolls: MutableList<Poll> = mutableListOf(),
 
