@@ -1,22 +1,18 @@
 package com.example.hack_for_change_backend.OrganisationTest
 
-import com.example.hack_for_change_backend.model.Enjoyer
-import com.example.hack_for_change_backend.repository.EventRepo
-import com.example.hack_for_change_backend.service.EventService
+import com.example.hack_for_change_backend.model.User
 import com.ninjasquad.springmockk.MockkBean
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import io.mockk.verify
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension
-import org.mockito.kotlin.times
-import org.mockito.kotlin.verify
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
+
 import org.springframework.http.MediaType
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
@@ -26,10 +22,14 @@ import org.springframework.web.util.NestedServletException
 import com.example.hack_for_change_backend.model.Event
 import com.example.hack_for_change_backend.model.Organisation
 import com.example.hack_for_change_backend.model.Venue
+import com.example.hack_for_change_backend.model.enums.EventStatus
 import com.example.hack_for_change_backend.model.enums.EventType
+import com.example.hack_for_change_backend.model.enums.PollStatus
+import com.example.hack_for_change_backend.model.enums.UserRoles
+import com.example.hack_for_change_backend.model.voting.Poll
 import com.example.hack_for_change_backend.repository.OrganisationRepo
+import java.util.*
 
-import org.junit.jupiter.api.Nested
 
 @AutoConfigureMockMvc // auto-magically configures and enables an instance of MockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -41,7 +41,15 @@ class OrganisationControllerTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-    val enjoyerMutableList = mutableListOf<Enjoyer>()
+    val votes1: MutableMap<EventType, Int> = TODO()
+
+    val poll1 = mutableListOf<Poll>()
+
+    val date1: Date
+
+    val date2: Date
+
+    val enjoyerMutableList = mutableListOf<User>()
 
     val eventMutableList = mutableListOf<Event>()
 
@@ -50,16 +58,16 @@ class OrganisationControllerTest {
     val events = listOf<Event>()
     val enum = EventType.valueOf("cinema")
 
-    val organisation1: Organisation = Organisation(1, "name", "email", "phoneNo",enjoyerMutableList, eventMutableList)
+    val organisation1: Organisation = Organisation(1, "name", "Lewis", "email", "phoneNo", enjoyerMutableList, eventMutableList)
 
-    val enjoyer: Enjoyer = Enjoyer(1, "Alex", organisation1, events)
+    val enjoyer: User = User("Alex", "Beeswax","email", "password", UserRoles.USER)
 
-    val enjoyers: List<Enjoyer> = listOf()
+    val enjoyers: List<User> = listOf()
 
 
-    val eventing: Event = Event(1, "location", "date", organisation1, venueMutableList, enum, enjoyers)
+    val eventing: Event = Event(1, "location", "Alex", date1, date2, "description",  organisation1, poll1, PollStatus.OPEN, venueMutableList, enum, votes1, EventStatus.PROPOSED)
 
-    val venue: Venue = Venue(1, eventing, "name", "location", enum)
+    val venue: Venue = Venue(1, events, "name", "location", enum)
 
 
 
@@ -78,7 +86,7 @@ class OrganisationControllerTest {
 
     @Test
     fun bad_post_request_event(){
-        val organisation = Organisation(3, "Home", "Wed Mar 27 08:22:02 IST 2015", "phoneNo",enjoyerMutableList, eventMutableList )
+        val organisation = Organisation(1, "23", "Lewis", "email", "phoneNo", enjoyerMutableList, eventMutableList)
         assertThrows<NestedServletException> {
             mockMvc.post("/organisations/"){
                 contentType = MediaType.APPLICATION_JSON
@@ -103,7 +111,7 @@ class OrganisationControllerTest {
                 contentType(MediaType.APPLICATION_JSON)
             }
             content{
-                json("""{"uniqueId":1,"name":"name","email":"email", "phoneNo":"phoneNo,"enjoyers":"$enjoyerMutableList","events":"$eventMutableList"}""")
+                json("""{"uniqueId":1,"joinCode":"name", "name":"Lewis","email":"email", "phoneNo":"phoneNo,"enjoyers":"$enjoyerMutableList","events":"$eventMutableList"}""")
             }
         }
         verify(repository, times(1)).save(organisation)
