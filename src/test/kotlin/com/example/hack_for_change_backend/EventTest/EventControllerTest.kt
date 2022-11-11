@@ -29,6 +29,7 @@ import com.example.hack_for_change_backend.model.enums.PollStatus
 import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.example.hack_for_change_backend.model.voting.Poll
 import io.mockk.Ordering
+import java.time.LocalDate
 
 import java.util.Date
 
@@ -45,9 +46,8 @@ class EventControllerTest() {
 
     val poll1 = mutableListOf<Poll>()
 
-    val date1: Date
-
-    val date2: Date
+    val date1 = Date(2018, 12, 12)
+    val date2 = Date(2020, 12 ,12 )
 
     val enjoyerMutableList = mutableListOf<User>()
 

@@ -44,13 +44,12 @@ class VenueControllerTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-    val votes1: MutableMap<EventType, Int> = TODO()
+    val votes1: MutableMap<EventType, Int> = mutableMapOf()
 
     val poll1 = mutableListOf<Poll>()
 
-    val date1: Date
-
-    val date2: Date
+    val date1 = Date(2018, 12, 12)
+    val date2 = Date(2020, 12 ,12 )
 
     val enjoyerMutableList = mutableListOf<User>()
 
