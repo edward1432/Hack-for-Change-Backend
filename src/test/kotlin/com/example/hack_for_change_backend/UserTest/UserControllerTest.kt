@@ -44,13 +44,12 @@ class UserControllerTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-    val votes1: MutableMap<EventType, Int> = TODO()
+    val votes1: MutableMap<EventType, Int> = mutableMapOf()
 
     val poll1 = mutableListOf<Poll>()
 
-    val date1: Date
-
-    val date2: Date
+    val date1 = Date(2018, 12, 12)
+    val date2 = Date(2020, 12 ,12 )
 
     val enjoyerMutableList = mutableListOf<User>()
 
@@ -59,14 +58,14 @@ class UserControllerTest {
     val venueMutableList = mutableListOf<Venue>()
 
     val events = listOf<Event>()
-    val enum = EventType.valueOf("cinema")
+    val enum = EventType.valueOf("CINEMA")
 
     val organisation1: Organisation = Organisation(1, "name", "Lewis", "email", "phoneNo", enjoyerMutableList, eventMutableList)
-
+    val user1 = UserRoles.USER
     val enjoyer1: User = User("Alex", "Beeswax","email", "password", user1)
 
     val enjoyers: List<User> = listOf()
-    val user1 = UserRoles.USER
+
 
     val eventing: Event = Event(1, "location", "Alex", date1, date2, "description",  organisation1, poll1, PollStatus.OPEN, venueMutableList, enum, votes1, EventStatus.PROPOSED)
 
@@ -76,8 +75,8 @@ class UserControllerTest {
     lateinit var repository: UserRepo
 
     @Test
-    fun findEvent() {
-        mockMvc.get("/enjoyers?id=1")
+    fun findUser() {
+        mockMvc.get("/enjoyers/findAll")
             .andExpect {
                 status { isOk() }
             }
@@ -86,10 +85,10 @@ class UserControllerTest {
 
 
     @Test
-    fun bad_post_request_event(){
+    fun bad_post_request_User(){
         val enjoyer: User = User("asd123", "Beeswax","email", "password", UserRoles.USER)
         assertThrows<NestedServletException> {
-            mockMvc.post("/enjoyers/"){
+            mockMvc.post("/api/v1/registration/"){
                 contentType = MediaType.APPLICATION_JSON
                 content = jacksonObjectMapper().writeValueAsString(enjoyer)
                 accept = MediaType.APPLICATION_JSON
@@ -99,9 +98,9 @@ class UserControllerTest {
     }
 
     @Test
-    fun good_post_request_event(){
+    fun good_post_request_User(){
         val enjoyer = enjoyer1
-        mockMvc.post("/enjoyers/"){
+        mockMvc.post("/api/v1/registration"){
             contentType = MediaType.APPLICATION_JSON
             content = jacksonObjectMapper().writeValueAsString(enjoyer)
             accept = MediaType.APPLICATION_JSON
