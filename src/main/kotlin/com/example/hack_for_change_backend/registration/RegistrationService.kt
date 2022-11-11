@@ -4,6 +4,7 @@ import com.example.hack_for_change_backend.model.User
 import com.example.hack_for_change_backend.model.enums.UserRoles
 import com.example.hack_for_change_backend.registration.token.ConfirmationToken
 import com.example.hack_for_change_backend.registration.token.ConfirmationTokenService
+import com.example.hack_for_change_backend.service.OrganisationService
 import com.example.hack_for_change_backend.service.UserService
 import lombok.AllArgsConstructor
 
@@ -16,7 +17,8 @@ import java.time.LocalDateTime
 @AllArgsConstructor
 class RegistrationService (
     val userService: UserService,
-    val confirmationTokenService: ConfirmationTokenService
+    val confirmationTokenService: ConfirmationTokenService,
+    val organisationService: OrganisationService
     ){
 //    val userService = UserService()
     val emailValidator = EmailValidator()
@@ -27,9 +29,11 @@ class RegistrationService (
     fun register(request: RegistrationRequest): String {
         val isValidEmail: Boolean = emailValidator.test(request.email)
         check(isValidEmail) { "Email ${request.email} not valid" }
+        val organisation = organisationService.findOrganisationByJoinCode(request.joinCode)
 
         val token: String = userService.signUpUser(
-            User(request.firstName, request.lastName, request.email, request.password, UserRoles.USER)
+            User(request.firstName, request.lastName, request.email, request.password, UserRoles.USER),
+            organisation.uniqueId
         )
 
 //        val link = "http://localhost:8080/api/v1/registration/confirm?token=$token"

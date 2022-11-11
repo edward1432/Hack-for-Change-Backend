@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service
 @Service
 class OrganisationService(val organisationRepo: OrganisationRepo){
 
-    fun findOrganisationById(id: Long) = organisationRepo.findById(id).orElseThrow { NoSuchElementException("Organisation with ID: $id does not exist") }
+    fun findOrganisationById(id: Long): Organisation = organisationRepo.findById(id).orElseThrow { NoSuchElementException("Organisation with ID: $id does not exist") }
 
-    fun findAll() = organisationRepo.findAll()
+    fun findAll(): List<Organisation> = organisationRepo.findAll()
+
+    fun findOrganisationByJoinCode(joinCode: String): Organisation = organisationRepo.findByJoinCodeIs(joinCode) ?:
+    throw NoSuchElementException("Organisation with join code: $joinCode does not exist")
 
     fun addNewOrganisation(organisation: Organisation): Organisation {
         organisationRepo.save(organisation)

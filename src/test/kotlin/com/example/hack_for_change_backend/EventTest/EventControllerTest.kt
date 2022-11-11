@@ -48,7 +48,7 @@ class EventControllerTest() {
 
     val date1 = Date(2018, 12, 12)
     val date2 = Date(2020, 12 ,12 )
-
+    
     val enjoyerMutableList = mutableListOf<User>()
 
     val eventMutableList = mutableListOf<Event>()

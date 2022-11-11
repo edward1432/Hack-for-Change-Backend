@@ -1,6 +1,7 @@
 package com.example.hack_for_change_backend.repository
 
 import com.example.hack_for_change_backend.model.Organisation
+import org.aspectj.weaver.ast.Or
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
@@ -16,4 +17,5 @@ interface OrganisationRepo : JpaRepository<Organisation, Long> {
     @Query(value = "SELECT * FROM organisations WHERE lower(organisation) LIKE lower(?1)", nativeQuery = true)
     fun findOrganisationByName(@Param("organisations") organisations: String): List<Organisation>
 
+    fun findByJoinCodeIs(joinCode: String): Organisation?
 }
