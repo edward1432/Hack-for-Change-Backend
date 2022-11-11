@@ -45,7 +45,7 @@ class EventControllerTest() {
 
     val poll1 = mutableListOf<Poll>()
 
-    val date1: Date
+    val date1: Dategit
 
     val date2: Date
 
