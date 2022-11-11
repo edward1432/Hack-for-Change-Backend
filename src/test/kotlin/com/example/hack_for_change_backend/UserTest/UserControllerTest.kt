@@ -58,7 +58,7 @@ class UserControllerTest {
     val venueMutableList = mutableListOf<Venue>()
 
     val events = listOf<Event>()
-    val enum = EventType.valueOf("cinema")
+    val enum = EventType.valueOf("CINEMA")
 
     val organisation1: Organisation = Organisation(1, "name", "Lewis", "email", "phoneNo", enjoyerMutableList, eventMutableList)
     val user1 = UserRoles.USER
@@ -75,8 +75,8 @@ class UserControllerTest {
     lateinit var repository: UserRepo
 
     @Test
-    fun findEvent() {
-        mockMvc.get("/enjoyers?id=1")
+    fun findUser() {
+        mockMvc.get("/enjoyers/findAll")
             .andExpect {
                 status { isOk() }
             }
@@ -85,10 +85,10 @@ class UserControllerTest {
 
 
     @Test
-    fun bad_post_request_event(){
+    fun bad_post_request_User(){
         val enjoyer: User = User("asd123", "Beeswax","email", "password", UserRoles.USER)
         assertThrows<NestedServletException> {
-            mockMvc.post("/enjoyers/"){
+            mockMvc.post("/api/v1/registration/"){
                 contentType = MediaType.APPLICATION_JSON
                 content = jacksonObjectMapper().writeValueAsString(enjoyer)
                 accept = MediaType.APPLICATION_JSON
@@ -98,9 +98,9 @@ class UserControllerTest {
     }
 
     @Test
-    fun good_post_request_event(){
+    fun good_post_request_User(){
         val enjoyer = enjoyer1
-        mockMvc.post("/enjoyers/"){
+        mockMvc.post("/api/v1/registration"){
             contentType = MediaType.APPLICATION_JSON
             content = jacksonObjectMapper().writeValueAsString(enjoyer)
             accept = MediaType.APPLICATION_JSON

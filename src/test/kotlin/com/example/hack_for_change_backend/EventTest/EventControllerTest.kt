@@ -48,7 +48,7 @@ class EventControllerTest() {
 
     val date1 = Date(2018, 12, 12)
     val date2 = Date(2020, 12 ,12 )
-    
+
     val enjoyerMutableList = mutableListOf<User>()
 
     val eventMutableList = mutableListOf<Event>()
@@ -56,7 +56,7 @@ class EventControllerTest() {
     val venueMutableList = mutableListOf<Venue>()
     val pollstatus1 = PollStatus.OPEN
     val events = listOf<Event>()
-    val enum = EventType.valueOf("cinema")
+    val enum = EventType.valueOf("CINEMA")
     val eventStatus1 = EventStatus.PROPOSED
     val organisation: Organisation = Organisation(1, "name", "Lewis", "email", "phoneNo", enjoyerMutableList, eventMutableList)
 
@@ -88,7 +88,7 @@ class EventControllerTest() {
     fun bad_post_request_event(){
         val event = Event(3, "Home", "NoWhere", date1, date2, "wrong", organisation, poll1, PollStatus.CLOSED, venueMutableList, enum, votes1, EventStatus.CANCELLED)
         assertThrows<NestedServletException> {
-            mockMvc.post("/events/"){
+            mockMvc.post("/events/addEvent"){
                 contentType = MediaType.APPLICATION_JSON
                 content = jacksonObjectMapper().writeValueAsString(event)
                 accept = MediaType.APPLICATION_JSON
@@ -100,7 +100,7 @@ class EventControllerTest() {
     @Test
     fun good_post_request_event(){
         val event = eventing
-        mockMvc.post("/events/"){
+        mockMvc.post("/events/addEvent"){
             contentType = MediaType.APPLICATION_JSON
             content = jacksonObjectMapper().writeValueAsString(event)
             accept = MediaType.APPLICATION_JSON

@@ -55,7 +55,7 @@ class OrganisationControllerTest {
     val venueMutableList = mutableListOf<Venue>()
 
     val events = listOf<Event>()
-    val enum = EventType.valueOf("cinema")
+    val enum = EventType.valueOf("CINEMA")
 
     val organisation1: Organisation = Organisation(1, "name", "Lewis", "email", "phoneNo", enjoyerMutableList, eventMutableList)
 
@@ -74,8 +74,8 @@ class OrganisationControllerTest {
     lateinit var repository: OrganisationRepo
 
     @Test
-    fun findEvent() {
-        mockMvc.get("/organisations?id=1")
+    fun findOrganisation() {
+        mockMvc.get("/organisations/findAll")
             .andExpect {
                 status { isOk() }
             }
@@ -84,10 +84,10 @@ class OrganisationControllerTest {
 
 
     @Test
-    fun bad_post_request_event(){
+    fun bad_post_request_Organisation(){
         val organisation = Organisation(1, "23", "Lewis", "email", "phoneNo", enjoyerMutableList, eventMutableList)
         assertThrows<NestedServletException> {
-            mockMvc.post("/organisations/"){
+            mockMvc.post("/organisations/addOrganisation"){
                 contentType = MediaType.APPLICATION_JSON
                 content = jacksonObjectMapper().writeValueAsString(organisation)
                 accept = MediaType.APPLICATION_JSON
@@ -98,9 +98,9 @@ class OrganisationControllerTest {
 
 
     @Test
-    fun good_post_request_event(){
+    fun good_post_request_Organisation(){
         val organisation = organisation1
-        mockMvc.post("/organisations/"){
+        mockMvc.post("/organisations/addOrganisation"){
             contentType = MediaType.APPLICATION_JSON
             content = jacksonObjectMapper().writeValueAsString(organisation)
             accept = MediaType.APPLICATION_JSON
