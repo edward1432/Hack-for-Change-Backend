@@ -41,7 +41,7 @@ class EventControllerTest() {
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-    val votes1: MutableMap<EventType, Int> = TODO()
+    val votes1: MutableMap<EventType, Int> = mutableMapOf()
 
     val poll1 = mutableListOf<Poll>()
 
@@ -76,7 +76,7 @@ class EventControllerTest() {
 
     @Test
     fun findEvent() {
-        mockMvc.get("/events?id=1")
+        mockMvc.get("/events/findAll")
             .andExpect {
                 status { isOk() }
             }
