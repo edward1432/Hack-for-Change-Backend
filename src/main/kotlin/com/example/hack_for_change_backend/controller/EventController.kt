@@ -3,6 +3,7 @@ package com.example.hack_for_change_backend.controller
 import com.example.hack_for_change_backend.model.Event
 import com.example.hack_for_change_backend.model.enums.EventStatus
 import com.example.hack_for_change_backend.model.enums.EventType
+import com.example.hack_for_change_backend.model.enums.RSVP
 import com.example.hack_for_change_backend.model.voting.Poll
 import com.example.hack_for_change_backend.service.EventService
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
@@ -95,7 +96,6 @@ class EventController(private val eventService: EventService) {
     fun closePoll(@PathVariable("event_id") eventId: Long): ResponseEntity<Pair<Event, String>> {
         return ResponseEntity.ok(eventService.closePoll(eventId))
     }
-
 
 //    @PatchMapping("/editDetails/{id}")
 //    fun editEvent(@PathVariable("event_id") eventId: Long,

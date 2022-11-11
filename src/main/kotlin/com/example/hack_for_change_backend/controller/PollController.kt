@@ -40,23 +40,22 @@ class PollController (private val pollService: PollService) {
         }
     }
 
-//    @PatchMapping("/addVotes/{id}")
-//    fun addVotes(@PathVariable("id") pollId: Long,
-//                 @RequestParam("ballot") ballot: List<EventType>): ResponseEntity<Poll> {
+//    @PatchMapping("/rsvp/{id}")
+//    fun rsvpToEvent(@PathVariable("id") pollId: Long,
+//                    @RequestParam("rsvp", required = false) rsvp: RSVP?): ResponseEntity<Poll> {
 //        return try {
-//            ResponseEntity.ok(pollService.addVotes(pollId, ballot))
+//            ResponseEntity.ok(pollService.rsvp(pollId, rsvp))
 //        } catch (e: NoSuchElementException) {
 //            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
-//        } catch (e: Exception) {
-//            throw ResponseStatusException(HttpStatus.BAD_REQUEST, e.message)
 //        }
 //    }
 
-    @PatchMapping("/rsvp/{id}")
-    fun rsvpToEvent(@PathVariable("id") pollId: Long,
-                    @RequestParam("rsvp") rsvp: RSVP): ResponseEntity<Poll> {
+    @PatchMapping("/rsvp/{event_id}/{user_id}")
+    fun rsvpToEvent(@PathVariable("event_id") eventId: Long,
+                    @PathVariable("user_id") userId: Long,
+                    @RequestParam("rsvp", required = false) rsvp: RSVP?): ResponseEntity<Poll> {
         return try {
-            ResponseEntity.ok(pollService.rsvp(pollId, rsvp))
+            ResponseEntity.ok(pollService.rsvp(eventId, userId, rsvp))
         } catch (e: NoSuchElementException) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }

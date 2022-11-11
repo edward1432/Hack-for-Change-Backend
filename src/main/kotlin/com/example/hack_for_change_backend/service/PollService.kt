@@ -8,7 +8,6 @@ import com.example.hack_for_change_backend.model.enums.RSVP
 import com.example.hack_for_change_backend.model.voting.Poll
 import com.example.hack_for_change_backend.repository.PollRepo
 import org.springframework.stereotype.Service
-import org.webjars.NotFoundException
 
 @Service
 class PollService (
@@ -20,6 +19,9 @@ class PollService (
     }
 
     fun findPollById(id: Long): Poll = pollRepo.findById(id).orElseThrow { NoSuchElementException("Poll with ID: $id does not exist") }
+
+    fun findPollByEventIdUserId(eventId: Long, userId: Long): Poll = pollRepo.findByEventIdAndUserId(eventId, userId) ?:
+    throw NoSuchElementException("Poll with eventID: $eventId and userID: $userId not found")
 
     fun addNewPoll(event: Event, user: User): Poll {
         if (pollRepo.findByEventIdAndUserId(event.uniqueId, user.uniqueId) != null) {
@@ -49,9 +51,19 @@ class PollService (
         return pollRepo.save(poll)
     }
 
-    fun rsvp(pollId: Long, rsvp: RSVP): Poll {
+//    fun rsvp(pollId: Long, rsvp: RSVP?): Poll {
+//        return try {
+//            val poll = findPollById(pollId)
+//            poll.rsvp = rsvp
+//            pollRepo.save(poll)
+//        } catch (e: NoSuchElementException) {
+//            throw NoSuchElementException(e.message)
+//        }
+//    }
+
+    fun rsvp(eventId: Long, userId: Long, rsvp: RSVP?): Poll {
         return try {
-            val poll = findPollById(pollId)
+            val poll = findPollByEventIdUserId(eventId, userId)
             poll.rsvp = rsvp
             pollRepo.save(poll)
         } catch (e: NoSuchElementException) {
