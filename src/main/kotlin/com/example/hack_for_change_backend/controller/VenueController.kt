@@ -1,6 +1,7 @@
 package com.example.hack_for_change_backend.controller
 
 import com.example.hack_for_change_backend.model.Venue
+import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.service.VenueService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -22,6 +23,10 @@ class VenueController(private val venueService: VenueService) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
         }
     }
+
+    @GetMapping("findByType")
+    fun findVenueByType(@RequestParam("event_type") eventType: EventType): ResponseEntity<List<Venue>> =
+        ResponseEntity.ok(venueService.findVenueByEventType(eventType))
 
     @PostMapping("/addVenue")
     fun addVenue(@RequestBody venue: Venue): ResponseEntity<Venue> {

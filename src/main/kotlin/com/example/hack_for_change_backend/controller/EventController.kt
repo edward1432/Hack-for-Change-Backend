@@ -1,6 +1,7 @@
 package com.example.hack_for_change_backend.controller
 
 import com.example.hack_for_change_backend.model.Event
+import com.example.hack_for_change_backend.model.EventDetailsModel
 import com.example.hack_for_change_backend.model.enums.EventStatus
 import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.model.enums.RSVP
@@ -71,7 +72,8 @@ class EventController(private val eventService: EventService) {
     @PutMapping("/addUser/{event_id}/{user_id}")
     fun addUserToEvent(
         @PathVariable("event_id") eventId: Long,
-        @PathVariable("user_id") userId: Long):
+        @PathVariable("user_id") userId: Long
+    ):
             ResponseEntity<HttpStatus> {
         return try {
             eventService.addUserToEvent(eventId, userId)
@@ -82,9 +84,11 @@ class EventController(private val eventService: EventService) {
     }
 
     @PatchMapping("/addVotes/{event_id}/{user_id}")
-    fun addVotes(@PathVariable("event_id") eventId: Long,
-                 @PathVariable("user_id") userId: Long,
-                 @RequestParam("ballot", required = true) ballot: List<EventType>): ResponseEntity<Poll> {
+    fun addVotes(
+        @PathVariable("event_id") eventId: Long,
+        @PathVariable("user_id") userId: Long,
+        @RequestParam("ballot", required = true) ballot: List<EventType>
+    ): ResponseEntity<Poll> {
         return try {
             ResponseEntity.ok(eventService.addVotes(eventId, userId, ballot))
         } catch (e: NotFoundException) {
@@ -110,5 +114,17 @@ class EventController(private val eventService: EventService) {
 //                  @RequestParam("status", required = false) eventStatus: EventStatus): ResponseEntity<Event> {
 //
 //    }
+
+    @PatchMapping("editDetails/{id}")
+    fun editEvent(
+        @PathVariable("id") eventId: Long,
+        @RequestBody eventDetailsModel: EventDetailsModel
+    ): ResponseEntity<Event> {
+        return try {
+            ResponseEntity.ok(eventService.editEvent(eventId, eventDetailsModel))
+        } catch (e: NoSuchElementException) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message)
+        }
+    }
 
 }

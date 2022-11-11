@@ -10,5 +10,8 @@ enum class EventType(val niceName: String) {
     LUNCH("Lunch"),
     DRINKS("Drinks"),
     GOLF("Golf"),
-    GOKARTING("Go-Karting")
+    GOKARTING("Go-Karting"),
+    ZOO("Zoo"),
+    BOATPARTY("Boat Party"),
+    THEATRE("Theatre")
 }

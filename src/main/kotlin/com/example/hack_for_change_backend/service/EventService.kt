@@ -1,6 +1,7 @@
 package com.example.hack_for_change_backend.service
 
 import com.example.hack_for_change_backend.model.Event
+import com.example.hack_for_change_backend.model.EventDetailsModel
 import com.example.hack_for_change_backend.model.enums.EventStatus
 import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.model.enums.PollStatus
@@ -184,5 +185,19 @@ class EventService(
         }
     }
 
-//    fun editEvent()
+    fun editEvent(eventId: Long, eventDetailsModel: EventDetailsModel): Event {
+        return try {
+            val event = findEventById(eventId)
+            event.run {
+                location = eventDetailsModel.location ?: location
+                name = eventDetailsModel.name ?: name
+                startDateTime = eventDetailsModel.startDateTime ?: startDateTime
+                endDateTime = eventDetailsModel.endDateTime ?: endDateTime
+                status = eventDetailsModel.status ?: status
+            }
+            eventRepo.save(event)
+        } catch (e: NoSuchElementException) {
+            throw NoSuchElementException(e.message)
+        }
+    }
 }

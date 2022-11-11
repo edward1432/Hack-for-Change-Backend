@@ -1,6 +1,7 @@
 package com.example.hack_for_change_backend.service
 
 import com.example.hack_for_change_backend.model.Venue
+import com.example.hack_for_change_backend.model.enums.EventType
 import com.example.hack_for_change_backend.repository.VenueRepo
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -30,6 +31,7 @@ class VenueService(val venueRepo: VenueRepo) {
         }
     }
 
+    fun findVenueByEventType(eventType: EventType): List<Venue> = findAll().filter { it.type == eventType }
 
     fun updateVenue(venueId: Long, venueDetails: Venue): ResponseEntity<Venue> {
         try {
