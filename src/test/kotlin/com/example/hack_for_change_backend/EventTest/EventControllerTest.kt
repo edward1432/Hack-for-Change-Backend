@@ -110,7 +110,7 @@ class EventControllerTest() {
                 contentType(MediaType.APPLICATION_JSON)
             }
             content{
-                 json("""{"uniqueId":1,"location":"location","name":"Alex","startDateTime":"$date1", "endDateTime": "$date2", "description":"description","organisation":"$organisation","userPolls":"$poll1",pollStatus":"$pollstatus1", "venues":"$venueMutableList", "eventType":"$enum", "votes":"$votes1", "status":"$eventStatus1""}"""
+                 json("""{"uniqueId":1,"location":"location","name":"Alex","startDateTime":"$date1", "endDateTime": "$date2", "description":"description","organisation":"$organisation","userPolls":"$poll1",pollStatus":"$pollstatus1", "venues":"$venueMutableList", "eventType":"$enum", "votes":"$votes1", "status":"$eventStatus1""}""")
             }
         }
         verify(repository, times(1)).save(event)

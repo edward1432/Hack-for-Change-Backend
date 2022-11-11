@@ -111,7 +111,7 @@ class OrganisationControllerTest {
                 contentType(MediaType.APPLICATION_JSON)
             }
             content{
-                json("""{"uniqueId":1,"name":"name","email":"email", "phoneNo":"phoneNo,"enjoyers":"$enjoyerMutableList","events":"$eventMutableList"}""")
+                json("""{"uniqueId":1,"joinCode":"name", "name":"Lewis","email":"email", "phoneNo":"phoneNo,"enjoyers":"$enjoyerMutableList","events":"$eventMutableList"}""")
             }
         }
         verify(repository, times(1)).save(organisation)

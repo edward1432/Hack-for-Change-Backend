@@ -114,9 +114,10 @@ class VenueControllerTest {
                 contentType(MediaType.APPLICATION_JSON)
             }
             content{
-                json("""{"id":1,"name":"Test"}""")
+                json("""{"uniqueId":1,"events":"$events", "name":"name", "location":"location", "type":"$enum"}""")
             }
         }
         verify(repository, times(1)).save(venue)
     }
+
 }
